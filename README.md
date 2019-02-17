@@ -12,7 +12,7 @@ Pour Windows 10, consulter
 
 ## Installation sous GNU/Linux Ubuntu 16.04+ ou Debian 9+
 
-1. Installer `emacs` (version `>= 24.3`) et `rlwrap` (*optionnel*) :
+1. Installer `emacs` (version `>= 24.4`) et `rlwrap` (*optionnel*) :
 
         sudo apt-get update
         sudo apt-get install emacs25 rlwrap
