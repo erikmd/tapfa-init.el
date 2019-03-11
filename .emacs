@@ -76,7 +76,7 @@
   :hook
   ((tuareg-mode caml-mode) . company-mode)
   :config
-  (bind-key "<S-tab>" 'company-complete))
+  (bind-key "<backtab>" 'company-complete))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
