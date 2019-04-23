@@ -37,6 +37,7 @@ Pour Windows 10, consulter
     Installer `coq` (déjà installé sur les PC de l'UPS, sauter alors
     cette étape) :
 
+        opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
         opam pin add -n -k version coq 8.8.2
         opam install -j 2 coq
 
