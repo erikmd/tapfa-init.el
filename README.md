@@ -37,7 +37,8 @@ Pour Windows 10, consulter
     Installer `coq` (déjà installé sur les PC de l'UPS, sauter alors
     cette étape) :
 
-        opam install coq.8.8.2
+        opam pin add -n -k version coq 8.8.2
+        opam install -j 2 coq
 
 1. **Ne pas exécuter `opam user-setup install`**.
 
