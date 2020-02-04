@@ -38,7 +38,7 @@ Pour Windows 10, consulter
     cette étape) :
 
         opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-        opam pin add -n -k version coq 8.8.2
+        opam pin add -n -k version coq 8.11.0
         opam install -j 2 coq
 
 1. **Ne pas exécuter `opam user-setup install`**.
