@@ -53,6 +53,7 @@ Pour installer automatiquement les modes
 [tuareg](https://github.com/ocaml/tuareg),
 [merlin-eldoc](https://github.com/Khady/merlin-eldoc),
 [company](https://github.com/company-mode/company-mode),
+[learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
 [ProofGeneral](https://github.com/ProofGeneral/PG) et
 [company-coq](https://github.com/cpitclaudel/company-coq) :
 
