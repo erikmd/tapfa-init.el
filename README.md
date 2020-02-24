@@ -26,6 +26,7 @@ ces 5 étapes.*)
 1. Installer les dépendances d'`opam` :
 
         sudo apt-get install aspcud bubblewrap build-essential curl git m4 tar unzip
+        sudo apt-get pkg-config libssl-dev
 
 1. Installer `opam` 2.0 (comme les paquets Debian/Ubuntu sont trop
    anciens, mieux vaut utiliser le [script d'installation
