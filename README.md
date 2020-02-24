@@ -10,9 +10,9 @@ GNU/Linux basées sur Debian. La procédure pour macOS est similaire.
 Pour Windows 10, consulter
 <https://github.com/erikmd/tapfa-init-win64.el#readme>.
 
-## Installation sous GNU/Linux Ubuntu 16.04+ ou Debian 9+
+## Installation sous GNU/Linux Ubuntu 18.04+ ou Debian 9+
 
-1. Installer `emacs` (version `>= 24.4`) et `rlwrap` (*optionnel*) :
+1. Installer `emacs` (version `>= 25.1`) et `rlwrap` (*optionnel*) :
 
         sudo apt-get update
         sudo apt-get install emacs25 rlwrap
