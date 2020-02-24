@@ -49,6 +49,8 @@ ces 5 étapes.*)
 
 ## Installation des modes Emacs pour OCaml et Coq
 
+(*Reprendre à cette étape si vous travaillez sur un PC de l'UPS.*)
+
 Pour installer automatiquement les modes
 [tuareg](https://github.com/ocaml/tuareg),
 [merlin-eldoc](https://github.com/Khady/merlin-eldoc),
@@ -61,7 +63,8 @@ Pour installer automatiquement les modes
    votre *homedir* (`~/`) :
 
         cd                    # pour revenir à la racine du homedir (~/)
-        mv -f .emacs .emacs~  # pour sauvegarder votre fichier
+        mv -f .emacs .emacs~  # pour sauvegarder votre fichier au cas où
+        # si la ligne précédente renvoie une erreur, ne pas en tenir compte
         curl -fOL https://github.com/erikmd/tapfa-init.el/raw/master/.emacs
 
     > *Note* : Si vous n'utilisez pas `curl` mais la fonctionnalité de
