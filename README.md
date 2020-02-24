@@ -15,6 +15,9 @@ Pour macOS, consulter
 
 ## Installation sous GNU/Linux Ubuntu 18.04+ ou Debian 9+
 
+(*Ces composants sont déjà installés sur les PC de l'UPS, sauter alors
+ces 5 étapes.*)
+
 1. Installer `emacs` (version `>= 25.1`) et `rlwrap` (*optionnel*) :
 
         sudo apt-get update
@@ -32,8 +35,7 @@ Pour macOS, consulter
         sh ./install.sh
 
 1. Configurer `opam` puis installer `merlin`, `utop`,
-   `learn-ocaml-client` et `coq` (déjà installés sur les PC de l'UPS,
-   sauter alors cette étape) :
+   `learn-ocaml-client` et `coq` :
 
         opam init --auto-setup --yes --compiler=ocaml-base-compiler.4.05.0
         eval $(opam env)
