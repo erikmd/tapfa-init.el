@@ -5,10 +5,13 @@ Emacs](https://www.gnu.org/software/emacs/) et
 [opam](https://ocaml.org/) (*the OCaml package manager*).
 
 La procédure ci-dessous concerne uniquement les distributions
-GNU/Linux basées sur Debian. La procédure pour macOS est similaire.
+GNU/Linux basées sur Debian.
 
 Pour Windows 10, consulter
 <https://github.com/erikmd/tapfa-init-win64.el#readme>.
+
+Pour macOS, consulter
+<https://github.com/erikmd/tapfa-init-macos.el#readme>.
 
 ## Installation sous GNU/Linux Ubuntu 18.04+ ou Debian 9+
 
