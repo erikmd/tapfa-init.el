@@ -110,6 +110,18 @@
 (load-library "paren")
 (show-paren-mode 1)
 
+;; Adapted from:
+;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Matching-parentheses.html
+(defun tapfa-match-paren-direct (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (cond ((looking-back "[])}]") ;;(forward-char 1)
+	 (backward-list 1))
+	((looking-at "[{([]") (forward-list 1) ;;(backward-char 1)
+	 )
+	(t (self-insert-command (or arg 1)))))
+(global-set-key "%" #'tapfa-match-paren-direct)
+
 ;; Raccourcis C-c/C-x/C-v/C-z standards
 ;; au lieu de M-w/C-w/C-y/C-_ par défaut dans GNU Emacs
 (cua-mode 1)
