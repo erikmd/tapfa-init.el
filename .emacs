@@ -106,6 +106,8 @@
       line-number-mode t
       require-final-newline t)
 
+(global-set-key (kbd "C-x C-S-q") #'view-mode)
+
 ;; Marquage des parenthèses
 (load-library "paren")
 (show-paren-mode 1)
