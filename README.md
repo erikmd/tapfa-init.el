@@ -8,10 +8,10 @@ La procédure ci-dessous concerne uniquement les distributions
 GNU/Linux basées sur Debian.
 
 Pour Windows 10, consulter
-<https://github.com/erikmd/tapfa-init-win64.el#readme>.
+<https://github.com/erikmd/tapfa-init-win64.el/tree/coq#readme>.
 
 Pour macOS, consulter
-<https://github.com/erikmd/tapfa-init-macos.el#readme>.
+<https://github.com/erikmd/tapfa-init-macos.el/tree/coq#readme>.
 
 ## Installation sous GNU/Linux Ubuntu 18.04+ ou Debian 9+
 
