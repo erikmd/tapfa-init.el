@@ -65,12 +65,12 @@ Pour installer automatiquement les modes
         cd                    # pour revenir à la racine du homedir (~/)
         mv -f .emacs .emacs~  # pour sauvegarder votre fichier au cas où
         # si la ligne précédente renvoie une erreur, ne pas en tenir compte
-        curl -fOL https://github.com/erikmd/tapfa-init.el/raw/master/.emacs
+        curl -fOL https://github.com/erikmd/tapfa-init.el/raw/coq/.emacs
 
     > *Note* : Si vous n'utilisez pas `curl` mais la fonctionnalité de
     > téléchargement de votre navigateur, veillez à ce que celui-ci
     > n'enlève pas le point au début du fichier
-    > ([`.emacs`](https://github.com/erikmd/tapfa-init.el/raw/master/.emacs),
+    > ([`.emacs`](https://github.com/erikmd/tapfa-init.el/raw/coq/.emacs),
     > pas `emacs`).
 
 1. Lancer Emacs :
