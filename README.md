@@ -3,7 +3,7 @@
 Ce tutoriel vise à guider l'installation de [GNU
 Emacs](https://www.gnu.org/software/emacs/) et
 [opam](https://opam.ocaml.org/) (*the OCaml package manager*)
-sous GNU/Linux, Windows 10 (64 bits) et macOS.
+sous GNU/Linux, macOS et Windows 10 (64 bits).
 
 *Notes :*
 
@@ -11,7 +11,7 @@ sous GNU/Linux, Windows 10 (64 bits) et macOS.
 
 * Le mode `learn-ocaml.el` (qui requiert `learn-ocaml-client`) a été surtout testé sous GNU/Linux jusqu'à présent.
 
-<details><summary>Installation sous GNU/Linux Ubuntu 18.04+ ou Debian 9+</summary>
+<details><summary><b>Installation sous GNU/Linux Ubuntu 18.04+ ou Debian 9+</b></summary>
 
 (*Ces composants sont déjà installés sur les PC de l'UPS, sauter alors
 ces 5 étapes.*)
@@ -98,7 +98,7 @@ Pour installer automatiquement les modes
 
 </details>
 
-<details><summary>Installation sous macOS</summary>
+<details><summary><b>Installation sous macOS</b></summary>
 
 1. Installer [Aquamacs](https://aquamacs.org)
    ou [Emacs avec Homebrew Cask](https://formulae.brew.sh/cask/emacs).
@@ -191,7 +191,7 @@ Pour installer automatiquement les modes
 </details>
 
 <details>
-<summary>Installation sous Windows 10 (64 bits) avec WSL</summary>
+<summary><b>Installation sous Windows 10 (64 bits) avec WSL</b></summary>
 
 1.  Installer GNU Emacs 27 à partir de
     <https://vigou3.gitlab.io/emacs-modified-windows/>
