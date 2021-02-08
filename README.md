@@ -5,7 +5,11 @@ Emacs](https://www.gnu.org/software/emacs/) et
 [opam](https://opam.ocaml.org/) (*the OCaml package manager*)
 sous GNU/Linux, Windows 10 (64 bits) et macOS.
 
-La procédure "GNU/Linux" concerne uniquement les distributions basées sur Debian ou Ubuntu.
+*Notes :*
+
+* La procédure "GNU/Linux" concerne uniquement les distributions basées sur Debian ou Ubuntu.
+
+* Le mode `learn-ocaml.el` (qui requiert `learn-ocaml-client`) a été surtout testé sous GNU/Linux jusqu'à présent.
 
 <details><summary>Installation sous GNU/Linux Ubuntu 18.04+ ou Debian 9+</summary>
 
@@ -29,18 +33,22 @@ ces 5 étapes.*)
         curl -fOL https://github.com/ocaml/opam/raw/master/shell/install.sh
         sh ./install.sh
 
-1. Configurer `opam` puis installer `merlin`, `utop`,
-   `learn-ocaml-client` et `coq` :
+1. Configurer `opam` puis installer `merlin` et `coq` :
 
         opam init --auto-setup --yes --compiler=ocaml-base-compiler.4.05.0
         eval $(opam env)
-        opam install -y merlin utop learn-ocaml-client
+        opam install -y merlin
         
         opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
         opam pin add -n -k version coq 8.12.2
         opam install -j 2 coq
 
-1. **Ne pas exécuter `opam user-setup install`**.
+   **Ne pas exécuter `opam user-setup install`**.
+
+1. **Optionnel** : installer `learn-ocaml-client` (utile seulement pour [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el))
+   et `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`) :
+
+        opam install utop learn-ocaml-client
 
 ## Installation des modes Emacs pour OCaml et Coq
 
@@ -83,7 +91,7 @@ Pour installer automatiquement les modes
     Vous pouvez alors **créer ou ouvrir un fichier OCaml** en tapant
     <kbd>C-x C-f tp1.ml RET</kbd>
 
-1. Et pour utiliser le mode
+1. Et si vous avez installé `learn-ocaml-client`, pour utiliser le mode
    [`learn-ocaml`](https://github.com/pfitaxel/learn-ocaml.el#usage),
    vous pouvez taper <kbd>M-x learn-ocaml-mode RET</kbd>.
 
@@ -104,18 +112,22 @@ Pour installer automatiquement les modes
 
         brew install opam
 
-1. Configurer `opam` puis installer `merlin`, `utop`,
-   `learn-ocaml-client` et `coq` :
+1. Configurer `opam` puis installer `merlin` et `coq` :
 
         opam init --auto-setup --yes --compiler=ocaml-base-compiler.4.05.0
         eval $(opam env)
-        opam install -y merlin utop learn-ocaml-client
+        opam install -y merlin
         
         opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
         opam pin add -n -k version coq 8.12.2
         opam install -j 2 coq
 
-1. **Ne pas exécuter `opam user-setup install`**.
+   **Ne pas exécuter `opam user-setup install`**.
+
+1. **Optionnel** : installer `learn-ocaml-client` (utile seulement pour [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el))
+   et `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`) :
+
+        opam install utop learn-ocaml-client
 
 ## Installation des modes Emacs pour OCaml et Coq
 
@@ -170,7 +182,7 @@ Pour installer automatiquement les modes
     Vous pouvez alors **créer ou ouvrir un fichier OCaml** en tapant
     <kbd>C-x C-f tp1.ml RET</kbd>
 
-1. Et pour utiliser le mode
+1. Et si vous avez installé `learn-ocaml-client`, pour utiliser le mode
    [`learn-ocaml`](https://github.com/pfitaxel/learn-ocaml.el#usage),
    vous pouvez taper <kbd>M-x learn-ocaml-mode RET</kbd>.
 
@@ -216,20 +228,25 @@ Pour installer automatiquement les modes
     sh ./install.sh
     ```
 
-1.  Configurer `opam` et installer `merlin`, `utop`,
-    `learn-ocaml-client` et `coq` (**`--disable-sandboxing` est requis**) :
+1.  Configurer `opam` et installer `merlin` et `coq`
+    (**`--disable-sandboxing` est requis**) :
 
     ```
     opam init --disable-sandboxing --auto-setup --yes --compiler=ocaml-base-compiler.4.05.0
     eval $(opam env)
 	opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
     opam pin add -n -k version coq 8.12.2
-    opam install -y -j 2 merlin utop learn-ocaml-client coq
+    opam install -y -j 2 merlin coq
     ```
 
     (*Les commandes précédentes doivent être copiées ligne à ligne !*)
 
     **Ne pas exécuter `opam user-setup install`**.
+
+1. **Optionnel** : installer `learn-ocaml-client` (utile seulement pour [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el))
+   et `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`) :
+
+        opam install utop learn-ocaml-client
 
 1.  Installer `wsl-alias` :
 
@@ -315,7 +332,7 @@ Pour installer automatiquement les modes
     Vous pouvez alors **créer ou ouvrir un fichier OCaml** en tapant
     <kbd>C-x C-f tp1.ml RET</kbd>
 
-1. Et pour utiliser le mode
+1. Et si vous avez installé `learn-ocaml-client`, pour utiliser le mode
    [`learn-ocaml`](https://github.com/pfitaxel/learn-ocaml.el#usage),
    vous pouvez taper <kbd>M-x learn-ocaml-mode RET</kbd>.
 
