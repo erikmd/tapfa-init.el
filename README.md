@@ -36,7 +36,7 @@ ces 5 étapes.*)
 1. Configurer `opam` puis installer `merlin` et `coq` :
 
         opam init --auto-setup --bare
-	opam switch create 4.05.0 ocaml-base-compiler.4.05.0
+        opam switch create 4.05.0 ocaml-base-compiler.4.05.0
         eval $(opam env)
         opam install -y merlin
         
@@ -116,7 +116,7 @@ Pour installer automatiquement les modes
 1. Configurer `opam` puis installer `merlin` et `coq` :
 
         opam init --auto-setup --bare
-	opam switch create 4.05.0 ocaml-base-compiler.4.05.0
+        opam switch create 4.05.0 ocaml-base-compiler.4.05.0
         eval $(opam env)
         opam install -y merlin
         
@@ -237,7 +237,7 @@ Pour installer automatiquement les modes
     opam init --disable-sandboxing --auto-setup --bare
     opam switch create 4.05.0 ocaml-base-compiler.4.05.0
     eval $(opam env)
-	opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
+    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
     opam pin add -n -k version coq 8.12.2
     opam install -y -j 2 merlin coq
     ```
@@ -275,7 +275,7 @@ Pour installer automatiquement les modes
     b wsl-alias add learn-ocaml-client "wrapper-learn-ocaml-client"
     b wsl-alias add utop "opam exec -- utop"
     b wsl-alias add coqtop "opam exec -- coqtop"
-	b wsl-alias add coqidetop "opam exec -- coqidetop"
+    b wsl-alias add coqidetop "opam exec -- coqidetop"
     b wsl-alias add coqc "opam exec -- coqc"
     b wsl-alias list  # pour vérifier
     b                 # sans argument, pour passer en mode WSL
@@ -299,8 +299,8 @@ Pour installer automatiquement les modes
     ```
     nano ~/.wsl-alias/env.sh
     ```
-	
-	Ajouter à la fin de ce fichier (qui doit déjà exister) :
+    
+    Ajouter à la fin de ce fichier (qui doit déjà exister) :
 
     ```
     wrapper-learn-ocaml-client() {
@@ -319,13 +319,13 @@ Pour installer automatiquement les modes
 1.  Lancer Emacs à partir de Windows.
 
     L'installation des modes Emacs pour OCaml et Coq
-	([tuareg](https://github.com/ocaml/tuareg),
-	[merlin](https://github.com/ocaml/merlin),
-	[company](https://github.com/company-mode/company-mode),
-	[learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
-	[ProofGeneral](https://github.com/ProofGeneral/PG) et
-	[company-coq](https://github.com/cpitclaudel/company-coq)) devrait
-	se lancer automatiquement et durer environ 2'30.
+    ([tuareg](https://github.com/ocaml/tuareg),
+    [merlin](https://github.com/ocaml/merlin),
+    [company](https://github.com/company-mode/company-mode),
+    [learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
+    [ProofGeneral](https://github.com/ProofGeneral/PG) et
+    [company-coq](https://github.com/cpitclaudel/company-coq)) devrait
+    se lancer automatiquement et durer environ 2'30.
 
     En cas de souci, faites
     <kbd>M-x package-install-selected-packages RET</kbd>
