@@ -237,9 +237,11 @@ Pour installer automatiquement les modes
     opam init --disable-sandboxing --auto-setup --bare
     opam switch create 4.05.0 ocaml-base-compiler.4.05.0
     eval $(opam env)
+    opam install -y merlin
+        
     opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
     opam pin add -n -k version coq 8.12.2
-    opam install -y -j 2 merlin coq
+    opam install -j 2 coq
     ```
 
     (*Les commandes précédentes doivent être copiées ligne à ligne !*)
