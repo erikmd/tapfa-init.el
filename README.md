@@ -37,7 +37,7 @@ ces 5 étapes.*)
         opam install -y merlin utop learn-ocaml-client
         
         opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-        opam pin add -n -k version coq 8.11.2
+        opam pin add -n -k version coq 8.12.2
         opam install -j 2 coq
 
 1. **Ne pas exécuter `opam user-setup install`**.
@@ -112,7 +112,7 @@ Pour installer automatiquement les modes
         opam install -y merlin utop learn-ocaml-client
         
         opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-        opam pin add -n -k version coq 8.11.2
+        opam pin add -n -k version coq 8.12.2
         opam install -j 2 coq
 
 1. **Ne pas exécuter `opam user-setup install`**.
@@ -179,7 +179,7 @@ Pour installer automatiquement les modes
 <details>
 <summary>Installation sous Windows 10 (64 bits) avec WSL</summary>
 
-1.  Installer GNU Emacs 26 à partir de
+1.  Installer GNU Emacs 27 à partir de
     <https://vigou3.gitlab.io/emacs-modified-windows/>
 
 1.  Activer WSL dans Windows 10 :
@@ -223,7 +223,7 @@ Pour installer automatiquement les modes
     opam init --disable-sandboxing --auto-setup --yes --compiler=ocaml-base-compiler.4.05.0
     eval $(opam env)
 	opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-    opam pin add -n -k version coq 8.11.2
+    opam pin add -n -k version coq 8.12.2
     opam install -y -j 2 merlin utop learn-ocaml-client coq
     ```
 
