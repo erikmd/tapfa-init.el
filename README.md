@@ -5,8 +5,7 @@ Emacs](https://www.gnu.org/software/emacs/) et
 [opam](https://opam.ocaml.org/) (*the OCaml package manager*)
 sous GNU/Linux, Windows 10 (64 bits) et macOS.
 
-La procédure ci-dessous concerne uniquement les distributions
-GNU/Linux basées sur Debian.
+La procédure "GNU/Linux" concerne uniquement les distributions basées sur Debian ou Ubuntu.
 
 <details><summary>Installation sous GNU/Linux Ubuntu 18.04+ ou Debian 9+</summary>
 
