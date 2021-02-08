@@ -91,7 +91,7 @@ Pour installer automatiquement les modes
 
 <details><summary>Installation sous macOS</summary>
 
-1. Installer [Aquamacs](http://aquamacs.org) (version GUI, recommandé)
+1. Installer [Aquamacs](https://aquamacs.org)
    ou [Emacs avec Homebrew Cask](https://formulae.brew.sh/cask/emacs).
 
 1. Installer `gpatch`, `pkg-config` et `openssl` 1.1 avec Homebrew :
