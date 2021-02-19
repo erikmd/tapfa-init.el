@@ -89,8 +89,22 @@ Pour installer automatiquement les modes
     (<kbd>M-x</kbd> désignant <kbd>Alt+X</kbd>
     et <kbd>RET</kbd> la touche Entrée) et redémarrez emacs.
 
-    Vous pouvez alors **créer ou ouvrir un fichier OCaml** en tapant
-    <kbd>C-x C-f tp1.ml RET</kbd>
+1. Vous pouvez alors **créer ou ouvrir un fichier OCaml** en tapant
+   <kbd>C-x C-f tp1.ml RET</kbd> (<kbd>C-x</kbd> désignant <kbd>Ctrl+X</kbd>).
+    
+    Tester alors l'installation en effectuant les deux choses suivantes :
+    
+    * Écrire une erreur de type (`let n = 1 + true`) et taper sur
+      <kbd>C-x C-s</kbd> pour sauvegarder.
+      Assurez-vous que l'IDE a bien mis en surbrillance l'erreur de type
+      (et si vous placez le curseur dessus (ou tapez <kbd>C-c C-x</kbd>),
+      vous devriez voir le message d'erreur complet :
+      *This expression has type bool but an expression was expected of type int*).
+
+    * Corriger l'expression précédemment tapée (`let n = 1 + 2`) puis taper sur
+      <kbd>C-c C-e</kbd> pour évaluer l'expression courante dans un toplevel
+      (si l'IDE affiche `OCaml REPL to run:` la première fois, valider avec
+      <kbd>RET</kbd> = touche Entrée).
 
 1. Et si vous avez installé `learn-ocaml-client`, pour utiliser le mode
    [`learn-ocaml`](https://github.com/pfitaxel/learn-ocaml.el#usage),
@@ -181,8 +195,22 @@ Pour installer automatiquement les modes
     (<kbd>M-x</kbd> désignant <kbd>Alt+X</kbd>
     et <kbd>RET</kbd> la touche Entrée) et redémarrez emacs.
 
-    Vous pouvez alors **créer ou ouvrir un fichier OCaml** en tapant
-    <kbd>C-x C-f tp1.ml RET</kbd>
+1. Vous pouvez alors **créer ou ouvrir un fichier OCaml** en tapant
+   <kbd>C-x C-f tp1.ml RET</kbd> (<kbd>C-x</kbd> désignant <kbd>Ctrl+X</kbd>).
+    
+    Tester alors l'installation en effectuant les deux choses suivantes :
+    
+    * Écrire une erreur de type (`let n = 1 + true`) et taper sur
+      <kbd>C-x C-s</kbd> pour sauvegarder.
+      Assurez-vous que l'IDE a bien mis en surbrillance l'erreur de type
+      (et si vous placez le curseur dessus (ou tapez <kbd>C-c C-x</kbd>),
+      vous devriez voir le message d'erreur complet :
+      *This expression has type bool but an expression was expected of type int*).
+
+    * Corriger l'expression précédemment tapée (`let n = 1 + 2`) puis taper sur
+      <kbd>C-c C-e</kbd> pour évaluer l'expression courante dans un toplevel
+      (si l'IDE affiche `OCaml REPL to run:` la première fois, valider avec
+      <kbd>RET</kbd> = touche Entrée).
 
 1. Et si vous avez installé `learn-ocaml-client`, pour utiliser le mode
    [`learn-ocaml`](https://github.com/pfitaxel/learn-ocaml.el#usage),
@@ -334,8 +362,22 @@ Pour installer automatiquement les modes
     (<kbd>M-x</kbd> désignant <kbd>Alt+X</kbd>
     et <kbd>RET</kbd> la touche Entrée) et redémarrez emacs.
 
-    Vous pouvez alors **créer ou ouvrir un fichier OCaml** en tapant
-    <kbd>C-x C-f tp1.ml RET</kbd>
+1. Vous pouvez alors **créer ou ouvrir un fichier OCaml** en tapant
+   <kbd>C-x C-f tp1.ml RET</kbd> (<kbd>C-x</kbd> désignant <kbd>Ctrl+X</kbd>).
+    
+    Tester alors l'installation en effectuant les deux choses suivantes :
+    
+    * Écrire une erreur de type (`let n = 1 + true`) et taper sur
+      <kbd>C-x C-s</kbd> pour sauvegarder.
+      Assurez-vous que l'IDE a bien mis en surbrillance l'erreur de type
+      (et si vous placez le curseur dessus (ou tapez <kbd>C-c C-x</kbd>),
+      vous devriez voir le message d'erreur complet :
+      *This expression has type bool but an expression was expected of type int*).
+
+    * Corriger l'expression précédemment tapée (`let n = 1 + 2`) puis taper sur
+      <kbd>C-c C-e</kbd> pour évaluer l'expression courante dans un toplevel
+      (si l'IDE affiche `OCaml REPL to run:` la première fois, valider avec
+      <kbd>RET</kbd> = touche Entrée).
 
 1. Et si vous avez installé `learn-ocaml-client`, pour utiliser le mode
    [`learn-ocaml`](https://github.com/pfitaxel/learn-ocaml.el#usage),
