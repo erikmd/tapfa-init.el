@@ -285,8 +285,8 @@ Pour installer automatiquement les modes
 
     (*Les commandes précédentes doivent être copiées ligne à ligne !*)
 
-1.  Vérifier que vous êtes bien dans le répertoire
-    `/mnt/c/Users/VOTRELOGIN` (dossier personnel Windows) et télécharger
+1.  Dans la **ligne de commande WSL** (vérifier que vous êtes bien dans le répertoire
+    `/mnt/c/Users/VOTRELOGIN` = dossier personnel Windows), télécharger
     le fichier `.emacs` fourni :
 
     ```
