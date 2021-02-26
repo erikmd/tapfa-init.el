@@ -91,6 +91,7 @@ Pour installer automatiquement les modes
    > ***Note pour les utilisateurs de Debian*** : si vous avez **Emacs 26.1**
    > (la version packagée [dans Debian 10](https://packages.debian.org/buster/emacs)),
    > vous pourriez avoir le message d'erreur
+   > "Buffer ' \*http elpa.gnu.org:443\*' has a running process; kill it?" ou bien
    > "Failed to download 'melpa' archive during the package refresh step".
    > C'est un bug connu ([debbug #34341](https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341))
    > qui a été corrigé dans Emacs 26.3 et 27.1. En gardant Emacs 26.1,
