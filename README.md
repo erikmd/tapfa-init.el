@@ -60,6 +60,7 @@ ces 5 étapes.*)
 
 Pour installer automatiquement les modes
 [tuareg](https://github.com/ocaml/tuareg),
+[bifocal](https://github.com/riscy/bifocal-mode),
 [merlin-eldoc](https://github.com/Khady/merlin-eldoc),
 [company](https://github.com/company-mode/company-mode),
 [learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
@@ -165,6 +166,7 @@ Pour installer automatiquement les modes
 
 Pour installer automatiquement les modes
 [tuareg](https://github.com/ocaml/tuareg),
+[bifocal](https://github.com/riscy/bifocal-mode),
 [merlin-eldoc](https://github.com/Khady/merlin-eldoc),
 [company](https://github.com/company-mode/company-mode),
 [learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
@@ -364,6 +366,7 @@ Pour installer automatiquement les modes
 
     L'installation des modes Emacs pour OCaml et Coq
     ([tuareg](https://github.com/ocaml/tuareg),
+    [bifocal](https://github.com/riscy/bifocal-mode),
     [merlin](https://github.com/ocaml/merlin),
     [company](https://github.com/company-mode/company-mode),
     [learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
