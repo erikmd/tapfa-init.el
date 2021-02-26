@@ -62,6 +62,11 @@
   (setq tuareg-interactive-program "ocaml"
         tuareg-opam "opam"))
 
+(use-package bifocal
+  :ensure t
+  :hook
+  (tuareg-interactive-mode . bifocal-mode))
+
 (use-package merlin
   :ensure t
   :hook
