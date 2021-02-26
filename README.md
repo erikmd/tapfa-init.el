@@ -1,7 +1,7 @@
 # Environnement de TP pour OCaml+Coq (avec Emacs)
 
 Ce tutoriel vise à guider l'installation de [GNU
-Emacs](https://www.gnu.org/software/emacs/) et
+Emacs](https://en.wikipedia.org/wiki/GNU_Emacs) et
 [opam](https://opam.ocaml.org/) (*the OCaml package manager*)
 sous GNU/Linux, macOS et Windows 10 (64 bits).
 
