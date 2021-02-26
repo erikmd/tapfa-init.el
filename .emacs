@@ -61,6 +61,11 @@
   :init
   (setq tuareg-opam-insinuate t))
 
+(use-package bifocal
+  :ensure t
+  :hook
+  (tuareg-interactive-mode . bifocal-mode))
+
 (use-package merlin
   :ensure t
   :hook
