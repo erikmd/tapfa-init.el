@@ -81,13 +81,24 @@ Pour installer automatiquement les modes
 
         emacs &
 
-    L'installation des modes Emacs pour OCaml et Coq devrait se lancer
-    automatiquement et durer environ 2'30.
+   L'installation des modes Emacs pour OCaml et Coq devrait se lancer
+   automatiquement et durer environ 2'30.
 
-    En cas de souci, faites
-    <kbd>M-x package-install-selected-packages RET</kbd>
-    (<kbd>M-x</kbd> désignant <kbd>Alt+X</kbd>
-    et <kbd>RET</kbd> la touche Entrée) et redémarrez emacs.
+   > ***Note pour les utilisateurs de Debian*** : si vous avez **Emacs 26.1**
+   > (la version packagée [dans Debian 10](https://packages.debian.org/buster/emacs)),
+   > vous pourriez avoir le message d'erreur
+   > "Failed to download 'melpa' archive during the package refresh step".
+   > C'est un bug connu ([debbug #34341](https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341))
+   > qui a été corrigé dans Emacs 26.3 et 27.1. En gardant Emacs 26.1,
+   > un contournement simple consiste à décommenter la ligne
+   > `(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")`
+   > dans votre fichier `.emacs` (enlever les `;;` devant cette ligne)
+   > et redémarrer emacs.
+
+   En cas d'un autre type de souci durant l'installation, faites
+   <kbd>M-x package-install-selected-packages RET</kbd>
+   (<kbd>M-x</kbd> désignant <kbd>Alt+X</kbd>
+   et <kbd>RET</kbd> la touche Entrée) et redémarrez emacs.
 
 1. Vous pouvez alors **créer ou ouvrir un fichier OCaml** en tapant
    <kbd>C-x C-f tp1.ml RET</kbd> (<kbd>C-x</kbd> désignant <kbd>Ctrl+X</kbd>).
