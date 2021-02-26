@@ -21,6 +21,9 @@ ces 5 étapes.*)
         sudo apt-get update
         sudo apt-get install emacs25 rlwrap
 
+   Il peut être nécessaire de remplacer `emacs25` par `emacs` sur certaines distributions
+   (Ubuntu 20.04+ ou Debian 10+) pour avoir une version plus récente.
+
 1. Installer les dépendances d'`opam` :
 
         sudo apt-get install aspcud bubblewrap build-essential curl git m4 tar unzip
