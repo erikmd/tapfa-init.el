@@ -39,7 +39,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(proof-locked-face ((t (:background "#add8e6"))))
+ '(region ((t (:background "gold1" :distant-foreground "dim gray")))))
 
 ;; Bootstrap use-package
 
@@ -91,9 +92,7 @@
 
 (use-package proof-general
   :ensure t
-  :mode ("\\.v\\'" . coq-mode)
-  :custom-face
-  (proof-locked-face ((t (:background "#add8e6")))))
+  :mode ("\\.v\\'" . coq-mode))
 
 (use-package company-coq
   :ensure t
