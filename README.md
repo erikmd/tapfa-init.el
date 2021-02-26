@@ -1,4 +1,4 @@
-# Environnement de TP pour OCaml et Coq (avec Emacs)
+# Environnement de TP pour OCaml+Coq (avec Emacs)
 
 Ce tutoriel vise à guider l'installation de [GNU
 Emacs](https://www.gnu.org/software/emacs/) et
