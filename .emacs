@@ -92,7 +92,9 @@
 
 (use-package proof-general
   :ensure t
-  :mode ("\\.v\\'" . coq-mode))
+  :mode ("\\.v\\'" . coq-mode)
+  :init
+  (setq overlay-arrow-string ""))
 
 (use-package company-coq
   :ensure t
@@ -107,6 +109,8 @@
 
 (setq column-number-mode t
       line-number-mode t
+      isearch-allow-scroll t
+      enable-recursive-minibuffers t
       require-final-newline t)
 
 (global-set-key (kbd "C-x C-S-q") #'view-mode)
@@ -114,6 +118,12 @@
 ;; Marquage des parenthèses
 (load-library "paren")
 (show-paren-mode 1)
+
+;; Marquage des problèmes d'espace
+(require 'whitespace)
+(setq whitespace-line-column 80)
+(setq whitespace-style '(face empty tabs lines-tail trailing space-after-tab space-before-tab))
+(add-hook 'prog-mode-hook #'whitespace-mode)
 
 ;; Adapted from:
 ;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Matching-parentheses.html
