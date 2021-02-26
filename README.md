@@ -7,7 +7,7 @@ sous GNU/Linux, macOS et Windows 10 (64 bits).
 
 *Notes :*
 
-* La procédure "GNU/Linux" concerne uniquement les distributions basées sur Debian ou Ubuntu.
+* La procédure "GNU/Linux" n'a été testée qu'avec les distributions basées sur Debian ou Ubuntu.
 
 * Le mode `learn-ocaml.el` (qui requiert `learn-ocaml-client`) a été surtout testé sous GNU/Linux jusqu'à présent.
 
