@@ -14,12 +14,16 @@
 ;; Config de package.el, MELPA et use-package
 
 (require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
-  (add-to-list 'package-archives
-               (cons "melpa" (concat proto "://melpa.org/packages/")) t))
+;; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3") ; cf. rem. ci-dessous
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
+;; Si vous avez Emacs 26.1 (qui est la version fournie dans Debian 10)
+;; vous pourriez avoir le message d'erreur "Failed to download 'melpa'
+;; archive during the package refresh step". C'est un bug connu
+;; (https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341) qui a été
+;; corrigé dans Emacs 26.3 et 27.1; un contournement simple consiste à
+;; décommenter la ligne (setq gnutls-algorithm-priority ...) ci-dessus
+;; (enlever les ";;").
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -35,7 +39,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(proof-locked-face ((t (:background "#add8e6"))))
+ '(region ((t (:background "gold1" :distant-foreground "dim gray")))))
 
 ;; Bootstrap use-package
 
@@ -91,9 +96,7 @@
   :ensure t
   :mode ("\\.v\\'" . coq-mode)
   :init                                 ; (:config doesn't work here)
-  (setq coq-prog-name "coqtop")         ; or "C:/Coq/bin/coqtop.exe"…
-  :custom-face
-  (proof-locked-face ((t (:background "#add8e6")))))
+  (setq coq-prog-name "coqtop"))        ; or "C:/Coq/bin/coqtop.exe"…
 
 (use-package company-coq
   :ensure t
