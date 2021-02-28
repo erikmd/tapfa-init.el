@@ -29,7 +29,7 @@ ces 5 étapes.*)
         sudo apt-get install aspcud bubblewrap build-essential curl git m4 tar unzip
         sudo apt-get install pkg-config libssl-dev
 
-   Si vous avez une version trop ancienne d'Ubuntu n'ayant pas le paquet `bubblewrap`,
+   Si vous avez une version trop ancienne d'Ubuntu n'ayant pas le paquet [`bubblewrap`](https://packages.ubuntu.com/bubblewrap),
    vous pouvez utiliser ce PPA : <https://launchpad.net/~avsm/+archive/ubuntu/ppa>.
 
 1. Installer `opam` 2.0 (comme les paquets Debian/Ubuntu sont trop
