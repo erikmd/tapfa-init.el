@@ -55,8 +55,9 @@ ces 5 étapes.*)
 
 1. **Optionnel** : installer `learn-ocaml-client` (utile seulement pour [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el))
    et `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`) :
-
+   ```
    opam install utop learn-ocaml-client
+   ```
 
 ## Installation des modes Emacs pour OCaml et Coq
 
@@ -162,8 +163,9 @@ Pour installer automatiquement les modes
 
 1. **Optionnel** : installer `learn-ocaml-client` (utile seulement pour [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el))
    et `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`) :
-
+   ```
    opam install utop learn-ocaml-client
+   ```
 
 ## Installation des modes Emacs pour OCaml et Coq
 
@@ -299,8 +301,9 @@ Pour installer automatiquement les modes
 
 1. **Optionnel** : installer `learn-ocaml-client` (utile seulement pour [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el))
    et `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`) :
-
+   ```
    opam install utop learn-ocaml-client
+   ```
 
 1. Installer `wsl-alias` :
 
