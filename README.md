@@ -44,6 +44,7 @@ ces 5 étapes.*)
    opam init --auto-setup --bare
    opam switch create 4.05.0 ocaml-base-compiler.4.05.0
    eval $(opam env)
+   opam update
    opam install -y merlin
    ```
    ```
@@ -152,6 +153,7 @@ Pour installer automatiquement les modes
    opam init --auto-setup --bare
    opam switch create 4.05.0 ocaml-base-compiler.4.05.0
    eval $(opam env)
+   opam update
    opam install -y merlin
    ```
    ```
@@ -287,6 +289,7 @@ Pour installer automatiquement les modes
    opam init --disable-sandboxing --auto-setup --bare
    opam switch create 4.05.0 ocaml-base-compiler.4.05.0
    eval $(opam env)
+   opam update
    opam install -y merlin
    ```
    ```
