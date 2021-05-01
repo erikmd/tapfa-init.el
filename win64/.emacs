@@ -132,6 +132,8 @@
 (setq whitespace-line-column 80)
 (setq whitespace-style '(face empty tabs lines-tail trailing space-after-tab space-before-tab))
 (add-hook 'prog-mode-hook #'whitespace-mode)
+(add-hook 'prog-mode-hook #'(lambda () (unless (derived-mode-p 'makefile-mode)
+                                         (setq indent-tabs-mode nil))))
 
 ;; Adapted from:
 ;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Matching-parentheses.html
@@ -139,10 +141,10 @@
   "Go to the matching paren if on a paren; otherwise insert µ."
   (interactive "p")
   (cond ((looking-back "[])}]") ;;(forward-char 1)
-	 (backward-list 1))
-	((looking-at "[{([]") (forward-list 1) ;;(backward-char 1)
-	 )
-	(t (self-insert-command (or arg 1)))))
+         (backward-list 1))
+        ((looking-at "[{([]") (forward-list 1) ;;(backward-char 1)
+         )
+        (t (self-insert-command (or arg 1)))))
 (global-set-key "µ" #'tapfa-match-paren-direct)
 
 ;; Raccourcis C-c/C-x/C-v/C-z standards
