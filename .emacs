@@ -131,6 +131,8 @@
 (add-hook 'prog-mode-hook #'whitespace-mode)
 (add-hook 'prog-mode-hook #'(lambda () (unless (derived-mode-p 'makefile-mode)
                                          (setq indent-tabs-mode nil))))
+(add-hook 'sgml-mode-hook #'(lambda () (setq indent-tabs-mode nil)))
+(add-hook 'nxml-mode-hook #'(lambda () (setq indent-tabs-mode nil)))
 
 ;; Adapted from:
 ;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Matching-parentheses.html
