@@ -68,6 +68,7 @@ Pour installer automatiquement les modes
 [tuareg](https://github.com/ocaml/tuareg),
 [bifocal](https://github.com/riscy/bifocal-mode),
 [merlin-eldoc](https://github.com/Khady/merlin-eldoc),
+[merlin-iedit](https://github.com/ocaml/merlin/blob/master/emacs/merlin-iedit.el),
 [company](https://github.com/company-mode/company-mode),
 [learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
 [ProofGeneral](https://github.com/ProofGeneral/PG) et
@@ -177,6 +178,7 @@ Pour installer automatiquement les modes
 [tuareg](https://github.com/ocaml/tuareg),
 [bifocal](https://github.com/riscy/bifocal-mode),
 [merlin-eldoc](https://github.com/Khady/merlin-eldoc),
+[merlin-iedit](https://github.com/ocaml/merlin/blob/master/emacs/merlin-iedit.el),
 [company](https://github.com/company-mode/company-mode),
 [learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
 [ProofGeneral](https://github.com/ProofGeneral/PG) et
