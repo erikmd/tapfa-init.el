@@ -82,6 +82,11 @@
 ;;   :bind (:map merlin-mode-map
 ;;               ("C-c <C-left>" . merlin-eldoc-jump-to-prev-occurrence)
 ;;               ("C-c <C-right>" . merlin-eldoc-jump-to-next-occurrence)))
+;;
+;; (use-package merlin-iedit
+;;   :ensure t
+;;   :bind (:map merlin-mode-map
+;;               ("C-c C-o" . merlin-iedit-occurrences)))
 
 (use-package company
   :ensure t
