@@ -32,7 +32,7 @@
  ;; If there is more than one, they won't work right.
  '(diff-switches "-u")
  '(package-selected-packages
-   (quote (company-coq proof-general company merlin tuareg use-package))))
+   (quote (learn-ocaml company-coq proof-general company merlin bifocal tuareg use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
