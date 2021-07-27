@@ -85,6 +85,7 @@
 ;;
 ;; (use-package merlin-iedit
 ;;   :ensure t
+;;   :after merlin-eldoc
 ;;   :bind (:map merlin-mode-map
 ;;               ("C-c C-o" . merlin-iedit-occurrences)))
 
