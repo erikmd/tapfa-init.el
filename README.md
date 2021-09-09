@@ -49,7 +49,7 @@ ces 5 étapes.*)
    ```
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -k version coq 8.12.2
+   opam pin add -n -k version coq 8.13.2
    opam install -j 2 coq
    ```
    **Ne pas exécuter `opam user-setup install`**.
@@ -159,7 +159,7 @@ Pour installer automatiquement les modes
    ```
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -k version coq 8.12.2
+   opam pin add -n -k version coq 8.13.2
    opam install -j 2 coq
    ```
    **Ne pas exécuter `opam user-setup install`**.
@@ -296,7 +296,7 @@ Pour installer automatiquement les modes
    ```
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -k version coq 8.12.2
+   opam pin add -n -k version coq 8.13.2
    opam install -j 2 coq
    ```
 
