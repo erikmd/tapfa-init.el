@@ -42,7 +42,7 @@ ces 5 étapes.*)
 1. Configurer `opam` puis installer `merlin` et `coq` :
    ```
    opam init --auto-setup --bare
-   opam switch create 4.05.0 ocaml-base-compiler.4.05.0
+   opam switch create 4.12.0 ocaml-base-compiler.4.12.0
    eval $(opam env)
    opam update
    opam install -y merlin
@@ -152,7 +152,7 @@ Pour installer automatiquement les modes
 1. Configurer `opam` puis installer `merlin` et `coq` :
    ```
    opam init --auto-setup --bare
-   opam switch create 4.05.0 ocaml-base-compiler.4.05.0
+   opam switch create 4.12.0 ocaml-base-compiler.4.12.0
    eval $(opam env)
    opam update
    opam install -y merlin
@@ -289,7 +289,7 @@ Pour installer automatiquement les modes
 
    ```
    opam init --disable-sandboxing --auto-setup --bare
-   opam switch create 4.05.0 ocaml-base-compiler.4.05.0
+   opam switch create 4.12.0 ocaml-base-compiler.4.12.0
    eval $(opam env)
    opam update
    opam install -y merlin
