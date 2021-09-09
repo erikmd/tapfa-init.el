@@ -414,6 +414,10 @@ Pour installer automatiquement les modes
    vous pouvez taper <kbd>M-x learn-ocaml-mode RET</kbd>.
 </details>
 
-## Remarque
+## Remarques
 
 En cas de problème avec cette configuration, ouvrez une [issue](https://github.com/erikmd/tapfa-init.el/issues) ou envoyez-moi un [e-mail](https://github.com/erikmd).
+          
+Ce tutoriel d'installation propose d'installer `coq` version `8.13.2`,
+sachant que la dernière version publiée de Coq est donnée par le badge suivant :
+[![coq latest version](https://img.shields.io/docker/v/coqorg/coq/latest)](https://github.com/coq/coq/releases)
