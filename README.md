@@ -19,10 +19,10 @@ ces 5 étapes.*)
 1. Installer `emacs` (version `>= 25.1`) et `rlwrap` (*optionnel*) :
    ```
    sudo apt-get update
-   sudo apt-get install emacs25 rlwrap
+   sudo apt-get install emacs rlwrap
    ```
-   Il peut être nécessaire de remplacer `emacs25` par `emacs` sur certaines distributions
-   (Ubuntu 20.04+ ou Debian 10+) pour avoir une version plus récente.
+   Il peut être nécessaire de remplacer `emacs` par `emacs25` sur certaines distributions
+   si le paquet `emacs` n'est pas disponible.
 
 1. Installer les dépendances d'`opam` :
    ```
