@@ -55,23 +55,36 @@
 
 ;; Config de Tuareg, Merlin et Company
 
-(use-package tuareg
-  :ensure t
-  :defer t
-  :init
-  (setq tuareg-opam-insinuate t))
+(setq tapfa-opam-available (eq (shell-command "opam var bin") 0))
+
+(if tapfa-opam-available
+    (use-package tuareg
+      :ensure t
+      :defer t
+      :init
+      (setq tuareg-opam-insinuate t))
+  (use-package tuareg
+    :ensure t
+    :defer t))
 
 (use-package bifocal
   :ensure t
   :hook
   (tuareg-interactive-mode . bifocal-mode))
 
-(use-package merlin
-  :ensure t
-  :hook
-  ((tuareg-mode caml-mode) . merlin-mode)
-  :config
-  (setq merlin-command 'opam))
+(if tapfa-opam-available
+    (use-package merlin
+      :ensure t
+      :hook
+      ((tuareg-mode caml-mode) . merlin-mode)
+      :config
+      (setq merlin-command 'opam))
+  (use-package merlin
+    :ensure t
+    :hook
+    ((tuareg-mode caml-mode) . merlin-mode)
+    :config
+    (setq merlin-command "ocamlmerlin")))
 
 (use-package merlin-eldoc
   :ensure t
