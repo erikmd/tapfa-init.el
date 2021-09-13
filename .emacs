@@ -168,3 +168,10 @@
 ;; Raccourcis C-c/C-x/C-v/C-z standards
 ;; au lieu de M-w/C-w/C-y/C-_ par défaut dans GNU Emacs
 (cua-mode 1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Vous utilisez Git ?
+;;
+;; Dans ce cas, vous pourriez être intéressé par le mode "Magit" :
+;;
+;; https://gist.github.com/erikmd/82c4b2a50a77c98e8fe6318530c531b7
