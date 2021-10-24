@@ -67,10 +67,11 @@
     :ensure t
     :defer t))
 
-(use-package bifocal
-  :ensure t
-  :hook
-  (tuareg-interactive-mode . bifocal-mode))
+;;;  Désactivé car le raccourci associé à <home> est malencontreux
+;; (use-package bifocal
+;;   :ensure t
+;;   :hook
+;;   (tuareg-interactive-mode . bifocal-mode))
 
 (if tapfa-opam-available
     (use-package merlin

@@ -62,10 +62,11 @@
   (setq tuareg-interactive-program "ocaml"
         tuareg-opam "opam"))
 
-(use-package bifocal
-  :ensure t
-  :hook
-  (tuareg-interactive-mode . bifocal-mode))
+;;;  Désactivé car le raccourci associé à <home> est malencontreux
+;; (use-package bifocal
+;;   :ensure t
+;;   :hook
+;;   (tuareg-interactive-mode . bifocal-mode))
 
 (use-package merlin
   :ensure t
