@@ -147,7 +147,7 @@
 ;; Marquage des problèmes d'espace
 (require 'whitespace)
 (setq whitespace-line-column 80)
-(setq whitespace-style '(face empty tabs lines-tail trailing space-after-tab space-before-tab))
+(setq whitespace-style '(face empty tabs trailing space-after-tab space-before-tab))
 (add-hook 'prog-mode-hook #'whitespace-mode)
 (add-hook 'prog-mode-hook #'(lambda () (unless (derived-mode-p 'makefile-mode)
                                          (setq indent-tabs-mode nil))))
