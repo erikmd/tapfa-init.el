@@ -136,8 +136,7 @@ Pour installer automatiquement les modes
 
 <details><summary><b>Installation sous macOS</b></summary>
 
-1. Installer [Emacs avec Homebrew Cask](https://formulae.brew.sh/cask/emacs)
-   ou [Aquamacs](https://aquamacs.org).
+1. Installer [Aquamacs](https://aquamacs.org) (ou [Emacs avec Homebrew Cask](https://formulae.brew.sh/cask/emacs), pas recommandé à cause de [cette issue](https://github.com/caldwell/build-emacs/issues/113))
 
 1. Installer `gpatch`, `pkg-config` et `openssl` 1.1 avec Homebrew :
    ```
