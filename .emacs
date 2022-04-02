@@ -118,8 +118,9 @@
 (use-package proof-general
   :ensure t
   :mode ("\\.v\\'" . coq-mode)
-  :init
-  (setq overlay-arrow-string ""))
+  :config
+  (setq overlay-arrow-string "")
+  (setq coq-double-hit-enable t))
 
 (use-package company-coq
   :ensure t
