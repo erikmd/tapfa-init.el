@@ -119,8 +119,8 @@
   :ensure t
   :mode ("\\.v\\'" . coq-mode)
   :config
-  (setq overlay-arrow-string "")
-  (setq coq-double-hit-enable t))
+  (setq overlay-arrow-string ""
+        coq-double-hit-enable t))
 
 (use-package company-coq
   :ensure t
