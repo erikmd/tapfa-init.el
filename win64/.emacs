@@ -128,48 +128,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Config générale
-
-(setq column-number-mode t
-      line-number-mode t
-      isearch-allow-scroll t
-      enable-recursive-minibuffers t
-      require-final-newline t)
-
-(global-set-key (kbd "C-x C-S-q") #'view-mode)
-
-;; Marquage des parenthèses
-(load-library "paren")
-(show-paren-mode 1)
-
-;; Marquage des problèmes d'espace
-(require 'whitespace)
-(setq whitespace-line-column 80)
-(setq whitespace-style '(face empty tabs trailing space-after-tab space-before-tab))
-(add-hook 'prog-mode-hook #'whitespace-mode)
-(add-hook 'prog-mode-hook #'(lambda () (unless (derived-mode-p 'makefile-mode)
-                                         (setq indent-tabs-mode nil))))
-(add-hook 'sgml-mode-hook #'(lambda () (setq indent-tabs-mode nil)))
-(add-hook 'nxml-mode-hook #'(lambda () (setq indent-tabs-mode nil)))
-
-;; Adapted from:
-;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Matching-parentheses.html
-(defun tapfa-match-paren-direct (arg)
-  "Go to the matching paren if on a paren; otherwise insert µ."
-  (interactive "p")
-  (cond ((looking-back "[])}]") ;;(forward-char 1)
-         (backward-list 1))
-        ((looking-at "[{([]") (forward-list 1) ;;(backward-char 1)
-         )
-        (t (self-insert-command (or arg 1)))))
-(global-set-key "µ" #'tapfa-match-paren-direct)
-
-;; Raccourcis C-c/C-x/C-v/C-z standards
-;; au lieu de M-w/C-w/C-y/C-_ par défaut dans GNU Emacs
-(cua-mode 1)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; Config de Magit
 ;; Copied-from: https://gist.github.com/erikmd/82c4b2a50a77c98e8fe6318530c531b7
 
@@ -233,3 +191,45 @@ Advices to `magit-push-current-to-*' trigger this query."
 (ad-activate 'magit-push-current-to-upstream)
 (ad-activate 'magit-push-current-to-pushremote)
 (ad-activate 'magit-run-git-async)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Config générale
+
+(setq column-number-mode t
+      line-number-mode t
+      isearch-allow-scroll t
+      enable-recursive-minibuffers t
+      require-final-newline t)
+
+(global-set-key (kbd "C-x C-S-q") #'view-mode)
+
+;; Marquage des parenthèses
+(load-library "paren")
+(show-paren-mode 1)
+
+;; Marquage des problèmes d'espace
+(require 'whitespace)
+(setq whitespace-line-column 80)
+(setq whitespace-style '(face empty tabs trailing space-after-tab space-before-tab))
+(add-hook 'prog-mode-hook #'whitespace-mode)
+(add-hook 'prog-mode-hook #'(lambda () (unless (derived-mode-p 'makefile-mode)
+                                         (setq indent-tabs-mode nil))))
+(add-hook 'sgml-mode-hook #'(lambda () (setq indent-tabs-mode nil)))
+(add-hook 'nxml-mode-hook #'(lambda () (setq indent-tabs-mode nil)))
+
+;; Adapted from:
+;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Matching-parentheses.html
+(defun tapfa-match-paren-direct (arg)
+  "Go to the matching paren if on a paren; otherwise insert µ."
+  (interactive "p")
+  (cond ((looking-back "[])}]") ;;(forward-char 1)
+         (backward-list 1))
+        ((looking-at "[{([]") (forward-list 1) ;;(backward-char 1)
+         )
+        (t (self-insert-command (or arg 1)))))
+(global-set-key "µ" #'tapfa-match-paren-direct)
+
+;; Raccourcis C-c/C-x/C-v/C-z standards
+;; au lieu de M-w/C-w/C-y/C-_ par défaut dans GNU Emacs
+(cua-mode 1)
