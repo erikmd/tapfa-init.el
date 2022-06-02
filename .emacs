@@ -172,8 +172,67 @@
 (cua-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Vous utilisez Git ?
-;;
-;; Dans ce cas, vous pourriez être intéressé par le mode "Magit" :
-;;
-;; https://gist.github.com/erikmd/82c4b2a50a77c98e8fe6318530c531b7
+
+;; Config de Magit
+;; Copied-from: https://gist.github.com/erikmd/82c4b2a50a77c98e8fe6318530c531b7
+
+;;; Pour plus d'infos :
+;; https://github.com/magit/magit et https://magit.vc (doc officielle)
+;; https://youtu.be/mtliRYQd0j4 (tuto vidéo sur git-rebase avec Magit)
+
+(use-package magit
+  :ensure t
+  :defer t
+  :config
+  (setq magit-diff-refine-hunk 'all)
+  :bind (("C-x g" . magit-status)
+         ("C-x M-g" . magit-dispatch-popup)))
+
+(use-package magit-gitflow
+  :ensure t
+  :after magit
+  :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
+
+;; Protect against accident pushes to upstream/pushremote
+;; compatible with https://github.com/magit/magit/pull/3813
+;; tested with magit-20200927.1644
+(defadvice magit-push-current-to-upstream
+    (around my-protect-accidental-magit-push-current-to-upstream)
+  "Protect against accidental push to upstream.
+Causes `magit-run-git-async' to ask the user for confirmation first."
+  (let ((my-magit-ask-before-push t))
+    ad-do-it))
+
+(defadvice magit-push-current-to-pushremote
+    (around my-protect-accidental-magit-push-current-to-pushremote)
+  "Protect against accidental push to upstream.
+Causes `magit-run-git-async' to ask the user for confirmation first."
+  (let ((my-magit-ask-before-push t))
+    ad-do-it))
+
+(defun magit-git-to-string (args)
+  "Pretty-print the `magit-run-git-async' arguments.
+Quote the substrings if need be."
+  (cond ((not args)
+         "")
+        ((stringp args)
+         (shell-quote-argument args))
+        ((listp args)
+         (mapconcat #'magit-git-to-string args " "))
+        (t (error "Unrecognized: %s" (pp-to-string args)))))
+;(magit-git-to-string '("push" "-v" ("--force-with-lease") "origin" "master:refs/heads/master"))
+
+(defadvice magit-run-git-async (around my-protect-accidental-magit-run-git-async)
+  "Maybe ask the user for confirmation before pushing.
+Advices to `magit-push-current-to-*' trigger this query."
+  (if (bound-and-true-p my-magit-ask-before-push)
+      ;; Arglist is (ARGS)
+      (if (y-or-n-p (format "Run 'git %s'? "
+                               (magit-git-to-string (ad-get-args 0))))
+          ad-do-it
+        (error "Push aborted by user"))
+    ad-do-it))
+
+(ad-activate 'magit-push-current-to-upstream)
+(ad-activate 'magit-push-current-to-pushremote)
+(ad-activate 'magit-run-git-async)
