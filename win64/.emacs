@@ -16,7 +16,7 @@
 (require 'package)
 ;; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3") ; cf. rem. ci-dessous
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
+
 ;; Si vous avez Emacs 26.1 (qui est la version fournie dans Debian 10)
 ;; vous pourriez avoir le message d'erreur "Failed to download 'melpa'
 ;; archive during the package refresh step". C'est un bug connu
@@ -24,6 +24,10 @@
 ;; corrigé dans Emacs 26.3 et 27.1; un contournement simple consiste à
 ;; décommenter la ligne (setq gnutls-algorithm-priority ...) ci-dessus
 ;; (enlever les ";;").
+
+(when (eval-when-compile (version< emacs-version "27"))
+  ;; (load "~/.emacs.d/early-init.el")
+  (package-initialize))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
