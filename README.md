@@ -66,13 +66,13 @@ ces 5 étapes.*)
 
 Pour installer automatiquement les modes
 [tuareg](https://github.com/ocaml/tuareg),
-[bifocal](https://github.com/riscy/bifocal-mode),
 [merlin-eldoc](https://github.com/Khady/merlin-eldoc),
 [merlin-iedit](https://github.com/ocaml/merlin/blob/master/emacs/merlin-iedit.el),
 [company](https://github.com/company-mode/company-mode),
 [learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
-[ProofGeneral](https://github.com/ProofGeneral/PG) et
-[company-coq](https://github.com/cpitclaudel/company-coq) :
+[ProofGeneral](https://github.com/ProofGeneral/PG),
+[company-coq](https://github.com/cpitclaudel/company-coq) et
+[magit](https://magit.vc) :
 
 1. Téléchargez et placez le fichier `.emacs` fourni à la racine de
    votre *homedir* (`~/`) :
@@ -175,13 +175,13 @@ Pour installer automatiquement les modes
 
 Pour installer automatiquement les modes
 [tuareg](https://github.com/ocaml/tuareg),
-[bifocal](https://github.com/riscy/bifocal-mode),
 [merlin-eldoc](https://github.com/Khady/merlin-eldoc),
 [merlin-iedit](https://github.com/ocaml/merlin/blob/master/emacs/merlin-iedit.el),
 [company](https://github.com/company-mode/company-mode),
 [learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
-[ProofGeneral](https://github.com/ProofGeneral/PG) et
-[company-coq](https://github.com/cpitclaudel/company-coq) :
+[ProofGeneral](https://github.com/ProofGeneral/PG),
+[company-coq](https://github.com/cpitclaudel/company-coq) et
+[magit](https://magit.vc) :
 
 1. Téléchargez et placez le fichier `.emacs` fourni à la racine de
    votre *homedir* (`~/`) :
@@ -378,12 +378,12 @@ Pour installer automatiquement les modes
 
    L'installation des modes Emacs pour OCaml et Coq
    ([tuareg](https://github.com/ocaml/tuareg),
-   [bifocal](https://github.com/riscy/bifocal-mode),
    [merlin](https://github.com/ocaml/merlin),
    [company](https://github.com/company-mode/company-mode),
    [learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
-   [ProofGeneral](https://github.com/ProofGeneral/PG) et
-   [company-coq](https://github.com/cpitclaudel/company-coq)) devrait
+   [ProofGeneral](https://github.com/ProofGeneral/PG),
+   [company-coq](https://github.com/cpitclaudel/company-coq) et
+   [magit](https://magit.vc)) devrait
    se lancer automatiquement et durer environ 2'30.
 
    En cas de souci, faites
