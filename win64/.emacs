@@ -196,6 +196,11 @@ Advices to `magit-push-current-to-*' trigger this query."
 
 ;; Config générale
 
+(use-package tabbar
+  :ensure t
+  :init
+  (tabbar-mode t))
+
 (setq column-number-mode t
       line-number-mode t
       isearch-allow-scroll t
