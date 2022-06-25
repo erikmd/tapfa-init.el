@@ -244,6 +244,46 @@ Advices to `magit-push-current-to-*' trigger this query."
         (t (self-insert-command (or arg 1)))))
 (global-set-key "µ" #'tapfa-match-paren-direct)
 
-;; Raccourcis C-c/C-x/C-v/C-z standards
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Proposition des "raccourcis Windows" C-c/C-x/C-v/C-z
 ;; au lieu de M-w/C-w/C-y/C-_ par défaut dans GNU Emacs
-(cua-mode 1)
+
+(defgroup tapfa-init nil
+  "Tapfa-Init Emacs Settings."
+  :group 'convenience
+  :prefix "tapfa-init-")
+
+(defcustom tapfa-init-cua nil
+  "Initial setup for `cua-mode'.
+
+The following values are meaningful:
+nil ask on startup
+-1  `cua-mode' is disabled
+ 1  `cua-mode' is enabled"
+  :type '(choice (const :tag "Ask on startup" nil)
+                 (const :tag "Disabled (emacs expert mode)" -1)
+                 (const :tag "Enabled (windows' shortcuts)" 1))
+  :group 'tapfa-init)
+
+(defun tapfa-init-cua (&optional batch)
+  "Ask to set (cua-mode 1) or (cua-mode -1) or to ask again.
+Always ask if BATCH is nil, e.g., called interactively."
+  (interactive)
+  (if (or (null batch) (null tapfa-init-cua))
+      (let ((newval
+             (condition-case _sig
+                 (x-popup-dialog
+                  t '("Presse-papier & Annulation :\n\nVoulez-vous forcer l'utilisation des raccourcis Windows\n(C-c, C-x, C-v, et C-z)\n\nOu garder les raccourcis Emacs/shell standards\n(M-w, C-w, C-y, et C-_)\n\n?"
+                      ("Windows" . 1) ("Emacs/shell" . -1)
+                      ("Me redemander" . nil)))
+               (quit nil))))
+        (customize-save-variable 'tapfa-init-cua newval)
+        (if newval
+            (message-box "Configuration enregistrée.\n\nSi jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET")
+          (message-box "Configuration supprimée.\n\nSi jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET"))))
+  (cond ((eq tapfa-init-cua 1) (cua-mode 1))
+        ((eq tapfa-init-cua -1) (cua-mode -1))
+        (t (cua-mode -1))))
+
+(tapfa-init-cua t)
