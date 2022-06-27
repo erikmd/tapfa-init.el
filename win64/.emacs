@@ -272,7 +272,7 @@ Always ask if BATCH is nil, e.g., called interactively."
         (customize-save-variable 'tapfa-init-cua newval)
         (if newval
             (message-box "Configuration enregistrée.\n\nSi jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET")
-          (message-box "Configuration supprimée.\n\nSi jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET"))))
+          (message-box "Configuration supprimée.\n\nSi jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET\nou redémarrez Emacs."))))
   (cond ((eq tapfa-init-cua 1) (cua-mode 1))
         ((eq tapfa-init-cua -1) (cua-mode -1))
         (t (cua-mode -1))))
