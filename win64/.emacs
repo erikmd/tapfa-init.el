@@ -114,9 +114,8 @@
   :ensure t
   :mode ("\\.v\\'" . coq-mode)
   :init                                 ; (:config doesn't work here)
-  (setq coq-prog-name "coqtop")         ; or "C:/Coq/bin/coqtop.exe"…
-  :config
-  (setq overlay-arrow-string ""
+  (setq coq-prog-name "coqtop"          ; or "C:/Coq/bin/coqtop.exe"…
+        overlay-arrow-string ""
         coq-double-hit-enable t))
 
 (use-package company-coq

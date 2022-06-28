@@ -124,7 +124,7 @@
 (use-package proof-general
   :ensure t
   :mode ("\\.v\\'" . coq-mode)
-  :config
+  :init
   (setq overlay-arrow-string ""
         coq-double-hit-enable t))
 
