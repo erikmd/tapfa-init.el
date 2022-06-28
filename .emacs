@@ -197,6 +197,8 @@ Advices to `magit-push-current-to-*' trigger this query."
         (error "Push aborted by user"))
     ad-do-it))
 
+(setq ad-redefinition-action 'accept)
+
 (ad-activate 'magit-push-current-to-upstream)
 (ad-activate 'magit-push-current-to-pushremote)
 (ad-activate 'magit-run-git-async)
