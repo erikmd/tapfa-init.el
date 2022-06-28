@@ -38,7 +38,7 @@
  ;; If there is more than one, they won't work right.
  '(diff-switches "-u")
  '(package-selected-packages
-   (quote (magit-gitflow magit learn-ocaml company-coq proof-general company merlin tuareg use-package))))
+   (quote (helpful discover-my-major which-key tabbar magit-gitflow magit learn-ocaml company-coq proof-general company merlin tuareg use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
