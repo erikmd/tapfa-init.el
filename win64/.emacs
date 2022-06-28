@@ -194,6 +194,39 @@ Advices to `magit-push-current-to-*' trigger this query."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Config pour augmenter la découvrabilité
+
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
+
+(use-package discover-my-major
+  :ensure t
+  :config
+  (global-set-key (kbd "C-h C-m") #'discover-my-major)
+  (global-set-key (kbd "C-h M-m") #'discover-my-mode))
+
+;; Recall we also have the standard keybinding "C-h m".
+
+(use-package helpful
+  :ensure t
+  :config
+  (global-set-key (kbd "C-h f") #'helpful-callable)
+  (global-set-key (kbd "C-h v") #'helpful-variable)
+  (global-set-key (kbd "C-h k") #'helpful-key)
+  ;;; Look up Functions (excludes macros).
+  ;; (global-set-key (kbd "C-h F") #'helpful-function)
+  ;;; Look up Commands (= keybindings).
+  ;; (global-set-key (kbd "C-h K") #'helpful-command)
+  ;;; COMMENTED-OUT as "Info-goto-emacs[-key]-command-node" are more useful.
+  (add-hook 'emacs-lisp-mode-hook #'(lambda ()
+    (local-set-key (kbd "C-c C-.") #'helpful-at-point))))
+
+;; Note we can also type "C-h" after a prefix to list its expansions.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Config générale
 
 (use-package tabbar
