@@ -309,16 +309,25 @@ Always ask if BATCH is nil, e.g., called interactively."
       (let ((newval
              (condition-case _sig
                  (x-popup-dialog
-                  t '("Presse-papier & Annulation :\n\nVoulez-vous forcer l'utilisation des raccourcis Windows\n(C-c, C-x, C-v, et C-z)\n\nOu garder les raccourcis Emacs/shell standards\n(M-w, C-w, C-y, et C-_)\n\n?"
-                      ("Windows" . 1) ("Emacs/shell" . -1)
+                  t '("Presse-papier & Annulation :\n\nVoulez-vous forcer l'utilisation des raccourcis Windows ?\n(C-c, C-x, C-v, et C-z)\n\nOu garder les raccourcis Emacs/shell standards\n(M-w, C-w, C-y, et C-_)\n"
+                      ("Emacs/shell" . -1) ("Windows" . 1)
                       ("Me redemander" . nil)))
                (quit nil))))
         (customize-save-variable 'tapfa-init-cua newval)
-        (if newval
-            (message-box "Configuration enregistrée.\n\nSi jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET")
-          (message-box "Configuration supprimée.\n\nSi jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET\nou redémarrez Emacs."))))
-  (cond ((eq tapfa-init-cua 1) (cua-mode 1))
-        ((eq tapfa-init-cua -1) (cua-mode -1))
-        (t (cua-mode -1))))
+        (let ((ssaved "Configuration enregistrée.\n\n")
+              (sremov "Pas de configuration stockée.\n\n")
+              (swindo "Utilise : raccourcis Windows\n(C-c, C-x, C-v, et C-z)\n\n")
+              (semacs "Utilise : raccourcis Emacs/shell standards\n(M-w, C-w, C-y, et C-_)\n\n")
+              (ssaved-end "Si jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET")
+              (sremov-end "Si jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET\nou redémarrez Emacs."))
+          (cond ((eq newval 1)
+                 (message-box (concat ssaved swindo ssaved-end)))
+                ((eq newval -1)
+                 (message-box (concat ssaved semacs ssaved-end)))
+                (t
+                 (message-box (concat sremov sremov-end)))))))
+        (cond ((eq tapfa-init-cua 1) (cua-mode 1))
+              ((eq tapfa-init-cua -1) (cua-mode -1))
+              (t (cua-mode -1))))
 
 (tapfa-init-cua t)
