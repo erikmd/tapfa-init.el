@@ -38,7 +38,7 @@
  ;; If there is more than one, they won't work right.
  '(diff-switches "-u")
  '(package-selected-packages
-   (quote (helpful discover-my-major which-key tabbar magit-gitflow magit learn-ocaml company-coq proof-general company merlin tuareg use-package))))
+   (quote (helpful discover-my-major which-key tabbar magit-gitflow magit learn-ocaml company merlin tuareg use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -108,22 +108,67 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Proposition d'installer les modes (proof-general, company-coq) pour Coq
+
+(defgroup tapfa-init nil
+  "Tapfa-Init Emacs Settings."
+  :group 'convenience
+  :prefix "tapfa-init-")
+
+(defcustom tapfa-init-coq nil
+  "Should coq modes be installed?
+
+The following values are meaningful:
+nil ask on startup
+-1  do not install coq related packages
+ 1  install proof-general + company-coq"
+  :type '(choice (const :tag "Ask on startup" nil)
+                 (const :tag "Do not install coq related packages" -1)
+                 (const :tag "Install proof-general + company-coq" 1))
+  :group 'tapfa-init)
+
+(defun tapfa-init-coq (&optional batch)
+  "Ask to set tapfa-init-coq to 1 or -1 or to ask again.
+Always ask if BATCH is nil, e.g., called interactively."
+  (interactive)
+  (if (or (null batch) (null tapfa-init-coq))
+      (let ((newval
+             (condition-case _sig
+                 (x-popup-dialog
+                  t '("Voulez-vous installer les modes (plugins) associés au langage Coq ?\n"
+                      ("Oui" . 1) ("Non" . -1)
+                      ("Plus tard" . nil)))
+               (quit nil))))
+        (customize-save-variable 'tapfa-init-coq newval)
+        (cond ((eq tapfa-init-coq 1)
+               (package-refresh-contents))
+              ((eq tapfa-init-coq -1)
+               t)
+              (t
+               (message-box "Saute l'installation des modes liés à Coq.\n\nPour les installer tout de même plus tard, tapez M-x tapfa-init-coq RET\n"))))))
+
+(tapfa-init-coq t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Config de ProofGeneral et company-coq
 
-(use-package proof-general
-  :ensure t
-  :mode ("\\.v\\'" . coq-mode)
-  :init                                 ; (:config doesn't work here)
-  (setq coq-prog-name "coqtop"          ; or "C:/Coq/bin/coqtop.exe"…
-        overlay-arrow-string ""
-        coq-double-hit-enable t))
+(when (eq tapfa-init-coq 1)
 
-(use-package company-coq
-  :ensure t
-  :hook
-  (coq-mode . company-coq-mode)
-  :init
-  (setq company-coq-disabled-features '(hello prettify-symbols)))
+  (use-package proof-general
+    :ensure t
+    :mode ("\\.v\\'" . coq-mode)
+    :init                               ; (:config doesn't work here)
+    (setq coq-prog-name "coqtop"        ; or "C:/Coq/bin/coqtop.exe"…
+          overlay-arrow-string ""
+          coq-double-hit-enable t))
+
+  (use-package company-coq
+    :ensure t
+    :hook
+    (coq-mode . company-coq-mode)
+    :init
+    (setq company-coq-disabled-features '(hello prettify-symbols))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -273,11 +318,6 @@ Advices to `magit-push-current-to-*' trigger this query."
 
 ;; Proposition des "raccourcis Windows" C-c/C-x/C-v/C-z
 ;; au lieu de M-w/C-w/C-y/C-_ par défaut dans GNU Emacs
-
-(defgroup tapfa-init nil
-  "Tapfa-Init Emacs Settings."
-  :group 'convenience
-  :prefix "tapfa-init-")
 
 (defcustom tapfa-init-cua nil
   "Initial setup for `cua-mode'.
