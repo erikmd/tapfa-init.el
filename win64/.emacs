@@ -172,6 +172,16 @@ Always ask if BATCH is nil, e.g., called interactively."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Config de markdown-mode (to edit README.md files easily!) and yaml-mode
+
+(use-package markdown-mode
+  :ensure t)
+
+(use-package yaml-mode
+  :ensure t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Config de Magit
 ;; Copied-from: https://gist.github.com/erikmd/82c4b2a50a77c98e8fe6318530c531b7
 
