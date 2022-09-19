@@ -357,7 +357,7 @@ Always ask if BATCH is nil, e.g., called interactively."
         (let ((ssaved "Configuration enregistrée.\n\n")
               (sremov "Pas de configuration stockée.\n\n")
               (swindo "Utilise : raccourcis Windows\n(C-c, C-x, C-v, et C-z)\n\n")
-              (semacs "Utilise : raccourcis Emacs/shell standards\n( M-w  pour copier,\n  C-w  pour couper,\n  C-y  pour coller,\n  C-_  pour annuler)\n\n")
+              (semacs "Utilise : raccourcis Emacs/shell standards\n( M-w  pour copier, c.-à-d.  Alt+w,\n  C-w  pour couper, c.-à-d.  Ctrl+w,\n  C-y  pour coller, c.-à-d.  Ctrl+y,\n  C-_  pour annuler, c.-à-d.  Ctrl+_)\n\n")
               (ssaved-end "Si jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET")
               (sremov-end "Si jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET\nou redémarrez Emacs."))
           (cond ((eq newval 1)
