@@ -59,6 +59,122 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Config pour augmenter la découvrabilité
+
+(use-package tabbar
+  :ensure t
+  :init
+  (tabbar-mode t))
+
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
+
+(use-package discover-my-major
+  :ensure t
+  :config
+  (global-set-key (kbd "C-h C-m") #'discover-my-major)
+  (global-set-key (kbd "C-h M-m") #'discover-my-mode))
+
+;; Recall we also have the standard keybinding "C-h m".
+
+(use-package helpful
+  :ensure t
+  :config
+  (global-set-key (kbd "C-h f") #'helpful-callable)
+  (global-set-key (kbd "C-h v") #'helpful-variable)
+  (global-set-key (kbd "C-h k") #'helpful-key)
+  ;;; Look up Functions (excludes macros).
+  ;; (global-set-key (kbd "C-h F") #'helpful-function)
+  ;;; Look up Commands (= keybindings).
+  ;; (global-set-key (kbd "C-h K") #'helpful-command)
+  ;;; COMMENTED-OUT as "Info-goto-emacs[-key]-command-node" are more useful.
+  (add-hook 'emacs-lisp-mode-hook #'(lambda ()
+    (local-set-key (kbd "C-c C-.") #'helpful-at-point))))
+
+;; Note we can also type "C-h" after a prefix to list its expansions.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Config de markdown-mode (to edit README.md files easily!) and yaml-mode
+
+(use-package markdown-mode
+  :ensure t)
+
+(use-package yaml-mode
+  :ensure t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Config de Magit
+;; Copied-from: https://gist.github.com/erikmd/82c4b2a50a77c98e8fe6318530c531b7
+
+;;; Pour plus d'infos :
+;; https://github.com/magit/magit et https://magit.vc (doc officielle)
+;; https://youtu.be/mtliRYQd0j4 (tuto vidéo sur git-rebase avec Magit)
+
+(use-package magit
+  :ensure t
+  :defer t
+  :config
+  (setq magit-diff-refine-hunk 'all)
+  :bind (("C-x g" . magit-status)
+         ("C-x M-g" . magit-dispatch-popup)))
+
+(use-package magit-gitflow
+  :ensure t
+  :after magit
+  :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
+
+;; Protect against accident pushes to upstream/pushremote
+;; compatible with https://github.com/magit/magit/pull/3813
+;; tested with magit-20200927.1644
+(defadvice magit-push-current-to-upstream
+    (around my-protect-accidental-magit-push-current-to-upstream)
+  "Protect against accidental push to upstream.
+Causes `magit-run-git-async' to ask the user for confirmation first."
+  (let ((my-magit-ask-before-push t))
+    ad-do-it))
+
+(defadvice magit-push-current-to-pushremote
+    (around my-protect-accidental-magit-push-current-to-pushremote)
+  "Protect against accidental push to upstream.
+Causes `magit-run-git-async' to ask the user for confirmation first."
+  (let ((my-magit-ask-before-push t))
+    ad-do-it))
+
+(defun magit-git-to-string (args)
+  "Pretty-print the `magit-run-git-async' arguments.
+Quote the substrings if need be."
+  (cond ((not args)
+         "")
+        ((stringp args)
+         (shell-quote-argument args))
+        ((listp args)
+         (mapconcat #'magit-git-to-string args " "))
+        (t (error "Unrecognized: %s" (pp-to-string args)))))
+;(magit-git-to-string '("push" "-v" ("--force-with-lease") "origin" "master:refs/heads/master"))
+
+(defadvice magit-run-git-async (around my-protect-accidental-magit-run-git-async)
+  "Maybe ask the user for confirmation before pushing.
+Advices to `magit-push-current-to-*' trigger this query."
+  (if (bound-and-true-p my-magit-ask-before-push)
+      ;; Arglist is (ARGS)
+      (if (y-or-n-p (format "Run 'git %s'? "
+                               (magit-git-to-string (ad-get-args 0))))
+          ad-do-it
+        (error "Push aborted by user"))
+    ad-do-it))
+
+(setq ad-redefinition-action 'accept)
+
+(ad-activate 'magit-push-current-to-upstream)
+(ad-activate 'magit-push-current-to-pushremote)
+(ad-activate 'magit-run-git-async)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Config de Tuareg, Merlin et Company
 
 (use-package tuareg
@@ -172,123 +288,7 @@ Always ask if BATCH is nil, e.g., called interactively."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Config de markdown-mode (to edit README.md files easily!) and yaml-mode
-
-(use-package markdown-mode
-  :ensure t)
-
-(use-package yaml-mode
-  :ensure t)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Config de Magit
-;; Copied-from: https://gist.github.com/erikmd/82c4b2a50a77c98e8fe6318530c531b7
-
-;;; Pour plus d'infos :
-;; https://github.com/magit/magit et https://magit.vc (doc officielle)
-;; https://youtu.be/mtliRYQd0j4 (tuto vidéo sur git-rebase avec Magit)
-
-(use-package magit
-  :ensure t
-  :defer t
-  :config
-  (setq magit-diff-refine-hunk 'all)
-  :bind (("C-x g" . magit-status)
-         ("C-x M-g" . magit-dispatch-popup)))
-
-(use-package magit-gitflow
-  :ensure t
-  :after magit
-  :config (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
-
-;; Protect against accident pushes to upstream/pushremote
-;; compatible with https://github.com/magit/magit/pull/3813
-;; tested with magit-20200927.1644
-(defadvice magit-push-current-to-upstream
-    (around my-protect-accidental-magit-push-current-to-upstream)
-  "Protect against accidental push to upstream.
-Causes `magit-run-git-async' to ask the user for confirmation first."
-  (let ((my-magit-ask-before-push t))
-    ad-do-it))
-
-(defadvice magit-push-current-to-pushremote
-    (around my-protect-accidental-magit-push-current-to-pushremote)
-  "Protect against accidental push to upstream.
-Causes `magit-run-git-async' to ask the user for confirmation first."
-  (let ((my-magit-ask-before-push t))
-    ad-do-it))
-
-(defun magit-git-to-string (args)
-  "Pretty-print the `magit-run-git-async' arguments.
-Quote the substrings if need be."
-  (cond ((not args)
-         "")
-        ((stringp args)
-         (shell-quote-argument args))
-        ((listp args)
-         (mapconcat #'magit-git-to-string args " "))
-        (t (error "Unrecognized: %s" (pp-to-string args)))))
-;(magit-git-to-string '("push" "-v" ("--force-with-lease") "origin" "master:refs/heads/master"))
-
-(defadvice magit-run-git-async (around my-protect-accidental-magit-run-git-async)
-  "Maybe ask the user for confirmation before pushing.
-Advices to `magit-push-current-to-*' trigger this query."
-  (if (bound-and-true-p my-magit-ask-before-push)
-      ;; Arglist is (ARGS)
-      (if (y-or-n-p (format "Run 'git %s'? "
-                               (magit-git-to-string (ad-get-args 0))))
-          ad-do-it
-        (error "Push aborted by user"))
-    ad-do-it))
-
-(setq ad-redefinition-action 'accept)
-
-(ad-activate 'magit-push-current-to-upstream)
-(ad-activate 'magit-push-current-to-pushremote)
-(ad-activate 'magit-run-git-async)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Config pour augmenter la découvrabilité
-
-(use-package which-key
-  :ensure t
-  :config
-  (which-key-mode))
-
-(use-package discover-my-major
-  :ensure t
-  :config
-  (global-set-key (kbd "C-h C-m") #'discover-my-major)
-  (global-set-key (kbd "C-h M-m") #'discover-my-mode))
-
-;; Recall we also have the standard keybinding "C-h m".
-
-(use-package helpful
-  :ensure t
-  :config
-  (global-set-key (kbd "C-h f") #'helpful-callable)
-  (global-set-key (kbd "C-h v") #'helpful-variable)
-  (global-set-key (kbd "C-h k") #'helpful-key)
-  ;;; Look up Functions (excludes macros).
-  ;; (global-set-key (kbd "C-h F") #'helpful-function)
-  ;;; Look up Commands (= keybindings).
-  ;; (global-set-key (kbd "C-h K") #'helpful-command)
-  ;;; COMMENTED-OUT as "Info-goto-emacs[-key]-command-node" are more useful.
-  (add-hook 'emacs-lisp-mode-hook #'(lambda ()
-    (local-set-key (kbd "C-c C-.") #'helpful-at-point))))
-
-;; Note we can also type "C-h" after a prefix to list its expansions.
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; Config générale
-
-(use-package tabbar
-  :ensure t
-  :init
-  (tabbar-mode t))
 
 (setq column-number-mode t
       line-number-mode t
