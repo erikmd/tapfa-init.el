@@ -244,7 +244,112 @@ Pour installer automatiquement les modes
 </details>
 
 <details>
-<summary><b>Installation sous Windows 10 (64 bits) avec WSL</b></summary>
+<summary><b>Installation sous Windows 10/11 (64 bits) avec WSL2</b></summary>
+
+### Partie commune
+
+Si vous avez déjà une installation WSL ou que vous voulez plus d'informations,
+vous pouvez consulter la documentation officielle de Microsoft :
+["Doc Générale WSL1/2"](https://learn.microsoft.com/fr-fr/windows/wsl/),
+["FAQ WSL1/2"](https://learn.microsoft.com/fr-fr/windows/wsl/faq),
+["WSL1 vs WSL2"](https://learn.microsoft.com/fr-fr/windows/wsl/compare-versions),
+["Installation de WSL2"](https://learn.microsoft.com/fr-fr/windows/wsl/install).
+
+1. Vérification des prérequis
+   Avant de tenter d'installer le sous-système pour Linux, il est important de mettre à jour le système,
+   surtout si c'est un Windows 10.
+
+   Le **build 19041 ou supérieur** est requis.  
+   Vérifier le numéro de build en faisant <kbd>WIN</kbd>+<kbd>R</kbd>,
+   saisir `winver`, puis <kbd>ENTER</kbd>.
+
+   Les mises à jours peuvent êtres obtenus via Windows Update.
+
+1. Installation
+
+   Pour installer le WSL, ouvrir un PowerShell en tant qu'Administrateur
+   et saisir la commande suivante.
+   ```powershell
+   wsl --install
+   ```
+   > Cette commande permet d'activer WSL et Hyper-V puis de télécharger
+   > le noyaux linux et une distribution Ubuntu (latest).  
+   > Elle met également en place le pipe graphique si vous êtes sous Windows 11.
+
+   La machine devrait redémarrer, il faut réouvrir un PowerShell en tant qu'Administrateur.
+
+   Pour garantir le maximum de performances et de sécurité il est conseillé de
+   faire les mises à jour du noyaux linux. La commande suivante ne produira rien 
+   si le noyaux est déjà à jour.
+   ```powershell
+   wsl --update
+   ```
+
+L'installation de WSL est terminée.  
+Si la machine est sous Windows 11 : se référer à la partie **Installation sous GNU/Linux**.  
+Si la machine est sous Windows 10 : il manque encore la partie graphique...
+
+### Pipe graphique sous Windows 10.
+
+1. Installation du Server-X
+
+   Le server-x sera VcxSrv.
+
+   Télécharger [VcxSrv sur SourceForge](https://sourceforge.net/projects/vcxsrv/).  
+   Installer VcxSrv en décochant "Desktop Shortcuts", tout le reste est important.
+
+1. Configuration du Server-X **(coté Windows)**
+
+   Lancer XLaunch et choisir les paramètres suivant :
+   - Multiple Windows
+   - Display number : 0
+   - ==========
+   - Start no client
+   - ==========
+   - Clipboard
+   - Primary Selection
+   - Native opengl
+   - Disable access control
+
+   Il est préférable de sauvegarder cette configuration, sur le bureau par exemple,
+   c'est ce fichier `.xlaunch` qui permettra de lancer le server-x avec la bonne configuration.
+
+   Lors du premier lancement VcxSrv va tenter de créer une règle dans le pare-feu de Windows,
+   il faut lui donner les droits sur tous les réseaux (Privée et Public).
+
+   Si vous n'avez pas eu la demande du pare-feu ou que vous voulez créer une règle indépendante du logiciel,
+   rentrez la commande suivante dans un PowerShell ouvert en tant qu'Administrateur.
+   ```powershell
+   netsh advfirewall firewall add rule name="WSL-Xserv" dir=in action=allow protocol=TCP localport=6000
+   ```
+
+1. Configuration du DISPLAY **(coté WSL)**
+
+   Après avoir démarrer la distribution WSL Ubuntu une première fois,
+   il faut éditer le fichier `.bashrc`.
+   ```bash
+   nano ~/.bashrc
+   ```
+   Il faut ajouter les lignes suivantes à la fin du fichier.
+   ```bash
+   # Config WSL Server-X
+   export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
+   export LIBGL_ALWAYS_INDIRECT=1
+   ```
+   Sauvegarder les modifications en faisant <kbd>CTRL</kbd>+<kbd>O</kbd>,
+   puis <kbd>ENTER</kbd> et <kbd>CTRL</kbd>+<kbd>X</kbd>.
+
+   Exécuter cette dernière commande pour mettre à jour les variables du système.
+   ```bash
+   source ~/.bashrc
+   ```
+
+Pour la suite, se référer à la partie **Installation sous GNU/Linux**.
+
+</details>
+
+<details>
+<summary><b>Installation sous Windows 10 (64 bits) avec WSL - <i>Ancienne méthode</i></b></summary>
 
 1. Installer GNU Emacs 27 à partir de
    <https://vigou3.gitlab.io/emacs-modified-windows/>
