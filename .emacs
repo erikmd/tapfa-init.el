@@ -294,7 +294,12 @@ Always ask if BATCH is nil, e.g., called interactively."
     :hook
     (coq-mode . company-coq-mode)
     :init
-    (setq company-coq-disabled-features '(hello))))
+    (setq company-coq-disabled-features '(hello)))
+
+  (use-package opam-switch-mode
+    :ensure t
+    :hook
+    (coq-mode . opam-switch-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
