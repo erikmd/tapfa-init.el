@@ -138,25 +138,21 @@ Pour installer automatiquement les modes
 
 1. Installer [Aquamacs](https://aquamacs.org) (ou [Emacs avec Homebrew Cask](https://formulae.brew.sh/cask/emacs), pas recommandé à cause de [cette issue](https://github.com/caldwell/build-emacs/issues/113))
 
-1. Installer `gpatch`, `pkg-config` et `openssl` 1.1 avec Homebrew :
-   ```
-   brew install gpatch      # comme opam utilise des options GNU
-   brew install pkg-config
-   brew install openssl@1.1 # suivre les instructions si besoin
-   ```
-1. Installer `opam` 2.0 avec Homebrew :
+1. Installer `opam` 2.x avec Homebrew :
    ```
    brew install opam
    ```
+
 1. Configurer `opam` puis installer `merlin` et `coq` :
    ```
    opam init --auto-setup --bare
-   opam switch create 4.12.0 ocaml-base-compiler.4.12.0
+   opam switch create 4.12.1 ocaml-base-compiler.4.12.1
    eval $(opam env)
    opam update
    opam install -y merlin
    ```
    ```
+   # Si jamais Coq est souhaité :
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
    opam pin add -n -k version coq 8.13.2
    opam install -j 2 coq
