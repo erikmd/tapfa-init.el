@@ -11,7 +11,7 @@ sous GNU/Linux, macOS et Windows 10 (64 bits).
 
 * Le mode `learn-ocaml.el` (qui requiert `learn-ocaml-client`) a été surtout testé sous GNU/Linux jusqu'à présent.
 
-<details><summary><b>Installation sous GNU/Linux Ubuntu 18.04+ ou Debian 9+</b></summary>
+<details><summary><b>Installation sous GNU/Linux Ubuntu LTS ou Debian Stable</b></summary>
 
 (*Ces composants sont déjà installés sur les PC de l'UPS, sauter alors
 ces 5 étapes.*)
