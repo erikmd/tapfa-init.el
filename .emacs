@@ -11,6 +11,17 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Config des touches Option dans GNU Emacs 28 pour macOS
+
+;; Utilisez la touche Option-de-gauche pour activer la touche Meta d'Emacs (M-)
+;; Utilisez la touche Option-de-droite (⌥-) pour saisir des caractères spéciaux
+
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'meta)
+  (setq mac-right-option-modifier 'none))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Config de package.el, MELPA et use-package
 
 (require 'package)
