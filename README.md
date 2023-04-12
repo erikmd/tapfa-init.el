@@ -136,7 +136,10 @@ Pour installer automatiquement les modes
 
 <details><summary><b>Installation sous macOS</b></summary>
 
-1. Installer [Aquamacs](https://aquamacs.org) (ou [Emacs avec Homebrew Cask](https://formulae.brew.sh/cask/emacs), pas recommandé à cause de [cette issue](https://github.com/caldwell/build-emacs/issues/113))
+1. Installer [Emacs avec Homebrew Cask](https://formulae.brew.sh/cask/emacs):
+   ```
+   brew install --cask emacs
+   ```
 
 1. Installer `opam` 2.x avec Homebrew :
    ```
@@ -193,24 +196,10 @@ Pour installer automatiquement les modes
    > ([`.emacs`](https://github.com/erikmd/tapfa-init.el/raw/master/.emacs),
    > pas `emacs`).
 
-1. Si vous n'utilisez pas GNU Emacs mais *Aquamacs*, pour éviter un
-   souci de connexion TLS avec MELPA (le gestionnaire de paquets
-   d'Emacs), vous pourriez avoir besoin d'exécuter :
-   ```
-   brew install libressl
-   brew install gnutls
-   ```
-   puis d'ajouter ces deux lignes au début du fichier `~/.emacs` :
-   ```
-   (with-eval-after-load 'tls
-     (push "/usr/local/etc/libressl/cert.pem" gnutls-trustfiles))
-   ```
-   (*Source* : [davidswelt/aquamacs-emacs#133](https://github.com/davidswelt/aquamacs-emacs/issues/133))
-
-1. Lancer Aquamacs (ou Emacs).
+1. Lancer Emacs.
 
    L'installation des modes Emacs pour OCaml et Coq devrait se lancer
-   automatiquement et durer environ 2'30.
+   automatiquement en arrière-plan et durer environ 2'30.
 
    En cas de souci, faites
    <kbd>M-x package-install-selected-packages RET</kbd>
