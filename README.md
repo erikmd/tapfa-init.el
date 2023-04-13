@@ -172,8 +172,6 @@ Pour installer automatiquement les modes
 
 ## Installation des modes Emacs pour OCaml et Coq
 
-(*Reprendre à cette étape si vous travaillez sur un PC de l'UPS.*)
-
 Pour installer automatiquement les modes
 [tuareg](https://github.com/ocaml/tuareg),
 [merlin-eldoc](https://github.com/Khady/merlin-eldoc),
