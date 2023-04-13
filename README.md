@@ -7,18 +7,12 @@ Ce tutoriel vise à guider l'installation de :
 
 sous GNU/Linux, macOS et Windows 10 (64 bits).
 
-*Notes :*
-
-* La procédure "GNU/Linux" n'a été testée qu'avec les distributions basées sur Debian ou Ubuntu.
-
-* Le mode `learn-ocaml.el` (qui requiert `learn-ocaml-client`) a été surtout testé sous GNU/Linux jusqu'à présent.
-
 <details><summary><b>Installation sous GNU/Linux Ubuntu LTS ou Debian Stable</b></summary>
 
 (*Ces composants sont déjà installés sur les PC de l'UPS, sauter alors
 ces 5 étapes.*)
 
-1. Installer `emacs` (version `>= 25.1`) et `rlwrap` (*optionnel*) :
+1. Installer `emacs` (version `>= 25.1`) et `rlwrap` (*optionnel mais recommandé*) :
    ```
    sudo apt-get update
    sudo apt-get install emacs rlwrap
@@ -41,7 +35,8 @@ ces 5 étapes.*)
    curl -fOL https://github.com/ocaml/opam/raw/master/shell/install.sh
    sh ./install.sh
    ```
-1. Configurer `opam` puis installer `merlin` et `coq` :
+
+1. Configurer `opam` puis installer `merlin` :
    ```
    opam init --auto-setup --bare
    opam switch create 4.12.0 ocaml-base-compiler.4.12.0
@@ -49,18 +44,21 @@ ces 5 étapes.*)
    opam update
    opam install -y merlin
    ```
+   **Ne pas exécuter `opam user-setup install`**.
+
+1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
    opam pin add -n -k version coq 8.13.2
    opam install -j 2 coq
    ```
-   **Ne pas exécuter `opam user-setup install`**.
 
-1. **Optionnel** : installer `learn-ocaml-client` (utile seulement pour [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el))
-   et `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`) :
+1. **Optionnel** : installer `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`)
    ```
-   opam install utop learn-ocaml-client
+   opam install utop
    ```
+
+1. **Optionnel** : installer [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el)
 
 ## Installation des modes Emacs pour OCaml et Coq
 
@@ -148,7 +146,7 @@ Pour installer automatiquement les modes
    brew install opam
    ```
 
-1. Configurer `opam` puis installer `merlin` et `coq` :
+1. Configurer `opam` puis installer `merlin` :
    ```
    opam init --auto-setup --bare
    opam switch create 4.12.1 ocaml-base-compiler.4.12.1
@@ -156,19 +154,21 @@ Pour installer automatiquement les modes
    opam update
    opam install -y merlin
    ```
+   **Ne pas exécuter `opam user-setup install`**.
+
+1. **Optionnel** : installer `coq` :
    ```
-   # Si jamais Coq est souhaité :
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
    opam pin add -n -k version coq 8.13.2
    opam install -j 2 coq
    ```
-   **Ne pas exécuter `opam user-setup install`**.
 
-1. **Optionnel** : installer `learn-ocaml-client` (utile seulement pour [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el))
-   et `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`) :
+1. **Optionnel** : installer `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`)
    ```
-   opam install utop learn-ocaml-client
+   opam install utop
    ```
+
+1. **Optionnel** : installer [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el)
 
 ## Installation des modes Emacs pour OCaml et Coq
 
@@ -270,7 +270,7 @@ Pour installer automatiquement les modes
    sh ./install.sh
    ```
 
-1. Configurer `opam` et installer `merlin` et `coq`
+1. Configurer `opam` et installer `merlin` :
    (**`--disable-sandboxing` est requis**) :
 
    ```
@@ -280,21 +280,23 @@ Pour installer automatiquement les modes
    opam update
    opam install -y merlin
    ```
+   (*Les commandes précédentes doivent être copiées ligne à ligne !*)
+
+   **Ne pas exécuter `opam user-setup install`**.
+
+1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
    opam pin add -n -k version coq 8.13.2
    opam install -j 2 coq
    ```
 
-   (*Les commandes précédentes doivent être copiées ligne à ligne !*)
-
-   **Ne pas exécuter `opam user-setup install`**.
-
-1. **Optionnel** : installer `learn-ocaml-client` (utile seulement pour [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el))
-   et `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`) :
+1. **Optionnel** : installer `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`)
    ```
-   opam install utop learn-ocaml-client
+   opam install utop
    ```
+
+1. **Optionnel** : installer [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el)
 
 1. Installer `wsl-alias` :
 
