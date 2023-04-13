@@ -10,7 +10,7 @@ sous GNU/Linux, macOS et Windows 10 (64 bits).
 <details><summary><b>Installation sous GNU/Linux Ubuntu LTS ou Debian Stable</b></summary>
 
 (*Ces composants sont déjà installés sur les PC de l'UPS, sauter alors
-ces 5 étapes.*)
+ces étapes.*)
 
 1. Installer `emacs` (version `>= 25.1`) et `rlwrap` (*optionnel mais recommandé*) :
    ```
