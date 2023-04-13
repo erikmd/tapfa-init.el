@@ -46,16 +46,16 @@ ces 5 étapes.*)
    ```
    **Ne pas exécuter `opam user-setup install`**.
 
+1. **Optionnel** : installer `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`)
+   ```
+   opam install utop
+   ```
+
 1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
    opam pin add -n -k version coq 8.13.2
    opam install -j 2 coq
-   ```
-
-1. **Optionnel** : installer `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`)
-   ```
-   opam install utop
    ```
 
 1. **Optionnel** : installer [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el)
@@ -156,16 +156,16 @@ Pour installer automatiquement les modes
    ```
    **Ne pas exécuter `opam user-setup install`**.
 
+1. **Optionnel** : installer `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`)
+   ```
+   opam install utop
+   ```
+
 1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
    opam pin add -n -k version coq 8.13.2
    opam install -j 2 coq
-   ```
-
-1. **Optionnel** : installer `utop` (pour un toplevel en ligne de commande plus riche que `rlwrap ocaml`)
-   ```
-   opam install utop
    ```
 
 1. **Optionnel** : installer [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el)
