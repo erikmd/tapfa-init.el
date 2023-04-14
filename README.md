@@ -2,10 +2,10 @@
 
 Ce tutoriel vise à guider l'installation de :
 
-* [GNU Emacs](https://en.wikipedia.org/wiki/GNU_Emacs) (l'éditeur utilisé par la majorité des développeurs de la communauté OCaml, cf. la **[Q. 28 du OCaml User Survey 2022](https://ocaml-sf.org/docs/2022/ocaml-user-survey-2022.pdf)**)
+* [GNU Emacs](https://en.wikipedia.org/wiki/GNU_Emacs) (l'éditeur utilisé par la majorité des développeurs de la communauté OCaml, cf. la **[Q28 du OCaml User Survey 2022](https://ocaml-sf.org/docs/2022/ocaml-user-survey-2022.pdf)**)
 * et [opam](https://opam.ocaml.org/) (le gestionnaire de paquets du langage OCaml) ;
 
-sous GNU/Linux, macOS et Windows 10 (64 bits).
+sous GNU/Linux, macOS et Windows 10+ (64 bits).
 
 <details><summary><b>Installation sous GNU/Linux Ubuntu LTS ou Debian Stable</b></summary>
 
