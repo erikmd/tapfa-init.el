@@ -196,8 +196,10 @@ Pour installer automatiquement les modes
    > ([`.emacs`](https://github.com/erikmd/tapfa-init.el/raw/master/.emacs),
    > pas `emacs`).
 
-1. Lancer Emacs.
-
+1. Lancer Emacs :
+   ```
+   emacs &
+   ```
    L'installation des modes Emacs pour OCaml et Coq devrait se lancer
    automatiquement en arrière-plan et durer environ 2'30.
 
