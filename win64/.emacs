@@ -222,6 +222,8 @@ Advices to `magit-push-current-to-*' trigger this query."
 (use-package learn-ocaml
   :ensure t)
 
+(global-set-key (kbd "<f12>") #'learn-ocaml-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Proposition d'installer les modes (proof-general, company-coq) pour Coq
