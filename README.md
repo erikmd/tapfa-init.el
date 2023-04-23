@@ -54,7 +54,7 @@ ces étapes.*)
 1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -k version coq 8.13.2
+   opam pin add -n -k version coq 8.16.1
    opam install -j 2 coq
    ```
 
@@ -164,7 +164,7 @@ Pour installer automatiquement les modes
 1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -k version coq 8.13.2
+   opam pin add -n -k version coq 8.16.1
    opam install -j 2 coq
    ```
 
@@ -287,7 +287,7 @@ Pour installer automatiquement les modes
 1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -k version coq 8.13.2
+   opam pin add -n -k version coq 8.16.1
    opam install -j 2 coq
    ```
 
@@ -406,6 +406,6 @@ Pour installer automatiquement les modes
 
 En cas de problème avec cette configuration, ouvrez une [issue](https://github.com/erikmd/tapfa-init.el/issues) ou envoyez-moi un [e-mail](https://github.com/erikmd).
           
-Ce tutoriel d'installation propose d'installer `coq` version `8.13.2`,
+Ce tutoriel d'installation propose d'installer `coq` version `8.16.1`,
 mais vous pouvez aussi installer la dernière version stable de Coq, donnée par le badge suivant :
 [![coq latest version](https://img.shields.io/docker/v/coqorg/coq/latest)](https://github.com/coq/coq/releases)
