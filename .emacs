@@ -190,15 +190,15 @@ Advices to `magit-push-current-to-*' trigger this query."
 
 (setq tapfa-opam-available (eq (shell-command "opam var bin") 0))
 
-(if tapfa-opam-available
-    (use-package tuareg
-      :ensure t
-      :defer t
-      :init
-      (setq tuareg-opam-insinuate t))
-  (use-package tuareg
+(when tapfa-opam-available
+  (use-package opam-switch-mode
     :ensure t
-    :defer t))
+    :hook
+    ((coq-mode tuareg-mode) . opam-switch-mode)))
+
+(use-package tuareg
+  :ensure t
+  :defer t)
 
 ;;;  Désactivé car le raccourci associé à <home> est malencontreux
 ;; (use-package bifocal
@@ -206,19 +206,10 @@ Advices to `magit-push-current-to-*' trigger this query."
 ;;   :hook
 ;;   (tuareg-interactive-mode . bifocal-mode))
 
-(if tapfa-opam-available
-    (use-package merlin
-      :ensure t
-      :hook
-      ((tuareg-mode caml-mode) . merlin-mode)
-      :config
-      (setq merlin-command 'opam))
-  (use-package merlin
-    :ensure t
-    :hook
-    ((tuareg-mode caml-mode) . merlin-mode)
-    :config
-    (setq merlin-command "ocamlmerlin")))
+(use-package merlin
+  :ensure t
+  :hook
+  ((tuareg-mode caml-mode) . merlin-mode))
 
 (use-package merlin-eldoc
   :ensure t
