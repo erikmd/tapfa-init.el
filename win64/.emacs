@@ -307,6 +307,9 @@ Always ask if BATCH is nil, e.g., called interactively."
       enable-recursive-minibuffers t
       require-final-newline t)
 
+;; Enable XTerm mouse support for menus in "emacs -nw" and so on
+(xterm-mouse-mode 1)
+
 (global-set-key (kbd "C-x C-S-q") #'view-mode)
 
 ;; Marquage des parenthèses
