@@ -307,10 +307,35 @@ Always ask if BATCH is nil, e.g., called interactively."
       enable-recursive-minibuffers t
       require-final-newline t)
 
+(global-set-key (kbd "C-x C-S-q") #'view-mode)
+
 ;; Enable XTerm mouse support for menus in "emacs -nw" and so on
 (xterm-mouse-mode 1)
 
-(global-set-key (kbd "C-x C-S-q") #'view-mode)
+;; Adapted from: https://emacs.stackexchange.com/a/78288/19818
+(defun tapfa-init--menu-bar-get-minimal-x (menu-symbol x y)
+  (let ((xx (- x 1)))
+    (if (< xx tty-menu--initial-menu-x)
+        x
+      (if (equal (menu-bar-menu-at-x-y xx y (selected-frame)) menu-symbol)
+          (tapfa-init--menu-bar-get-minimal-x menu-symbol xx y)
+        x))))
+(defun tapfa-init--menu-bar-open-x-y (mouse-event)
+  (interactive "e")
+  (pcase mouse-event
+    (`(mouse-1 (,_ menu-bar (,x . ,y) . ,_))
+     (let ((menu (menu-bar-menu-at-x-y x y)))
+       (popup-menu (or
+                    (lookup-key-ignore-too-long
+                     global-map (vector 'menu-bar menu))
+                    (lookup-key-ignore-too-long
+                     (current-local-map) (vector 'menu-bar menu))
+                    (cdar (minor-mode-key-binding (vector 'menu-bar menu)))
+                    (mouse-menu-bar-map))
+                   (posn-at-x-y (tapfa-init--menu-bar-get-minimal-x menu x y) y nil t)
+                   nil t)))
+    (_ (message "unsupported event %S" (car mouse-event)))))
+(define-key global-map (kbd "<menu-bar> <mouse-1>") 'tapfa-init--menu-bar-open-x-y)
 
 ;; Marquage des parenthèses
 (load-library "paren")
