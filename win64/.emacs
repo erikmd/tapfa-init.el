@@ -335,7 +335,9 @@ Always ask if BATCH is nil, e.g., called interactively."
                    (posn-at-x-y (tapfa-init--menu-bar-get-minimal-x menu x y) y nil t)
                    nil t)))
     (_ (message "unsupported event %S" (car mouse-event)))))
-(define-key global-map (kbd "<menu-bar> <mouse-1>") 'tapfa-init--menu-bar-open-x-y)
+(define-key global-map (kbd "<menu-bar> <mouse-1>")
+  (lambda (ev) (interactive "e")
+    (if tty-menu-open-use-tmm (tmm-menubar-mouse ev) (tapfa-init--menu-bar-open-x-y ev))))
 
 ;; Marquage des parenthèses
 (load-library "paren")
