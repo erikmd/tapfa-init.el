@@ -49,7 +49,7 @@
  ;; If there is more than one, they won't work right.
  '(diff-switches "-u")
  '(package-selected-packages
-   (quote (learn-ocaml company merlin-iedit merlin-eldoc merlin tuareg magit-gitflow magit yaml-mode markdown-mode helpful discover-my-major which-key tabbar use-package))))
+   (quote (learn-ocaml company merlin-iedit merlin-eldoc merlin tuareg auctex magit-gitflow magit yaml-mode markdown-mode helpful discover-my-major which-key tabbar use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -305,12 +305,7 @@ Always ask if BATCH is nil, e.g., called interactively."
     :hook
     (coq-mode . company-coq-mode)
     :init
-    (setq company-coq-disabled-features '(hello)))
-
-  (use-package opam-switch-mode
-    :ensure t
-    :hook
-    (coq-mode . opam-switch-mode)))
+    (setq company-coq-disabled-features '(hello))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
