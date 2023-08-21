@@ -352,7 +352,11 @@ Advices to `magit-push-current-to-*' trigger this query."
 ;; Config de Tuareg, Merlin et Company
 
 ;;;  Désactivé car pas testé
-;; (setq tapfa-opam-available (eq (shell-command "opam var bin") 0))
+;; (setq tapfa-opam-available
+;;       (let* ((temp (get-buffer-create " *temp"))
+;;              (status (shell-command "opam var bin" temp)))
+;;         (kill-buffer temp)
+;;         (eq status 0)))
 ;;
 ;; (when tapfa-opam-available
 ;;   (use-package opam-switch-mode
