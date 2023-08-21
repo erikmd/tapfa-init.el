@@ -38,7 +38,7 @@
  ;; If there is more than one, they won't work right.
  '(diff-switches "-u")
  '(package-selected-packages
-   (quote (learn-ocaml company merlin tuareg auctex magit-gitflow magit yaml-mode markdown-mode helpful discover-my-major which-key use-package))))
+   (quote (learn-ocaml company merlin tuareg auctex magit-gitflow magit yaml-mode markdown-mode helpful discover-my-major which-key centaur-tabs use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -56,6 +56,14 @@
 
 (eval-when-compile
   (require 'use-package))
+
+(defgroup tapfa-init nil
+  "Tapfa-Init Emacs Settings."
+  :group 'convenience
+  :prefix "tapfa-init-")
+
+(use-package diminish
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -160,8 +168,8 @@ Always ask if BATCH is nil, e.g., called interactively."
   ("C-c <C-right>" . centaur-tabs-forward)
   ("<C-S-prior>" . centaur-tabs-move-current-tab-to-left)
   ("<C-S-next>" . centaur-tabs-move-current-tab-to-right)
-  ("C-c <C-S-left>" . centaur-tabs-backward)
-  ("C-c <C-S-right>" . centaur-tabs-forward)
+  ("C-c <C-S-left>" . centaur-tabs-move-current-tab-to-left)
+  ("C-c <C-S-right>" . centaur-tabs-move-current-tab-to-right)
   :demand t
   :config
   (centaur-tabs-mode t)
@@ -226,6 +234,7 @@ Always ask if BATCH is nil, e.g., called interactively."
 
 (use-package which-key
   :ensure t
+  :diminish
   :config
   (which-key-mode))
 
@@ -371,14 +380,22 @@ Advices to `magit-push-current-to-*' trigger this query."
   :config
   (setq merlin-command "ocamlmerlin"))
 
+(use-package whitespace
+  :defer t
+  :diminish whitespace-mode)
+
+;; (use-package eldoc
+;;   :defer t
+;;   :diminish)
+;;
 ;;;  Désactivé car induit un ralentissement sous Windows+WSL
 ;; (use-package merlin-eldoc
 ;;   :ensure t
 ;;   :hook
 ;;   ((tuareg-mode caml-mode) . merlin-eldoc-setup)
 ;;   :bind (:map merlin-mode-map
-;;               ("C-c <C-left>" . merlin-eldoc-jump-to-prev-occurrence)
-;;               ("C-c <C-right>" . merlin-eldoc-jump-to-next-occurrence)))
+;;               ("C-c <left>" . merlin-eldoc-jump-to-prev-occurrence)
+;;               ("C-c <right>" . merlin-eldoc-jump-to-next-occurrence)))
 ;;
 ;; (use-package merlin-iedit
 ;;   :ensure t
@@ -388,6 +405,7 @@ Advices to `magit-push-current-to-*' trigger this query."
 
 (use-package company
   :ensure t
+  :diminish
   :hook
   ((tuareg-mode caml-mode) . company-mode)
   :config
