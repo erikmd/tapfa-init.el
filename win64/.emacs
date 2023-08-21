@@ -38,7 +38,7 @@
  ;; If there is more than one, they won't work right.
  '(diff-switches "-u")
  '(package-selected-packages
-   (quote (learn-ocaml company merlin tuareg auctex magit-gitflow magit yaml-mode markdown-mode helpful discover-my-major which-key tabbar use-package))))
+   (quote (learn-ocaml company merlin tuareg auctex magit-gitflow magit yaml-mode markdown-mode helpful discover-my-major which-key use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -59,12 +59,170 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Config pour augmenter la découvrabilité
+;; Custom spacemacs theme with nice tabs
 
-(use-package tabbar
+;; (menu-bar-mode -1) Keep it!
+(tool-bar-mode -1)
+;; M-x minor-mode-menu-from-indicator RET
+
+(use-package spacemacs-theme
   :ensure t
   :init
-  (tabbar-mode t))
+  (setq spacemacs-theme-comment-bg nil))
+
+(use-package spaceline
+  :ensure t
+  :config
+  (use-package spaceline-config
+    :config
+    (spaceline-emacs-theme)))
+
+(defcustom tapfa-init-darkness nil
+  "Should dark mode be enabled?
+
+The following values are meaningful:
+nil ask on startup
+-1  setup dark mode
+ 1  setup light mode"
+  :type '(choice (const :tag "Ask on startup" nil)
+                 (const :tag "Setup spacemacs-light theme" -1)
+                 (const :tag "Setup spacemacs-dark theme" 1))
+  :group 'tapfa-init)
+
+(defun tapfa-init-darkness-apply ()
+  "Load themes accordingly as per `tapfa-init-darkness'."
+  (load-theme (if (eq tapfa-init-darkness -1) 'spacemacs-dark 'spacemacs-light) t)
+  (spaceline-emacs-theme))
+
+(defun tapfa-init-darkness (&optional batch)
+  "Ask to set tapfa-init-darkness to 1 or -1 or to ask again.
+Always ask if BATCH is nil, e.g., called interactively."
+  (interactive)
+  (if (or (null batch) (null tapfa-init-darkness))
+      (let ((newval
+             (condition-case _sig
+                 (x-popup-dialog
+                  t '("Quel thème spacemacs voulez-vous activer ?\n"
+                      ("Light" . 1) ("Dark" . -1)
+                      ("Redemander" . nil)))
+               (quit nil))))
+        (customize-save-variable 'tapfa-init-darkness newval)
+        (let ((sdark "Thème enregistré : spacemacs-dark.\n\n")
+              (slight "Thème enregistré : spacemacs-light.\n\n")
+              (sdflt "Thème par défaut : spacemacs-light.\n\n")
+              (ssaved-end "Si jamais vous voulez rechanger, tapez M-x tapfa-init-darkness RET")
+              (sdflt-end "Si jamais vous voulez changer, tapez M-x tapfa-init-darkness RET\nou redémarrez Emacs."))
+          (cond ((eq tapfa-init-darkness 1)
+                 (message-box (concat slight ssaved-end)))
+                ((eq tapfa-init-darkness -1)
+                 (message-box (concat sdark ssaved-end)))
+                (t
+                 (message-box (concat sdflt sdflt-end)))))))
+        (tapfa-init-darkness-apply))
+
+(tapfa-init-darkness t)
+
+(defun tapfa-init-fix-centaur-tabs-excluded-prefixes ()
+  "Fix `centaur-tabs-excluded-prefixes'."
+  (when (or
+         (member "*Help" centaur-tabs-excluded-prefixes)
+         (member "*help" centaur-tabs-excluded-prefixes))
+    (customize-save-variable 'centaur-tabs-excluded-prefixes
+                             (seq-filter (lambda (s) (not (member s '("*Help" "*help"))))
+                                         centaur-tabs-excluded-prefixes))))
+
+(use-package centaur-tabs
+  :ensure t
+  :init
+  (setq centaur-tabs-enable-key-bindings nil
+        centaur-tabs-show-count nil
+        centaur-tabs-show-navigation-buttons t
+        centaur-tabs-height 32
+        centaur-tabs-left-edge-margin nil
+        centaur-tabs-set-icons nil ;; improve?
+        ;; centaur-tabs-label-fixed-length 14
+        ;; centaur-tabs-gray-out-icons 'buffer
+        ;; centaur-tabs-plain-icons t
+        centaur-tabs-style "bar"
+        centaur-tabs-set-bar 'under
+        x-underline-at-descent-line t
+        centaur-tabs-set-modified-marker t
+        centaur-tabs-show-new-tab-button nil)
+  :hook
+  (dashboard-mode . centaur-tabs-local-mode)
+  (term-mode . centaur-tabs-local-mode)
+  (calendar-mode . centaur-tabs-local-mode)
+  (org-agenda-mode . centaur-tabs-local-mode)
+  :bind
+  ("<C-prior>" . centaur-tabs-backward)
+  ("<C-next>" . centaur-tabs-forward)
+  ("C-c <C-left>" . centaur-tabs-backward)
+  ("C-c <C-right>" . centaur-tabs-forward)
+  ("<C-S-prior>" . centaur-tabs-move-current-tab-to-left)
+  ("<C-S-next>" . centaur-tabs-move-current-tab-to-right)
+  ("C-c <C-S-left>" . centaur-tabs-backward)
+  ("C-c <C-S-right>" . centaur-tabs-forward)
+  :demand t
+  :config
+  (centaur-tabs-mode t)
+  ;; (centaur-tabs-headline-match)
+  (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
+  (tapfa-init-fix-centaur-tabs-excluded-prefixes)
+  (defun centaur-tabs-buffer-groups ()
+  "`centaur-tabs-buffer-groups' control buffers' group rules."
+  (list
+   (cond
+    ;; ((and (buffer-file-name) (file-remote-p (buffer-file-name)))
+    ;;  "Remote")
+    ((memq major-mode '(tuareg-mode caml-mode))
+     "OCaml")
+    ((memq major-mode '(coq-mode
+                        proof-splash-mode
+                        coq-shell-mode
+                        coq-goals-mode
+                        coq-response-mode))
+     "Coq")
+    ((memq major-mode '(tex-mode
+                        latex-mode))
+     "TeX")
+    ((memq major-mode '(helpful-mode
+                        help-mode))
+     "Help")
+    ((derived-mode-p 'eshell-mode)
+     "EShell")
+    ((derived-mode-p 'emacs-lisp-mode)
+     "Elisp")
+    ((derived-mode-p 'dired-mode)
+     "Dired")
+    ((derived-mode-p 'prog-mode)
+     "Editing")
+    ((memq major-mode '(org-mode
+                        org-agenda-clockreport-mode
+                        org-src-mode
+                        org-agenda-mode
+                        org-beamer-mode
+                        org-indent-mode
+                        org-bullets-mode
+                        org-cdlatex-mode
+                        org-agenda-log-mode
+                        diary-mode))
+       "OrgMode")
+    ((or (string-equal "*" (substring (buffer-name) 0 1))
+	 (memq major-mode '(magit-process-mode
+			    magit-status-mode
+			    magit-diff-mode
+			    magit-log-mode
+			    magit-file-mode
+			    magit-blob-mode
+			    magit-blame-mode
+			    )))
+     "Emacs")
+    (t
+     (centaur-tabs-get-group-name (current-buffer)))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Config pour augmenter la découvrabilité
 
 (use-package which-key
   :ensure t
@@ -243,11 +401,6 @@ Advices to `magit-push-current-to-*' trigger this query."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Proposition d'installer les modes (proof-general, company-coq) pour Coq
-
-(defgroup tapfa-init nil
-  "Tapfa-Init Emacs Settings."
-  :group 'convenience
-  :prefix "tapfa-init-")
 
 (defcustom tapfa-init-coq nil
   "Should coq modes be installed?
