@@ -234,7 +234,7 @@ Pour installer automatiquement les modes
 <summary><b>Installation sous Windows 10 (64 bits) avec WSL</b></summary>
 
 1. Installer GNU Emacs 28 à partir de
-   <https://vigou3.gitlab.io/emacs-modified-windows/>
+   <https://emacs-modified.gitlab.io/windows/>
 
 1. Activer WSL dans Windows 10 :
    <https://docs.microsoft.com/en-us/windows/wsl/install-win10>
