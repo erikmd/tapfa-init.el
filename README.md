@@ -301,7 +301,7 @@ Pour installer automatiquement les modes
 1. Installer `wsl-alias` :
 
    ```
-   curl -fOL https://github.com/leongrdic/wsl-alias/raw/master/install.sh
+   curl -fOL https://github.com/erikmd/wsl-alias/raw/v2.4.1/install.sh
    bash ./install.sh
    ```
 
