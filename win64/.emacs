@@ -134,10 +134,16 @@ Always ask if BATCH is nil, e.g., called interactively."
   "Fix `centaur-tabs-excluded-prefixes'."
   (when (or
          (member "*Help" centaur-tabs-excluded-prefixes)
-         (member "*help" centaur-tabs-excluded-prefixes))
+         (member "*help" centaur-tabs-excluded-prefixes)
+         (not (member "*Choices" centaur-tabs-excluded-prefixes))
+         (not (member "*Process" centaur-tabs-excluded-prefixes)))
     (customize-save-variable 'centaur-tabs-excluded-prefixes
-                             (seq-filter (lambda (s) (not (member s '("*Help" "*help"))))
-                                         centaur-tabs-excluded-prefixes))))
+                             (append '("*Choices" "*Process")
+                                     (seq-filter
+                                      (lambda (s)
+                                        (not (member s '("*Help" "*help"
+                                                         "*Choices" "*Process"))))
+                                      centaur-tabs-excluded-prefixes)))))
 
 (use-package centaur-tabs
   :ensure t
@@ -216,14 +222,14 @@ Always ask if BATCH is nil, e.g., called interactively."
                         diary-mode))
        "OrgMode")
     ((or (string-equal "*" (substring (buffer-name) 0 1))
-	 (memq major-mode '(magit-process-mode
-			    magit-status-mode
-			    magit-diff-mode
-			    magit-log-mode
-			    magit-file-mode
-			    magit-blob-mode
-			    magit-blame-mode
-			    )))
+         (memq major-mode '(magit-process-mode
+                            magit-status-mode
+                            magit-diff-mode
+                            magit-log-mode
+                            magit-file-mode
+                            magit-blob-mode
+                            magit-blame-mode
+                            )))
      "Emacs")
     (t
      (centaur-tabs-get-group-name (current-buffer)))))))
