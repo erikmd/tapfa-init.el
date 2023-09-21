@@ -58,8 +58,6 @@ ces étapes.*)
    opam install -j 2 coq
    ```
 
-1. **Optionnel** : installer [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el)
-
 ## Installation des modes Emacs pour OCaml et Coq
 
 (*Reprendre à cette étape si vous travaillez sur un PC de l'UPS.*)
@@ -69,7 +67,6 @@ Pour installer automatiquement les modes
 [merlin-eldoc](https://github.com/Khady/merlin-eldoc),
 [merlin-iedit](https://github.com/ocaml/merlin/blob/master/emacs/merlin-iedit.el),
 [company](https://github.com/company-mode/company-mode),
-[learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
 [ProofGeneral](https://github.com/ProofGeneral/PG),
 [company-coq](https://github.com/cpitclaudel/company-coq) et
 [magit](https://magit.vc) :
@@ -128,10 +125,6 @@ Pour installer automatiquement les modes
      <kbd>C-c C-e</kbd> pour évaluer l'expression courante dans un toplevel
      (si l'IDE affiche `OCaml REPL to run:` la première fois, valider avec
      <kbd>RET</kbd> = touche Entrée).
-
-1. Et si vous avez installé `learn-ocaml-client`, pour utiliser le mode
-   [`learn-ocaml`](https://github.com/pfitaxel/learn-ocaml.el#usage),
-   vous pouvez taper <kbd>M-x learn-ocaml-mode RET</kbd>.
 </details>
 
 <details><summary><b>Installation sous macOS</b></summary>
@@ -168,8 +161,6 @@ Pour installer automatiquement les modes
    opam install -j 2 coq
    ```
 
-1. **Optionnel** : installer [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el)
-
 ## Installation des modes Emacs pour OCaml et Coq
 
 Pour installer automatiquement les modes
@@ -177,7 +168,6 @@ Pour installer automatiquement les modes
 [merlin-eldoc](https://github.com/Khady/merlin-eldoc),
 [merlin-iedit](https://github.com/ocaml/merlin/blob/master/emacs/merlin-iedit.el),
 [company](https://github.com/company-mode/company-mode),
-[learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
 [ProofGeneral](https://github.com/ProofGeneral/PG),
 [company-coq](https://github.com/cpitclaudel/company-coq) et
 [magit](https://magit.vc) :
@@ -301,8 +291,6 @@ Pour installer automatiquement les modes
    opam install utop
    ```
 
-1. **Optionnel** : installer [`learn-ocaml.el`](https://github.com/pfitaxel/learn-ocaml.el)
-
 1. Installer `wsl-alias` :
 
    ```
@@ -374,7 +362,6 @@ Pour installer automatiquement les modes
    ([tuareg](https://github.com/ocaml/tuareg),
    [merlin](https://github.com/ocaml/merlin),
    [company](https://github.com/company-mode/company-mode),
-   [learn-ocaml](https://github.com/pfitaxel/learn-ocaml.el),
    [ProofGeneral](https://github.com/ProofGeneral/PG),
    [company-coq](https://github.com/cpitclaudel/company-coq) et
    [magit](https://magit.vc)) devrait
@@ -401,10 +388,6 @@ Pour installer automatiquement les modes
      <kbd>C-c C-e</kbd> pour évaluer l'expression courante dans un toplevel
      (si l'IDE affiche `OCaml REPL to run:` la première fois, valider avec
      <kbd>RET</kbd> = touche Entrée).
-
-1. Et si vous avez installé `learn-ocaml-client`, pour utiliser le mode
-   [`learn-ocaml`](https://github.com/pfitaxel/learn-ocaml.el#usage),
-   vous pouvez taper <kbd>M-x learn-ocaml-mode RET</kbd>.
 </details>
 
 ## Remarques
