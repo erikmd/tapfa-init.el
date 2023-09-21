@@ -17,20 +17,20 @@ ces étapes.*)
    sudo apt-get update
    sudo apt-get install emacs rlwrap
    ```
-   Il peut être nécessaire de remplacer `emacs` par `emacs25` sur certaines distributions
-   si le paquet `emacs` n'est pas disponible.
 
 1. Installer les dépendances d'`opam` :
    ```
-   sudo apt-get install aspcud bubblewrap build-essential curl git m4 tar unzip
-   sudo apt-get install pkg-config libssl-dev
+   sudo apt-get install build-essential bubblewrap unzip tar curl git m4 rsync ca-certificates
    ```
-   Si vous avez une version trop ancienne d'Ubuntu n'ayant pas le paquet [`bubblewrap`](https://packages.ubuntu.com/bubblewrap),
-   vous pouvez utiliser ce PPA : <https://launchpad.net/~avsm/+archive/ubuntu/ppa>.
 
-1. Installer `opam` 2.0 (comme les paquets Debian/Ubuntu sont trop
-   anciens, mieux vaut utiliser le [script d'installation
-   officiel](https://opam.ocaml.org/doc/Install.html)) :
+1. Installer `opam` 2.x,
+   **soit** la version disponible le gestionnaire de paquets [Debian](https://packages.debian.org/opam)/[Ubuntu](https://packages.ubuntu.com/opam) :
+   ```
+   sudo apt-get install opam
+   ```
+
+   **soit** la toute dernière version (avec le
+   [script d'installation officiel](https://opam.ocaml.org/doc/Install.html)) :
    ```
    curl -fOL https://github.com/ocaml/opam/raw/master/shell/install.sh
    sh ./install.sh
@@ -42,7 +42,7 @@ ces étapes.*)
    opam switch create 4.12.1 ocaml-base-compiler.4.12.1
    eval $(opam env)
    opam update
-   opam install -y merlin
+   opam install merlin
    ```
    **Ne pas exécuter `opam user-setup install`**.
 
@@ -54,7 +54,7 @@ ces étapes.*)
 1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -k version coq 8.17.1
+   opam pin add -n -y -k version coq 8.17.1
    opam install -j 2 coq
    ```
 
@@ -152,7 +152,7 @@ Pour installer automatiquement les modes
    opam switch create 4.12.1 ocaml-base-compiler.4.12.1
    eval $(opam env)
    opam update
-   opam install -y merlin
+   opam install merlin
    ```
    **Ne pas exécuter `opam user-setup install`**.
 
@@ -164,7 +164,7 @@ Pour installer automatiquement les modes
 1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -k version coq 8.17.1
+   opam pin add -n -y -k version coq 8.17.1
    opam install -j 2 coq
    ```
 
@@ -257,13 +257,18 @@ Pour installer automatiquement les modes
 1. Installer les dépendances d'`opam` :
 
    ```
-   sudo apt-get install aspcud bubblewrap build-essential curl git m4 tar unzip
-   sudo apt-get install pkg-config libssl-dev
+   sudo apt-get install build-essential bubblewrap unzip tar curl git m4 rsync ca-certificates
    ```
 
-1. Installer `opam` 2.0 (comme les paquets Debian/Ubuntu sont trop
-   anciens, mieux vaut utiliser le [script d'installation
-   officiel](https://opam.ocaml.org/doc/Install.html)) :
+1. Installer `opam` 2.x,
+   **soit** la version disponible le gestionnaire de paquets [Debian](https://packages.debian.org/opam)/[Ubuntu](https://packages.ubuntu.com/opam) :
+
+   ```
+   sudo apt-get install opam
+   ```
+
+   **soit** la toute dernière version (avec le
+   [script d'installation officiel](https://opam.ocaml.org/doc/Install.html)) :
 
    ```
    curl -fOL https://github.com/ocaml/opam/raw/master/shell/install.sh
@@ -278,7 +283,7 @@ Pour installer automatiquement les modes
    opam switch create 4.12.1 ocaml-base-compiler.4.12.1
    eval $(opam env)
    opam update
-   opam install -y merlin
+   opam install merlin
    ```
    (*Les commandes précédentes doivent être copiées ligne à ligne !*)
 
@@ -287,7 +292,7 @@ Pour installer automatiquement les modes
 1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -k version coq 8.17.1
+   opam pin add -n -y -k version coq 8.17.1
    opam install -j 2 coq
    ```
 
@@ -346,7 +351,7 @@ Pour installer automatiquement les modes
    ```
    nano ~/.wsl-alias/env.sh
    ```
-    
+
    Ajouter à la fin de ce fichier (qui doit déjà exister) :
 
    ```
@@ -382,9 +387,9 @@ Pour installer automatiquement les modes
 
 1. Vous pouvez alors **créer ou ouvrir un fichier OCaml** en tapant
    <kbd>C-x C-f tp1.ml RET</kbd> (<kbd>C-x</kbd> désignant <kbd>Ctrl+X</kbd>).
-    
+
    Tester alors l'installation en effectuant les deux choses suivantes :
-    
+
    * Écrire une erreur de type (`let n = 1 + true`) et taper sur
      <kbd>C-x C-s</kbd> pour sauvegarder.
      Assurez-vous que l'IDE a bien mis en surbrillance l'erreur de type
@@ -405,7 +410,7 @@ Pour installer automatiquement les modes
 ## Remarques
 
 En cas de problème avec cette configuration, ouvrez une [issue](https://github.com/erikmd/tapfa-init.el/issues) ou envoyez-moi un [e-mail](https://github.com/erikmd).
-          
+
 Ce tutoriel d'installation propose d'installer `coq` version `8.17.1`,
-mais vous pouvez aussi installer la dernière version stable de Coq, donnée par le badge suivant :
+mais vous pouvez aussi installer la dernière version stable de Coq, donnée au début du badge suivant :
 [![coq latest version](https://img.shields.io/docker/v/coqorg/coq/latest)](https://github.com/coq/coq/releases)
