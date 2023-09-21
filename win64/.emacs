@@ -168,6 +168,7 @@ Always ask if BATCH is nil, e.g., called interactively."
   (calendar-mode . centaur-tabs-local-mode)
   (org-agenda-mode . centaur-tabs-local-mode)
   :bind
+  ("<C-f5>" . centaur-tabs-extract-window-to-new-frame)
   ("<C-prior>" . centaur-tabs-backward)
   ("<C-next>" . centaur-tabs-forward)
   ("C-c <C-left>" . centaur-tabs-backward)
