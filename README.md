@@ -390,6 +390,19 @@ Pour installer automatiquement les modes
      <kbd>RET</kbd> = touche Entrée).
 </details>
 
+## Exemples
+
+*Copies d'écran d'[Emacs](https://www.gnu.org/software/emacs/)+Tuareg+[Merlin](https://ocaml.github.io/merlin/editor/emacs/)+[OPSW](https://github.com/ProofGeneral/opam-switch-mode) :*
+
+
+### Thème spacemacs-light
+
+<a href="https://github.com/erikmd/tapfa-init.el/raw/master/images/2023_Screenshot_Tuareg_light.png"><img alt="spacemacs-light" width="754px" src="https://github.com/erikmd/tapfa-init.el/raw/master/images/2023_Screenshot_Tuareg_light.png"></a>
+
+### Thème spacemacs-dark
+
+<a href="https://github.com/erikmd/tapfa-init.el/raw/master/images/2023_Screenshot_Tuareg_dark.png"><img alt="spacemacs-dark" width="754px" src="https://github.com/erikmd/tapfa-init.el/raw/master/images/2023_Screenshot_Tuareg_dark.png"></a>
+
 ## Remarques
 
 En cas de problème avec cette configuration, ouvrez une [issue](https://github.com/erikmd/tapfa-init.el/issues) ou envoyez-moi un [e-mail](https://github.com/erikmd).
