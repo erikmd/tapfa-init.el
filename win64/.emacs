@@ -237,6 +237,17 @@ Always ask if BATCH is nil, e.g., called interactively."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Config pour alternative à dired-mode
+
+;;; (use-package neotree
+;;;   :ensure t
+;;;   :config
+;;;   (global-set-key (kbd "<f6>") #'neotree-toggle))
+;;; ;; cf. https://github.com/jaypei/emacs-neotree#keybindings
+;;; ;; pour les raccourcis du buffer Neotree
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Config pour augmenter la découvrabilité
 
 (use-package which-key
