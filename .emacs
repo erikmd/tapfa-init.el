@@ -316,7 +316,7 @@ ESC ESC ESC   ; signal d'échappement (+ puissant que le raccourci \"C-g\")
           (tapfa-init-cua)
           :help "M-x tapfa-init-cua RET"]
          ["Installer les modes Coq - si nécessaire"
-          M-x tapfa-init-coq RET
+          (tapfa-init-coq)
           :help "M-x tapfa-init-coq RET"]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
