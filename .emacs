@@ -146,10 +146,11 @@ Always ask if BATCH is nil, e.g., called interactively."
   (when (or
          (member "*Help" centaur-tabs-excluded-prefixes)
          (member "*help" centaur-tabs-excluded-prefixes)
+         (not (member "*tapfa" centaur-tabs-excluded-prefixes))
          (not (member "*Choices" centaur-tabs-excluded-prefixes))
          (not (member "*Process" centaur-tabs-excluded-prefixes)))
     (customize-save-variable 'centaur-tabs-excluded-prefixes
-                             (append '("*Choices" "*Process")
+                             (append '("*Choices" "*Process" "*tapfa")
                                      (seq-filter
                                       (lambda (s)
                                         (not (member s '("*Help" "*help"
@@ -245,6 +246,87 @@ Always ask if BATCH is nil, e.g., called interactively."
      "Emacs")
     (t
      (centaur-tabs-get-group-name (current-buffer)))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Config pour afficher une aide sur les raccourcis de base (C-f1)
+
+(defun tapfa-init-help-display ()
+  (interactive)
+  (let ((buf (get-buffer-create "*tapfa-init-help*")))
+    (with-current-buffer buf
+      (when (<= (point-max) 1)
+        ;; Only do things once, even if this might prevent a text update
+        (insert
+"Principaux raccourcis à connaître — taper \"q\" pour fermer cette aide :
+
+C-x C-f …     ; ouvrir un fichier existant ou créer un nouveau fichier
+C-x C-s       ; sauvegarder le fichier courant
+Ctrl+X Ctrl+S ; idem (conseil : on peut garder la touche Ctrl appuyée)
+
+C-x 2         ; découper la vue courante en une \"mosaïque horizontale\"
+C-x o         ; déplacer le curseur d'une zone à l'autre
+C-x 1         ; maximiser le buffer courant et masquer les autres vues
+
+C-c …         ; préfixe spécifique au mode courant (dépend du langage)
+
+C-g           ; annule la commande en cours de saisie dans le minibuffer
+ESC ESC ESC   ; signal d'échappement (+ puissant que le raccourci \"C-g\")
+"
+)
+        (read-only-mode)
+        (lisp-mode)
+        (local-set-key (kbd "q") (lambda () (interactive) (quit-window t))))
+      (switch-to-buffer-other-window buf))))
+
+;; (spaceline-define-segment ?)
+
+(global-set-key (kbd "<C-f1>") #'tapfa-init-help-display)
+
+(defvar tapfa-init-help-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map [menu-bar] nil)
+    map))
+
+(define-minor-mode tapfa-init-help-mode
+  "Minor mode to display basic key bindings help (in French)."
+  :lighter " (?)"
+  :global t
+  :keymap tapfa-init-help-map
+  (if tapfa-init-help-mode
+      (message "Tapez C-f1 (Ctrl+F1) pour plus d'aide sur les raccourcis de base")))
+
+;; (define-globalized-minor-mode global-tapfa-init-help-mode tapfa-init-help-mode
+;;  (lambda () (tapfa-init-help-mode 1)))
+
+(easy-menu-define
+  tapfa-init-help-mode--menu
+  tapfa-init-help-map
+  "tapfa-init help menu"
+   (list "(?) - Tapfa Init Help"
+         :label "(?)"
+   ["Aide sur les raccourcis de base  (C-f1)"
+       (tapfa-init-help-display)
+       :help "Affiche les principaux raccourcis à connaître"]))
+
+(defconst tapfa-init-help-enable-max 2
+  "Number of times to show `tapfa-init-help-enable-max'.")
+
+(defcustom tapfa-init-help-enable nil
+  "How many times `tapfa-init-help-mode' was automatically on before dismiss?"
+  :type 'integer
+  :group 'tapfa-init)
+
+(defun tapfa-init-help-enable ()
+  "Enable `tapfa-init-help-mode' till `tapfa-init-help-enable-max'."
+  (cond
+   ((null tapfa-init-help-enable)
+    (tapfa-init-help-mode 1)
+    (customize-save-variable 'tapfa-init-help-enable 1))
+   ((< tapfa-init-help-enable tapfa-init-help-enable-max)
+    (tapfa-init-help-mode 1)
+    (customize-save-variable 'tapfa-init-help-enable
+                             (+ 1 tapfa-init-help-enable)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -618,3 +700,4 @@ Always ask if BATCH is nil, e.g., called interactively."
               (t (cua-mode -1))))
 
 (tapfa-init-cua t)
+(tapfa-init-help-enable)
