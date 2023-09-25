@@ -294,28 +294,19 @@ ESC ESC ESC   ; signal d'échappement (+ puissant que le raccourci \"C-g\")
   "tapfa-init help menu"
    (list "(?) - Tapfa Init Help"
          :label "(?)"
-   ["Aide sur les raccourcis de base  (C-f1)"
-       (tapfa-init-help-display)
-       :help "Affiche les principaux raccourcis à connaître"]))
-
-(defconst tapfa-init-help-enable-max 2
-  "Number of times to show `tapfa-init-help-enable-max'.")
-
-(defcustom tapfa-init-help-enable nil
-  "How many times `tapfa-init-help-mode' was automatically on before dismiss?"
-  :type 'integer
-  :group 'tapfa-init)
-
-(defun tapfa-init-help-enable ()
-  "Enable `tapfa-init-help-mode' till `tapfa-init-help-enable-max'."
-  (cond
-   ((null tapfa-init-help-enable)
-    (tapfa-init-help-mode 1)
-    (customize-save-variable 'tapfa-init-help-enable 1))
-   ((< tapfa-init-help-enable tapfa-init-help-enable-max)
-    (tapfa-init-help-mode 1)
-    (customize-save-variable 'tapfa-init-help-enable
-                             (+ 1 tapfa-init-help-enable)))))
+         ["Aide sur les raccourcis de base  (C-f1)"
+          (tapfa-init-help-display)
+          :help "Affiche les principaux raccourcis à connaître"]
+         "-------"
+         ["Changer le thème spacemacs : light / dark"
+          (tapfa-init-darkness)
+          :help "M-x tapfa-init-darkness RET"]
+         ["Changer les raccourcis : shell / windows"
+          (tapfa-init-cua)
+          :help "M-x tapfa-init-cua RET"]
+         ["Installer les modes Coq - si nécessaire"
+          M-x tapfa-init-coq RET
+          :help "M-x tapfa-init-coq RET"]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -697,4 +688,4 @@ Always ask if BATCH is nil, e.g., called interactively."
               (t (cua-mode -1))))
 
 (tapfa-init-cua t)
-(tapfa-init-help-enable)
+(tapfa-init-help-mode 1)
