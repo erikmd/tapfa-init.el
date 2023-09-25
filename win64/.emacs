@@ -512,7 +512,7 @@ Advices to `magit-push-current-to-*' trigger this query."
 (global-set-key (kbd "<f12>") #'learn-ocaml-mode)
 
 ;; Useful toggle when copying in Gitpod Browser Terminal
-(global-set-key (kbd "<f9>") #'xterm-mouse-mode)
+(global-set-key (kbd "<f7>") #'xterm-mouse-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
