@@ -264,6 +264,7 @@ ESC ESC ESC   ; signal d'échappement (+ puissant que le raccourci \"C-g\")
 "
 )
         (read-only-mode)
+        (goto-char (point-min))
         (lisp-mode)
         (local-set-key (kbd "q") (lambda () (interactive) (quit-window t))))
       (switch-to-buffer-other-window buf))))
