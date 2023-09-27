@@ -223,8 +223,8 @@ Pour installer automatiquement les modes
 <details>
 <summary><b>Installation sous Windows 10 (64 bits) avec WSL</b></summary>
 
-1. Installer GNU Emacs 28 à partir de
-   <https://emacs-modified.gitlab.io/windows/>
+1. ~~Installer GNU Emacs 28 à partir de
+   <https://emacs-modified.gitlab.io/windows/>~~
 
 1. Activer WSL dans Windows 10 :
    <https://docs.microsoft.com/en-us/windows/wsl/install-win10>
@@ -291,37 +291,33 @@ Pour installer automatiquement les modes
    opam install utop
    ```
 
-1. Installer `wsl-alias` :
+1. ~~Installer `wsl-alias` :~~
 
-   ```
-   curl -fOL https://github.com/leongrdic/wsl-alias/raw/master/install.sh
-   bash ./install.sh
-   ```
+   > ~~curl -fOL https://github.com/leongrdic/wsl-alias/raw/master/install.sh~~
+   > ~~bash ./install.sh~~
 
-   et valider les questions posées.
+   ~~et valider les questions posées.~~
 
-1. Ajouter comme indiqué, le chemin suivant à votre `PATH` Windows :
+1. ~~Ajouter comme indiqué, le chemin suivant à votre `PATH` Windows :
    `%userprofile%\wsl-alias` (vous pouvez vous inspirer de la page
-   <https://stackoverflow.com/a/44272417>).
+   <https://stackoverflow.com/a/44272417>).~~
 
-1. Ouvrir un terminal cmd.exe (a.k.a. MS-DOS, **pas WSL**) et taper les
-   commandes suivantes :
+1. ~~Ouvrir un terminal cmd.exe (a.k.a. MS-DOS, **pas WSL**) et taper les
+   commandes suivantes :~~
 
-   ```
-   b wsl-alias add opam opam
-   b wsl-alias add ocaml "opam exec -- ocaml"
-   b wsl-alias add ocamlc "opam exec -- ocamlc"
-   b wsl-alias add ocamlmerlin "opam exec -- ocamlmerlin"
-   b wsl-alias add learn-ocaml-client "wrapper-learn-ocaml-client"
-   b wsl-alias add utop "opam exec -- utop"
-   b wsl-alias add coqtop "opam exec -- coqtop"
-   b wsl-alias add coqidetop "opam exec -- coqidetop"
-   b wsl-alias add coqc "opam exec -- coqc"
-   b wsl-alias list  # pour vérifier
-   b                 # sans argument, pour passer en mode WSL
-   ```
+   > ~~`b wsl-alias add opam opam`~~  
+   > ~~`b wsl-alias add ocaml "opam exec -- ocaml"`~~  
+   > ~~`b wsl-alias add ocamlc "opam exec -- ocamlc"`~~  
+   > ~~`b wsl-alias add ocamlmerlin "opam exec -- ocamlmerlin"`~~  
+   > ~~`b wsl-alias add learn-ocaml-client "wrapper-learn-ocaml-client"`~~  
+   > ~~`b wsl-alias add utop "opam exec -- utop"`~~  
+   > ~~`b wsl-alias add coqtop "opam exec -- coqtop"`~~  
+   > ~~`b wsl-alias add coqidetop "opam exec -- coqidetop"`~~  
+   > ~~`b wsl-alias add coqc "opam exec -- coqc"`~~  
+   > ~~`b wsl-alias list  # pour vérifier`~~  
+   > ~~`b                 # sans argument, pour passer en mode WSL`~~
 
-   (*Les commandes précédentes doivent être copiées ligne à ligne !*)
+   ~~(*Les commandes précédentes doivent être copiées ligne à ligne !*)~~
 
 1. Dans la **ligne de commande WSL** (vérifier que vous êtes bien dans le répertoire
    `/mnt/c/Users/VOTRELOGIN` = dossier personnel Windows), télécharger
@@ -333,31 +329,35 @@ Pour installer automatiquement les modes
    curl -fOL https://github.com/erikmd/tapfa-init.el/raw/master/win64/.emacs
    ```
 
-1. Toujours dans la **ligne de commande WSL**, éditer le fichier
-   `~/.wsl-alias/env.sh` en tapant :
+1. ~~Toujours dans la **ligne de commande WSL**, éditer le fichier
+   `~/.wsl-alias/env.sh` en tapant :~~
+
+   > ~~`nano ~/.wsl-alias/env.sh`~~
+
+   ~~Ajouter à la fin de ce fichier (qui doit déjà exister) :~~
+   
+   > ~~`wrapper-learn-ocaml-client() {`~~  
+   > ~~`    declare -a args`~~  
+   > ~~`    args=()`~~  
+   > ~~`    for arg; do`~~  
+   > ~~`    args[${#args[@]}]="$(sed -e 's|htt/mnt/p\\\?|http://|; s|http/mnt/s\\\?|https://|' <<< "$arg")"`~~  
+   > ~~`    done`~~  
+   > ~~`    exec opam exec -- learn-ocaml-client "${args[@]}"`~~  
+   > ~~`}`~~  
+
+   ~~Sauver avec <kbd>Ctrl+O</kbd> <kbd>Entrée</kbd> et quitter avec
+   <kbd>Ctrl+X</kbd>.~~
+
+1. ~~Lancer Emacs à partir de Windows.~~
+
+1. Installer Emacs dans WSL, puis lancer Emacs à partir de WSL :
 
    ```
-   nano ~/.wsl-alias/env.sh
+   sudo apt-get install emacs
+   eval $(opam env)
+   emacs
    ```
-
-   Ajouter à la fin de ce fichier (qui doit déjà exister) :
-
-   ```
-   wrapper-learn-ocaml-client() {
-       declare -a args
-       args=()
-       for arg; do
-       args[${#args[@]}]="$(sed -e 's|htt/mnt/p\\\?|http://|; s|http/mnt/s\\\?|https://|' <<< "$arg")"
-       done
-       exec opam exec -- learn-ocaml-client "${args[@]}"
-   }
-   ```
-
-   Sauver avec <kbd>Ctrl+O</kbd> <kbd>Entrée</kbd> et quitter avec
-   <kbd>Ctrl+X</kbd>.
-
-1. Lancer Emacs à partir de Windows.
-
+   
    L'installation des modes Emacs pour OCaml et Coq
    ([tuareg](https://github.com/ocaml/tuareg),
    [merlin](https://github.com/ocaml/merlin),
