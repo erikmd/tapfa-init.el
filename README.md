@@ -32,7 +32,7 @@ ces étapes.*)
    **soit** la toute dernière version (avec le
    [script d'installation officiel](https://opam.ocaml.org/doc/Install.html)) :
    ```
-   curl -fOL https://github.com/ocaml/opam/raw/master/shell/install.sh
+   curl -fL https://github.com/ocaml/opam/raw/master/shell/install.sh > ./install.sh
    sh ./install.sh
    ```
 
@@ -77,7 +77,7 @@ Pour installer automatiquement les modes
    cd                    # pour revenir à la racine du homedir (~/)
    mv -f .emacs .emacs~  # pour sauvegarder votre fichier au cas où
    # si la ligne précédente renvoie une erreur, ne pas en tenir compte
-   curl -fOL https://github.com/erikmd/tapfa-init.el/raw/master/.emacs
+   curl -fL https://github.com/erikmd/tapfa-init.el/raw/master/.emacs > ~/.emacs
    ```
    > *Note* : Si vous n'utilisez pas `curl` mais la fonctionnalité de
    > téléchargement de votre navigateur, veillez à ce que celui-ci
@@ -178,7 +178,7 @@ Pour installer automatiquement les modes
    cd                    # pour revenir à la racine du homedir (~/)
    mv -f .emacs .emacs~  # pour sauvegarder votre fichier
    # si la ligne précédente renvoie une erreur, ne pas en tenir compte
-   curl -fOL https://github.com/erikmd/tapfa-init.el/raw/master/.emacs
+   curl -fL https://github.com/erikmd/tapfa-init.el/raw/master/.emacs > ~/.emacs
    ```
    > *Note* : Si vous n'utilisez pas `curl` mais la fonctionnalité de
    > téléchargement de votre navigateur, veillez à ce que celui-ci
@@ -261,7 +261,7 @@ Pour installer automatiquement les modes
    [script d'installation officiel](https://opam.ocaml.org/doc/Install.html)) :
 
    ```
-   curl -fOL https://github.com/ocaml/opam/raw/master/shell/install.sh
+   curl -fL https://github.com/ocaml/opam/raw/master/shell/install.sh > ./install.sh
    sh ./install.sh
    ```
 
@@ -326,7 +326,7 @@ Pour installer automatiquement les modes
    ```
    mv -f .emacs .emacs.bak  # pour sauvegarder votre fichier au cas où
    # si la ligne précédente renvoie une erreur, ne pas en tenir compte
-   curl -fOL https://github.com/erikmd/tapfa-init.el/raw/master/win64/.emacs
+   curl -fL https://github.com/erikmd/tapfa-init.el/raw/master/.emacs > ~/.emacs # même config que Linux
    ```
 
 1. ~~Toujours dans la **ligne de commande WSL**, éditer le fichier
