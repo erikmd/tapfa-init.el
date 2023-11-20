@@ -224,7 +224,7 @@ Pour installer automatiquement les modes
 <summary><b>Installation sous Windows 10 (64 bits) avec WSL</b></summary>
 
 Les lignes ~~barrées~~ ci-dessous ne doivent pas être exécutées
-(il s'agit des étapes de l'ancienne version du tutoriel qui nécessitait `emacs-modified for windows` et `wsl-alias`, et qui était moins robuste que la dernière version du tutoriel utilisant `emacs` en mode TTY).
+(il s'agit des étapes de l'ancienne version du tutoriel qui nécessitait *emacs-modified for windows* et *wsl-alias*, et qui était moins robuste que la dernière version du tutoriel utilisant *emacs* natif pour Linux, en mode TTY).
 
 1. ~~Installer GNU Emacs 28 à partir de
    <https://emacs-modified.gitlab.io/windows/>~~
@@ -354,7 +354,7 @@ Les lignes ~~barrées~~ ci-dessous ne doivent pas être exécutées
 1. Installer Emacs dans WSL, puis lancer Emacs à partir de WSL :
 
    ```
-   sudo apt-get install emacs
+   sudo apt-get update && sudo apt-get install emacs
    eval $(opam env)
    emacs
    ```
