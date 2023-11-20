@@ -223,16 +223,17 @@ Pour installer automatiquement les modes
 <details>
 <summary><b>Installation sous Windows 10 (64 bits) avec WSL</b></summary>
 
+Les lignes ~~barrées~~ ci-dessous ne doivent pas être exécutées
+(il s'agit des étapes de l'ancienne version du tutoriel qui nécessitait `emacs-modified for windows` et `wsl-alias`, et qui était moins robuste que la dernière version du tutoriel utilisant `emacs` en mode TTY).
+
 1. ~~Installer GNU Emacs 28 à partir de
    <https://emacs-modified.gitlab.io/windows/>~~
 
-1. Activer WSL dans Windows 10 :
-   <https://docs.microsoft.com/en-us/windows/wsl/install-win10>
+1. Installer WSL pour Windows 10+ :
+   <https://aka.ms/wslstore>
 
-1. Installer une distribution GNU/Linux
-   ([Debian](https://www.microsoft.com/store/apps/9MSVKQC78PK6) ou
-   [Ubuntu](https://www.microsoft.com/store/apps/9N9TNGVNDL3Q)) à
-   partir de Microsoft Store.
+1. Installer une distribution GNU/Linux (par exemple, `Ubuntu-22.04`)
+   en suivant les instructons de <https://aka.ms/wslstore>
 
 1. Ouvrir un terminal WSL (par ex. en tapant le nom de la distribution
    dans le Menu Démarrer) et assurez-vous que vous avez un compte
