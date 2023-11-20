@@ -233,11 +233,11 @@ Pour installer automatiquement les modes
    <https://aka.ms/wslstore>
 
 1. Installer une distribution GNU/Linux (par exemple, `Ubuntu-22.04`)
-   en suivant les instructons de <https://aka.ms/wslstore>
+   en suivant les instructions de <https://aka.ms/wslstore>.
 
 1. Ouvrir un terminal WSL (par ex. en tapant le nom de la distribution
-   dans le Menu Démarrer) et assurez-vous que vous avez un compte
-   utilisateur Linux "normal" (**pas `root`**)
+   dans le Menu Démarrer), répondez aux questions éventuelles
+   et assurez-vous que vous avez un compte utilisateur Linux "normal" (**pas `root`**).
 
 1. Mettre à jour l'index des paquets :
 
