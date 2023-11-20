@@ -223,8 +223,8 @@ Pour installer automatiquement les modes
 <details>
 <summary><b>Installation sous Windows 10 (64 bits) avec WSL</b></summary>
 
-Les lignes ~~barrées~~ ci-dessous ne doivent pas être exécutées
-(il s'agit des étapes de l'ancienne version du tutoriel qui nécessitait *emacs-modified for windows* et *wsl-alias*, et qui était moins robuste que la dernière version du tutoriel utilisant *emacs* natif pour Linux, en mode TTY).
+**Note:** Les lignes ~~barrées~~ ci-dessous ne doivent pas être exécutées
+(il s'agit des étapes de l'ancienne version du tutoriel qui nécessitait *emacs-modified for windows* et *wsl-alias*, et qui était moins robuste que la dernière version du tutoriel utilisant *emacs* natif pour Linux).
 
 1. ~~Installer GNU Emacs 28 à partir de
    <https://emacs-modified.gitlab.io/windows/>~~
@@ -320,13 +320,15 @@ Les lignes ~~barrées~~ ci-dessous ne doivent pas être exécutées
 
    ~~(*Les commandes précédentes doivent être copiées ligne à ligne !*)~~
 
-1. Dans la **ligne de commande WSL** (vérifier que vous êtes bien dans le répertoire
-   `/mnt/c/Users/VOTRELOGIN` = dossier personnel Windows), télécharger
-   le fichier `.emacs` fourni :
+   ~~Vérifier que vous êtes bien dans le répertoire `/mnt/c/Users/VOTRELOGIN` = dossier personnel Windows.~~
+
+1. Dans la **ligne de commande WSL**, télécharger le fichier `.emacs` fourni :
 
    ```
+   cd ~/
    mv -f .emacs .emacs.bak  # pour sauvegarder votre fichier au cas où
    # si la ligne précédente renvoie une erreur, ne pas en tenir compte
+
    curl -fL https://github.com/erikmd/tapfa-init.el/raw/master/.emacs > ~/.emacs # même config que Linux
    ```
 
