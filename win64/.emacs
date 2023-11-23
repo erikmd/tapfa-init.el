@@ -162,7 +162,10 @@ Always ask if BATCH is nil, e.g., called interactively."
         centaur-tabs-set-bar 'under
         x-underline-at-descent-line t
         centaur-tabs-set-modified-marker t
-        centaur-tabs-show-new-tab-button nil)
+        centaur-tabs-show-new-tab-button nil
+        centaur-tabs-down-tab-text " ⋮ "
+        centaur-tabs-backward-tab-text "(←)"
+        centaur-tabs-forward-tab-text "(→)")
   :hook
   (dashboard-mode . centaur-tabs-local-mode)
   (term-mode . centaur-tabs-local-mode)
