@@ -413,4 +413,4 @@ En cas de problème avec cette configuration, ouvrez une [issue](https://github.
 
 Ce tutoriel d'installation propose d'installer `coq` version `8.17.1`,
 mais vous pouvez aussi installer la dernière version stable de Coq, donnée au début du badge suivant :
-[![coq latest version](https://img.shields.io/docker/v/coqorg/coq/latest)](https://github.com/coq/coq/releases)
+[![coq latest version](https://img.shields.io/docker/v/coqorg/coq?sort=semver)](https://github.com/coq/coq/releases)
