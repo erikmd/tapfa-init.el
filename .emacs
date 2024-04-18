@@ -11,6 +11,14 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Wrapper for macOS native fullscreen
+
+(defun tapfa-frame-maximize (prefix)
+  "Toggle the current frame fullscreen (resp. maximized if PREFIX holds)."
+  (interactive "P")
+  (if prefix (toggle-frame-maximized)
+    (toggle-frame-fullscreen)))
+
 ;; Config des touches Option dans GNU Emacs 28 pour macOS
 
 ;; Utilisez la touche Option-de-gauche pour activer la touche Meta d'Emacs (M-)
@@ -21,7 +29,8 @@
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'meta)
   (setq mac-right-option-modifier 'none)
-  (add-to-list 'image-types 'svg t))
+  (add-to-list 'image-types 'svg t)
+  (global-set-key (kbd "C-s-f") #'tapfa-frame-maximize))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
