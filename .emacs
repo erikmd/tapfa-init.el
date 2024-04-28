@@ -198,6 +198,8 @@ Always ask if BATCH is nil, e.g., called interactively."
   ("<C-f5>" . centaur-tabs-extract-window-to-new-frame)
   ("<C-prior>" . centaur-tabs-backward)
   ("<C-next>" . centaur-tabs-forward)
+  ("C-c <left>" . centaur-tabs-backward)
+  ("C-c <right>" . centaur-tabs-forward)
   ("C-c <C-left>" . centaur-tabs-backward)
   ("C-c <C-right>" . centaur-tabs-forward)
   ("<C-S-prior>" . centaur-tabs-move-current-tab-to-left)
