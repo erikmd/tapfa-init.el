@@ -133,17 +133,14 @@ Always ask if BATCH is nil, e.g., called interactively."
 (defun tapfa-init-fix-centaur-tabs-excluded-prefixes ()
   "Fix `centaur-tabs-excluded-prefixes'."
   (when (or
-         (member "*Help" centaur-tabs-excluded-prefixes)
-         (member "*help" centaur-tabs-excluded-prefixes)
-         (not (member "*tapfa" centaur-tabs-excluded-prefixes))
-         (not (member "*Choices" centaur-tabs-excluded-prefixes))
-         (not (member "*Process" centaur-tabs-excluded-prefixes)))
+         ;; (member "*Keep" centaur-tabs-excluded-prefixes)
+         (not (member "*tapfa" centaur-tabs-excluded-prefixes)))
     (customize-save-variable 'centaur-tabs-excluded-prefixes
-                             (append '("*Choices" "*Process" "*tapfa")
+                             (append '("*tapfa")
                                      (seq-filter
                                       (lambda (s)
-                                        (not (member s '("*Help" "*help"
-                                                         "*Choices" "*Process"))))
+                                        (not (member s '(;;"*Keep"
+							 ))))
                                       centaur-tabs-excluded-prefixes)))))
 
 (use-package centaur-tabs
@@ -188,33 +185,15 @@ Always ask if BATCH is nil, e.g., called interactively."
   (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
   (tapfa-init-fix-centaur-tabs-excluded-prefixes)
   (defun centaur-tabs-buffer-groups ()
-  "`centaur-tabs-buffer-groups' control buffers' group rules."
+  "`centaur-tabs-buffer-groups' control buffers' group rules.
+
+Group centaur-tabs with mode if buffer is derived from `eshell-mode'
+`emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+All buffer name start with * will group to \"Emacs\".
+Other buffer group by `centaur-tabs-get-group-name' with project name."
   (list
    (cond
-    ;; ((and (buffer-file-name) (file-remote-p (buffer-file-name)))
-    ;;  "Remote")
-    ((memq major-mode '(tuareg-mode caml-mode))
-     "OCaml")
-    ((memq major-mode '(coq-mode
-                        proof-splash-mode
-                        coq-shell-mode
-                        coq-goals-mode
-                        coq-response-mode))
-     "Coq")
-    ((memq major-mode '(tex-mode
-                        latex-mode))
-     "TeX")
-    ((memq major-mode '(helpful-mode
-                        help-mode))
-     "Help")
-    ((derived-mode-p 'eshell-mode)
-     "EShell")
-    ((derived-mode-p 'emacs-lisp-mode)
-     "Elisp")
-    ((derived-mode-p 'dired-mode)
-     "Dired")
-    ((derived-mode-p 'prog-mode)
-     "Editing")
+    ;; ((memq major-mode '(org-mode org-agenda-mode diary-mode)) "OrgMode")
     ((memq major-mode '(org-mode
                         org-agenda-clockreport-mode
                         org-src-mode
@@ -224,18 +203,30 @@ Always ask if BATCH is nil, e.g., called interactively."
                         org-bullets-mode
                         org-cdlatex-mode
                         org-agenda-log-mode
-                        diary-mode))
-       "OrgMode")
-    ((or (string-equal "*" (substring (buffer-name) 0 1))
-         (memq major-mode '(magit-process-mode
-                            magit-status-mode
-                            magit-diff-mode
-                            magit-log-mode
-                            magit-file-mode
-                            magit-blob-mode
-                            magit-blame-mode
-                            )))
+                        diary-mode)) "OrgMode")
+    ((memq major-mode '(tex-mode latex-mode)) "TeX")
+    ((memq major-mode '(tuareg-mode caml-mode)) "OCaml")
+    ((memq major-mode '(coq-mode
+                        proof-splash-mode
+                        coq-shell-mode
+                        coq-goals-mode
+                        coq-response-mode)) "Coq")
+    ((memq major-mode '(helpful-mode help-mode)) "Help")
+    ;; ((derived-mode-p 'prog-mode) "Editing")
+    ;; ((and (buffer-file-name) (file-remote-p (buffer-file-name))) "Remote")
+  ((or (string-equal "*" (substring (buffer-name) 0 1))
+         (memq major-mode '( magit-process-mode
+                             magit-status-mode
+                             magit-diff-mode
+                             magit-log-mode
+                             magit-file-mode
+                             magit-blob-mode
+                             magit-blame-mode)))
      "Emacs")
+    ((derived-mode-p 'shell-mode) "Shell")
+    ((derived-mode-p 'eshell-mode) "EShell")
+    ((derived-mode-p 'emacs-lisp-mode) "Elisp")
+    ((derived-mode-p 'dired-mode) "Dired")
     (t
      (centaur-tabs-get-group-name (current-buffer)))))))
 
