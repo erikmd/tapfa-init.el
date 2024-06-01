@@ -71,6 +71,20 @@
  '(proof-locked-face ((t (:background "#add8e6"))))
  '(region ((t (:background "gold1" :distant-foreground "dim gray")))))
 
+;; Install https://elpa.gnu.org/packages/gnu-elpa-keyring-update.html
+;; to fix the bad-signature error that occurs in Debian GNU/Linux 12
+;; (cf. https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1070664)
+(unless (package-installed-p 'gnu-elpa-keyring-update)
+  ;; over-approximation: Unset package-check-signature temporarily for
+  ;; GNU/Linux, emacs < 29.3 (cf. https://packages.debian.org/emacs)
+  (if (and (string-equal system-type "gnu/linux")
+           (version< emacs-version "29.3"))
+      (let ((package-check-signature nil))
+        (package-refresh-contents)
+        (package-install 'gnu-elpa-keyring-update))
+    (progn (package-refresh-contents)
+           (package-install 'gnu-elpa-keyring-update))))
+
 ;; Bootstrap use-package
 
 (unless (package-installed-p 'use-package)
