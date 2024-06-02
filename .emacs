@@ -1,4 +1,4 @@
-;;; .emacs --- Emacs conf file -*- coding: utf-8 -*-
+;;; .emacs --- Emacs conf file -*- coding: utf-8; lexical-binding: t -*-
 
 ;; Téléchargez et placez ce fichier à la racine de votre homedir (=> ~/.emacs)
 ;; puis lancez GNU Emacs en exécutant la commande "emacs &" dans un terminal.
@@ -35,6 +35,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Config de package.el, MELPA et use-package
+
+;; In Emacs-28, `magit` raises an emergency warning "requires seq >= 2.24".
+;; Stefan: `transient` manque à l'appel dans le `package--builtin-versions`
+;; de Emacs-28.
+(and (not (assq 'transient package--builtin-versions))
+     (>= emacs-major-version 28)
+     (push '(transient 0 3 7) package--builtin-versions))
 
 (require 'package)
 
