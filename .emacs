@@ -278,6 +278,29 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Config pour afficher au démarrage un dashboard + joli et utile
+
+(use-package page-break-lines
+  :ensure t
+  :hook
+  (dashboard-mode . page-break-lines-mode))
+
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  :custom
+  (dashboard-banner-logo-title "Welcome to GNU Emacs!")
+  (dashboard-page-separator "\n\f\n")
+  (dashboard-items '((recents . 5)
+                     (bookmarks . 5))))
+;; dashboard-open
+;; C-x r m ;; bookmark-set
+;; C-x r b ;; bookmark-jump
+;; C-x r l ;; bookmark-bmenu-list
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Config pour afficher une aide sur les raccourcis de base (C-f1)
 
 (defun tapfa-init-help-display ()
