@@ -291,7 +291,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (dashboard-setup-startup-hook)
   :custom
   (dashboard-banner-logo-title "Welcome to GNU Emacs!")
-  (dashboard-page-separator "\n\f\n")
+  (dashboard-page-separator "\f\n")
   (dashboard-items '((recents . 5)
                      (bookmarks . 5))))
 ;; dashboard-open
