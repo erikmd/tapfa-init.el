@@ -293,11 +293,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (dashboard-banner-logo-title "Welcome to GNU Emacs!")
   (dashboard-page-separator "\f\n")
   (dashboard-items '((recents . 5)
-                     (bookmarks . 5))))
-;; dashboard-open
-;; C-x r m ;; bookmark-set
-;; C-x r b ;; bookmark-jump
-;; C-x r l ;; bookmark-bmenu-list
+                     (bookmarks . 10))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -334,12 +330,11 @@ ESC ESC ESC   ; signal d'échappement (+ puissant que le raccourci \"C-g\")
 
 ;; (spaceline-define-segment ?)
 
-(global-set-key (kbd "<C-f1>") #'tapfa-init-help-display)
-
 (defvar tapfa-init-help-map
   (let ((map (make-sparse-keymap)))
-    (define-key map [menu-bar] nil)
-    map))
+    (define-key map (kbd "C-<f1>") #'tapfa-init-help-display)
+    map)
+  "Keymap for tapfa-init-help.")
 
 (define-minor-mode tapfa-init-help-mode
   "Minor mode to display basic key bindings help (in French)."
@@ -347,7 +342,7 @@ ESC ESC ESC   ; signal d'échappement (+ puissant que le raccourci \"C-g\")
   :global t
   :keymap tapfa-init-help-map
   (if tapfa-init-help-mode
-      (message "Tapez C-f1 (Ctrl+F1) pour plus d'aide sur les raccourcis de base")))
+      (message "Tapez C-<f1> (Ctrl+F1) pour plus d'aide sur les raccourcis de base")))
 
 ;; (define-globalized-minor-mode global-tapfa-init-help-mode tapfa-init-help-mode
 ;;  (lambda () (tapfa-init-help-mode 1)))
@@ -358,19 +353,33 @@ ESC ESC ESC   ; signal d'échappement (+ puissant que le raccourci \"C-g\")
   "tapfa-init help menu"
    (list "(?) - Tapfa Init Help"
          :label "(?)"
-         ["Aide sur les raccourcis de base  (C-f1)"
-          (tapfa-init-help-display)
-          :help "Affiche les principaux raccourcis à connaître"]
+         ["Sauver la position dans un signet"
+          bookmark-set
+          :help "bookmark-set"]
+         ["Ouvrir un signet existant"
+          bookmark-jump
+          :help "bookmark-jump"]
+         ["Afficher la liste des signets"
+          bookmark-bmenu-list
+          :help "bookmark-bmenu-list"]
+         "-------"
+         ["Afficher le dashboard d'Emacs"
+          dashboard-open
+          :help "M-x dashboard-open RET"]
          "-------"
          ["Changer le thème spacemacs : light / dark"
-          (tapfa-init-darkness)
+          tapfa-init-darkness
           :help "M-x tapfa-init-darkness RET"]
          ["Changer les raccourcis : shell / windows"
-          (tapfa-init-cua)
+          tapfa-init-cua
           :help "M-x tapfa-init-cua RET"]
          ["Installer les modes Coq - si nécessaire"
-          (tapfa-init-coq)
-          :help "M-x tapfa-init-coq RET"]))
+          tapfa-init-coq
+          :help "M-x tapfa-init-coq RET"]
+         "-------"
+         ["Aide sur les raccourcis de base"
+          tapfa-init-help-display
+          :help "Afficher les principaux raccourcis à connaître"]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -744,4 +753,4 @@ Always ask if BATCH is nil, e.g., called interactively."
               (t (cua-mode -1))))
 
 (tapfa-init-cua t)
-(tapfa-init-help-mode 1)
+(add-hook 'emacs-startup-hook (lambda () (tapfa-init-help-mode 1))) ;; after dashboard-initialize
