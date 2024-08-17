@@ -283,23 +283,52 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
       (when (<= (point-max) 1)
         ;; Only do things once, even if this might prevent a text update
         (insert
-"Principaux raccourcis à connaître — taper \"q\" pour fermer cette aide :
+"Principaux raccourcis — taper \"q\" pour fermer cette aide, \"SPC\" pour défiler :
 
-C-x C-f …     ; ouvrir un fichier existant ou créer un nouveau fichier
-C-x C-s       ; sauvegarder le fichier courant
-Ctrl+X Ctrl+S ; idem (conseil : on peut garder la touche Ctrl appuyée)
+C-g (= Ctrl+g) ; annuler la saisie en cours dans le minibuffer (≈ barre d'état)
+ESC ESC ESC    ; pour annuler plus violemment (commande plus puissante que C-g)
 
-C-x 2         ; découper la vue courante en une \"mosaïque horizontale\"
-C-x o         ; déplacer le curseur d'une zone à l'autre
-C-x 1         ; maximiser le buffer courant et masquer les autres vues
+C-x C-f …  ; pour ouvrir un fichier existant ou créer un nouveau fichier
+C-x C-s    ; sauver le fichier courant (ProTip : garder la touche Ctrl appuyée)
+C-x k RET  ; pour fermer le buffer courant
+C-x 2      ; pour découper la vue courante en 2 zones empilées verticalement
+C-x o      ; pour déplacer le curseur d'une zone à l'autre
+C-x 1      ; pour garder la zone courante et masquer les autres zones affichées
 
-C-c …         ; préfixe spécifique au mode courant (dépend du langage)
+C-c …  ; préfixe spécifique au mode courant (dépend du langage, cf. ci-dessous)
 
-C-g           ; annule la commande en cours de saisie dans le minibuffer
-ESC ESC ESC   ; signal d'échappement (+ puissant que le raccourci \"C-g\")
-"
-)
+Principaux raccourcis des modes Tuareg et Merlin (pour OCaml) :
+
+C-x C-s  ; sauver le fichier courant et surligner les erreurs OCaml en rouge
+
+C-c C-s RET  ; pour lancer un toplevel OCaml (Ctrl+c Ctrl+s Entrée)
+C-c C-e  ; pour évaluer toute la phrase OCaml autour du curseur
+C-c C-b  ; pour évaluer tout le buffer dans le toplevel OCaml
+
+C-c C-t  ; pour afficher dans le minibuffer le type OCaml du code sélectionné
+C-c C-d  ; pour afficher dans le minibuffer la doc de la fonction sélectionnée
+C-c C-l  ; pour localiser et sauter à la définition de l'identificateur courant
+C-c C-&  ; pour revenir à la dernière position avant d'avoir fait C-c C-l
+C-c C-o  ; pour renommer toutes les occurrences du curseur (terminer avec C-g)
+
+Principaux raccourcis du mode Proof-General (pour Coq) :
+
+C-c C-RET  ; pour évaluer le code Coq jusqu'au curseur
+. .        ; (2 appuis rapides sur .) écrit 1 point final et évalue le code Coq
+C-c C-u    ; pour revenir à la phrase précédente
+C-c C-n    ; pour évaluer la phrase suivante
+C-c C-b    ; pour évaluer tout le buffer
+C-u C-c C-RET  ; pour évaluer le code Coq, en remplaçant \"Qed.\" par \"Admitted.\"
+
+C-c C-f  ; pour effectuer une recherche (Search) sans l'écrire dans le code
+C-c C-l C-c C-p  ; pour réafficher les 3 buffers standard en mode preuve
+
+C-u C-c C-x  ; pour tuer le processus (coqtop)
+
+M-x p-u-e-p RET  ; mettre à jour tous les modes Emacs (= Alt+x p-u-e-p Entrée)
+")
         (read-only-mode)
+        (view-mode 1)
         (goto-char (point-min))
         (lisp-mode)
         (local-set-key (kbd "q") (lambda () (interactive) (quit-window t))))
