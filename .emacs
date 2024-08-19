@@ -299,13 +299,22 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 ;; Config pour afficher une aide sur les raccourcis de base (C-f1)
 
+(defun tapfa-get-lang ()
+  "Read $LANG and return 'fr if it matches and 'en otherwise."
+  (let ((lang (getenv "LANG")))         ; can be nil
+    (if (or (string-prefix-p "fr_" lang)
+            (string-equal "fr" lang))
+        'fr
+      'en)))
+
 (defun tapfa-init-help-display ()
   (interactive)
   (let ((buf (get-buffer-create "*tapfa-init-help*")))
     (with-current-buffer buf
       (when (<= (point-max) 1)
         ;; Only do things once, even if this might prevent a text update
-        (insert
+        (if (eq (tapfa-get-lang) 'fr)
+            (insert
 "Principaux raccourcis — taper \"q\" pour fermer cette aide, \"SPC\" pour défiler :
 
 C-g (= Ctrl+g) ; annuler la saisie en cours dans le minibuffer (≈ barre d'état)
@@ -336,12 +345,12 @@ C-c C-o  ; pour renommer toutes les occurrences du curseur (terminer avec C-g)
 
 Principaux raccourcis du mode Proof-General (pour Coq) :
 
-C-c C-RET  ; pour évaluer le code Coq jusqu'au curseur
-. .        ; (2 appuis rapides sur .) écrit 1 point final et évalue le code Coq
-C-c C-u    ; pour revenir à la phrase précédente
-C-c C-n    ; pour évaluer la phrase suivante
-C-c C-b    ; pour évaluer tout le buffer
-C-u C-c C-RET  ; pour évaluer le code Coq, en remplaçant \"Qed.\" par \"Admitted.\"
+C-c RET  ; pour évaluer le code Coq jusqu'au curseur
+. .      ; (2 appuis rapides sur .) écrit 1 point final et évalue le code Coq
+C-c C-u  ; pour revenir à la phrase précédente
+C-c C-n  ; pour évaluer la phrase suivante
+C-c C-b  ; pour évaluer tout le buffer
+C-u C-c RET  ; pour évaluer le code Coq, en remplaçant \"Qed.\" par \"Admitted.\"
 
 C-c C-f  ; pour effectuer une recherche (Search) sans l'écrire dans le code
 C-c C-l C-c C-p  ; pour réafficher les 3 buffers standard en mode preuve
@@ -350,10 +359,55 @@ C-u C-c C-x  ; pour tuer le processus (coqtop)
 
 M-x p-u-e-p RET  ; mettre à jour tous les modes Emacs (= Alt+x p-u-e-p Entrée)
 ")
+          (insert
+"Main key bindings — press \"q\" to dismiss this help, or \"SPC\" to scroll:
+
+C-g (= Ctrl+g) ; abort the current editing in the minibuffer (≈ status bar)
+ESC ESC ESC    ; to abort more aggressively (command more powerful than C-g)
+
+C-x C-f …  ; to open an existing file or create a new file
+C-x C-s    ; to save the current file (ProTip: keep the Ctrl key down)
+C-x k RET  ; to kill (= close) the current buffer
+C-x 2      ; to split the current view in 2 zones, vertically stacked
+C-x o      ; to move the cursor from a zone to another one
+C-x 1      ; to keep the current zone and hide the other displayed ones
+
+C-c …  ; prefix specific to the current mode (dep. on the language, see below)
+
+Main key bindings of the Tuareg and Merlin modes (for OCaml):
+
+C-x C-s  ; to save the current file and highlight the OCaml errors in red
+
+C-c C-s RET  ; to launch an OCaml toplevel (Ctrl+c Ctrl+s Return)
+C-c C-e  ; to evaluate the whole OCaml phrase around the cursor
+C-c C-b  ; to evaluate the whole buffer in the OCaml toplevel
+
+C-c C-t  ; to display in the minibuffer the OCaml type of the selected code
+C-c C-d  ; to display in the minibuffer the doc of the selected function
+C-c C-l  ; to jump to the definition of the identifier under the cursor
+C-c C-&  ; to jump back to the last position before typing C-c C-l
+C-c C-o  ; to rename all the occurrences of the cursor (stop with C-g)
+
+Main key bindings of the Proof-General mode (for Coq):
+
+C-c RET  ; to evaluate the Coq code up to the cursor
+. .      ; (2 quick press on .) write 1 final stop and evaluate the Coq code
+C-c C-u  ; to come back to the previous phrase
+C-c C-n  ; to evaluate the next phrase
+C-c C-b  ; to evaluate the whole buffer
+C-u C-c RET  ; to evaluate the Coq code, replacing \"Qed.\" with \"Admitted.\"
+
+C-c C-f  ; to perform some lemma search (Search) without writing it in the code
+C-c C-l C-c C-p  ; to redisplay the 3 standard buffers in proof mode
+
+C-u C-c C-x  ; to kill the Coq process (coqtop)
+
+M-x p-u-e-p RET  ; to upgrade all the Emacs modes (= Alt+x p-u-e-p Return)
+"))
         (read-only-mode)
-        (view-mode 1)
         (goto-char (point-min))
         (lisp-mode)
+        (view-mode 1)
         (local-set-key (kbd "q") (lambda () (interactive) (quit-window t))))
       (switch-to-buffer-other-window buf))))
 
