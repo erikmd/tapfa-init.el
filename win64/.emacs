@@ -394,6 +394,7 @@ M-x p-u-e-p RET  ; to upgrade all the Emacs modes (= Alt+x p-u-e-p Return)
 (defvar tapfa-init-help-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-<f1>") #'tapfa-init-help-display)
+    (define-key map (kbd "M-<f1>") #'tapfa-init-help-display)
     map)
   "Keymap for tapfa-init-help.")
 
@@ -403,7 +404,7 @@ M-x p-u-e-p RET  ; to upgrade all the Emacs modes (= Alt+x p-u-e-p Return)
   :global t
   :keymap tapfa-init-help-map
   (if tapfa-init-help-mode
-      (message "Tapez C-<f1> (Ctrl+F1) pour plus d'aide sur les raccourcis de base")))
+      (message "Tapez Ctrl+F1 ou Alt+F1 pour plus d'aide sur les principaux raccourcis")))
 
 ;; (define-globalized-minor-mode global-tapfa-init-help-mode tapfa-init-help-mode
 ;;  (lambda () (tapfa-init-help-mode 1)))
