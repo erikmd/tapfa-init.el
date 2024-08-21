@@ -68,7 +68,7 @@
  ;; If there is more than one, they won't work right.
  '(diff-switches "-u")
  '(package-selected-packages
-   (quote (learn-ocaml company merlin-iedit merlin-eldoc merlin tuareg auctex magit-gitflow magit yaml-mode markdown-mode helpful discover-my-major which-key centaur-tabs use-package))))
+   (quote (learn-ocaml company merlin-iedit merlin-eldoc merlin tuareg auctex magit-gitflow magit yaml-mode markdown-mode helpful discover-my-major which-key dashboard page-break-lines centaur-tabs spaceline spacemacs-theme diminish use-package gnu-elpa-keyring-update)))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -598,13 +598,24 @@ Advices to `magit-push-current-to-*' trigger this query."
 
 ;; Config de Tuareg, Merlin et Company
 
+(defcustom tapfa-always-install-opam-switch-mode nil
+  "Should opam-switch-mode be installed even if opam is not detected?
+Option useful for .emacs.d batch prebuild.
+
+The following values are meaningful:
+nil do not enforce the installation
+ t  always install opam-switch-mode"
+  :type '(choice (const :tag "Do not enforce the installation" nil)
+                 (const :tag "Always install opam-switch-mode" t))
+  :group 'tapfa-init)
+
 (setq tapfa-opam-available
       (let* ((temp (get-buffer-create " *temp"))
              (status (shell-command "opam var bin" temp)))
         (kill-buffer temp)
         (eq status 0)))
 
-(when tapfa-opam-available
+(when (or tapfa-opam-available tapfa-always-install-opam-switch-mode)
   (use-package opam-switch-mode
     :ensure t
     :hook
