@@ -89,6 +89,54 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Custom gettext
+
+(defun tapfa-init-getenv-lang ()
+  "Read $LANG and return 'fr if it matches and 'en otherwise."
+  (let ((lang (getenv "LANG")))         ; can be nil
+    (if (or (string-prefix-p "fr_" lang)
+            (string-equal "fr" lang))
+        'fr
+      'en)))
+
+(defcustom tapfa-init-default-lang nil
+  "Option to set the default language in tapfa-init strings.
+
+The following values are meaningful:
+nil use (tapfa-init-getenv-lang)
+fr  use French
+en  use English"
+  :type '(choice (const :tag "Use (tapfa-init-getenv-lang)" nil)
+                 (const :tag "Use French" 'fr)
+                 (const :tag "Use English" 'en))
+  :group 'tapfa-init)
+
+(defun tapfa-init-get-lang ()
+  "Read `tapfa-init-default-lang' or `tapfa-init-getenv-lang'."
+  (if tapfa-init-default-lang
+      tapfa-init-default-lang
+    (let ((lang (tapfa-init-getenv-lang)))
+      (customize-save-variable 'tapfa-init-default-lang lang))))
+
+(defun tapfa-init-select-lang ()
+  "Use `x-popup-dialog' to select the supplementary-help language."
+  (interactive)
+  (let ((newval
+         (condition-case _sig
+             (x-popup-dialog
+              t '("What language should be used for the supplementary help?\n"
+                  ("French" . fr) ("English" . en)))
+           (quit nil))))
+    (when newval
+      (customize-save-variable 'tapfa-init-default-lang newval)
+      (tapfa-init-easy-menu-define))))
+
+(defun tapfa-init-get-text (fr en)
+  "Return FR or EN, depending on `tapfa-init-get-lang'."
+  (if (eq (tapfa-init-get-lang) 'fr) fr en))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Custom spacemacs theme with nice tabs
 
 ;; (menu-bar-mode -1) Keep it!
@@ -132,16 +180,30 @@ Always ask if BATCH is nil, e.g., called interactively."
       (let ((newval
              (condition-case _sig
                  (x-popup-dialog
-                  t '("Quel thème spacemacs voulez-vous activer ?\n"
-                      ("Light" . 1) ("Dark" . -1)
-                      ("Redemander" . nil)))
+                  t (tapfa-init-get-text
+		     '("Quel thème spacemacs voulez-vous activer ?\n"
+                       ("Light" . 1) ("Dark" . -1)
+                       ("Redemander" . nil))
+		     '("What spacemacs theme do you want to enable?\n"
+                       ("Light" . 1) ("Dark" . -1)
+                       ("Ask again" . nil))))
                (quit nil))))
         (customize-save-variable 'tapfa-init-darkness newval)
-        (let ((sdark "Thème enregistré : spacemacs-dark.\n\n")
-              (slight "Thème enregistré : spacemacs-light.\n\n")
-              (sdflt "Thème par défaut : spacemacs-light.\n\n")
-              (ssaved-end "Si jamais vous voulez rechanger, tapez M-x tapfa-init-darkness RET")
-              (sdflt-end "Si jamais vous voulez changer, tapez M-x tapfa-init-darkness RET\nou redémarrez Emacs."))
+        (let ((sdark (tapfa-init-get-text
+		      "Thème enregistré : spacemacs-dark.\n\n"
+		      "Theme stored: spacemacs-dark.\n\n"))
+              (slight (tapfa-init-get-text
+		       "Thème enregistré : spacemacs-light.\n\n"
+		       "Theme stored: spacemacs-light.\n\n"))
+              (sdflt (tapfa-init-get-text
+		      "Thème par défaut : spacemacs-light.\n\n"
+		      "Theme by default: spacemacs-light.\n\n"))
+              (ssaved-end (tapfa-init-get-text
+			   "Si jamais vous voulez rechanger, utiliser le menu (?)\n"
+			   "If ever you want to change, use the menu (?)\n"))
+              (sdflt-end (tapfa-init-get-text
+			  "Si jamais vous voulez changer, utilisez le menu (?)\nou redémarrer Emacs."
+			  "If ever you want to change, use the menu (?)\nor restart Emacs.")))
           (cond ((eq tapfa-init-darkness 1)
                  (message-box (concat slight ssaved-end)))
                 ((eq tapfa-init-darkness -1)
@@ -277,22 +339,14 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 ;; Config pour afficher une aide sur les raccourcis de base (C-f1)
 
-(defun tapfa-get-lang ()
-  "Read $LANG and return 'fr if it matches and 'en otherwise."
-  (let ((lang (getenv "LANG")))         ; can be nil
-    (if (or (string-prefix-p "fr_" lang)
-            (string-equal "fr" lang))
-        'fr
-      'en)))
-
 (defun tapfa-init-help-display ()
   (interactive)
   (let ((buf (get-buffer-create "*tapfa-init-help*")))
     (with-current-buffer buf
-      (when (<= (point-max) 1)
-        ;; Only do things once, even if this might prevent a text update
-        (if (eq (tapfa-get-lang) 'fr)
-            (insert
+      (read-only-mode 0)
+      (erase-buffer)
+      (insert (tapfa-init-get-text
+;; French:
 "Principaux raccourcis — taper \"q\" pour fermer cette aide, \"SPC\" pour défiler :
 
 C-g (= Ctrl+g) ; annuler la saisie en cours dans le minibuffer (≈ barre d'état)
@@ -336,8 +390,8 @@ C-c C-l C-c C-p  ; pour réafficher les 3 buffers standard en mode preuve
 C-u C-c C-x  ; pour tuer le processus (coqtop)
 
 M-x p-u-e-p RET  ; mettre à jour tous les modes Emacs (= Alt+x p-u-e-p Entrée)
-")
-          (insert
+"
+;; English:
 "Main key bindings — press \"q\" to dismiss this help, or \"SPC\" to scroll:
 
 C-g (= Ctrl+g) ; abort the current editing in the minibuffer (≈ status bar)
@@ -382,11 +436,11 @@ C-u C-c C-x  ; to kill the Coq process (coqtop)
 
 M-x p-u-e-p RET  ; to upgrade all the Emacs modes (= Alt+x p-u-e-p Return)
 "))
-        (read-only-mode)
-        (goto-char (point-min))
-        (lisp-mode)
-        (view-mode 1)
-        (local-set-key (kbd "q") (lambda () (interactive) (quit-window t))))
+      (read-only-mode 1)
+      (goto-char (point-min))
+      (lisp-mode)
+      (view-mode 1)
+      (local-set-key (kbd "q") (lambda () (interactive) (quit-window t)))
       (switch-to-buffer-other-window buf))))
 
 ;; (spaceline-define-segment ?)
@@ -404,44 +458,74 @@ M-x p-u-e-p RET  ; to upgrade all the Emacs modes (= Alt+x p-u-e-p Return)
   :global t
   :keymap tapfa-init-help-map
   (if tapfa-init-help-mode
-      (message "Tapez Ctrl+F1 ou Alt+F1 pour plus d'aide sur les principaux raccourcis")))
+      (message (tapfa-init-get-text
+                "Tapez Ctrl+F1 ou Alt+F1 pour plus d'aide sur les principaux raccourcis"
+                "Type Ctrl+F1 or Alt+F1 for more help about the main key bindings"))))
 
 ;; (define-globalized-minor-mode global-tapfa-init-help-mode tapfa-init-help-mode
 ;;  (lambda () (tapfa-init-help-mode 1)))
 
-(easy-menu-define
-  tapfa-init-help-mode--menu
-  tapfa-init-help-map
-  "tapfa-init help menu"
-   (list "(?) - Tapfa Init Help"
-         :label "(?)"
-         ["Sauver la position dans un signet"
-          bookmark-set
-          :help "bookmark-set"]
-         ["Ouvrir un signet existant"
-          bookmark-jump
-          :help "bookmark-jump"]
-         ["Afficher la liste des signets"
-          bookmark-bmenu-list
-          :help "bookmark-bmenu-list"]
-         "-------"
-         ["Afficher le dashboard d'Emacs"
-          dashboard-open
-          :help "M-x dashboard-open RET"]
-         "-------"
-         ["Changer le thème spacemacs : light / dark"
-          tapfa-init-darkness
-          :help "M-x tapfa-init-darkness RET"]
-         ["Changer les raccourcis : shell / windows"
-          tapfa-init-cua
-          :help "M-x tapfa-init-cua RET"]
-         ["Installer les modes Coq - si nécessaire"
-          tapfa-init-coq
-          :help "M-x tapfa-init-coq RET"]
-         "-------"
-         ["Aide sur les raccourcis de base"
-          tapfa-init-help-display
-          :help "Afficher les principaux raccourcis à connaître"]))
+(defun tapfa-init-easy-menu-define ()
+  (interactive)
+  (easy-menu-define
+    tapfa-init-help-mode--menu
+    tapfa-init-help-map
+    "tapfa-init help menu"
+    `("(?) - Tapfa Init Help"
+          :label "(?)"
+          [,(tapfa-init-get-text
+             "Changer la langue de ce menu (EN / FR)"
+             "Set the language for this menu (FR / EN)")
+           tapfa-init-select-lang
+           :help "M-x tapfa-init-set-lang"]
+          "-------"
+          [,(tapfa-init-get-text
+            "Sauver la position dans un signet"
+            "Store the position in a bookmark")
+           bookmark-set
+           :help "bookmark-set"]
+          [,(tapfa-init-get-text
+            "Ouvrir un signet existant"
+            "Jump to an existing bookmark")
+           bookmark-jump
+           :help "bookmark-jump"]
+          [,(tapfa-init-get-text
+            "Afficher la liste des signets"
+            "Display the list of bookmarks")
+           bookmark-bmenu-list
+           :help "bookmark-bmenu-list"]
+          "-------"
+          [,(tapfa-init-get-text
+            "Afficher le dashboard d'Emacs"
+            "Display the Emacs dashboard")
+           dashboard-open
+           :help "M-x dashboard-open RET"]
+          "-------"
+          [,(tapfa-init-get-text
+            "Changer le thème spacemacs : light / dark"
+            "Change the spacemacs theme: light / dark")
+           tapfa-init-darkness
+           :help "M-x tapfa-init-darkness RET"]
+          [,(tapfa-init-get-text
+            "Changer les raccourcis : shell / windows"
+            "Change the shortcuts: shell / windows")
+           tapfa-init-cua
+           :help "M-x tapfa-init-cua RET"]
+          [,(tapfa-init-get-text
+            "Installer les modes Coq - si nécessaire"
+            "Install the Coq modes - if need be")
+           tapfa-init-coq
+           :help "M-x tapfa-init-coq RET"]
+          "-------"
+          [,(tapfa-init-get-text
+            "Aide sur les raccourcis de base"
+            "Help on the main key bindings")
+           tapfa-init-help-display
+           :help ,(tapfa-init-get-text
+                  "Afficher les principaux raccourcis à connaître"
+                  "Display the main key bindings to know")])))
+
+(tapfa-init-easy-menu-define)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -673,9 +757,13 @@ Always ask if BATCH is nil, e.g., called interactively."
       (let ((newval
              (condition-case _sig
                  (x-popup-dialog
-                  t '("Voulez-vous installer les modes (plugins) associés au langage Coq ?\n"
-                      ("Oui" . 1) ("Non" . -1)
-                      ("Plus tard" . nil)))
+                  t (tapfa-init-get-text
+                     '("Voulez-vous installer les modes (plugins) associés au langage Coq ?\n"
+                       ("Oui" . 1) ("Non" . -1)
+                       ("Plus tard" . nil))
+                     '("Do you want to install the modes (plugins) related to the Coq prover?\n"
+                       ("Yes" . 1) ("No" . -1)
+                       ("Later" . nil))))
                (quit nil))))
         (customize-save-variable 'tapfa-init-coq newval)
         (cond ((eq tapfa-init-coq 1)
@@ -683,7 +771,9 @@ Always ask if BATCH is nil, e.g., called interactively."
               ((eq tapfa-init-coq -1)
                t)
               (t
-               (message-box "Saute l'installation des modes liés à Coq.\n\nPour les installer tout de même plus tard, tapez M-x tapfa-init-coq RET\n"))))))
+               (message-box (tapfa-init-get-text
+                             "Saute l'installation des modes liés à Coq.\n\nPour les installer tout de même plus tard, utiliser le menu (?)\n"
+                             "Skip the installation of modes for the Coq prover.\n\nTo install these later on if need be, use the menu (?)\n")))))))
 
 (tapfa-init-coq t)
 
@@ -801,17 +891,29 @@ Always ask if BATCH is nil, e.g., called interactively."
       (let ((newval
              (condition-case _sig
                  (x-popup-dialog
-                  t '("Presse-papier & Annulation :\n\nVoulez-vous forcer l'utilisation des raccourcis Windows ?\n(C-c, C-x, C-v, et C-z)\n\nOu garder les raccourcis Emacs/shell standards\n(M-w, C-w, C-y, et C-_)\n"
-                      ("Emacs/shell" . -1) ("Windows" . 1)
-                      ("Me redemander" . nil)))
+                  t (tapfa-init-get-text
+                     '("Presse-papier & Annulation :\nVoulez-vous les raccourcis Windows ? (C-c, C-x, C-v, C-z)\nOu garder les raccourcis standards (M-w, C-w, C-y, C-_)\n"
+                      ("Windows" . 1) ("Emacs/shell" . -1)
+                      ("Me redemander" . nil))
+                     '("Clipboard & Cancelling:\nDo you want the Windows keybindings? (C-c, C-x, C-v, C-z)\nOr keep the standard keybindings (M-w, C-w, C-y, C-_)\n"
+                      ("Windows" . 1) ("Emacs/shell" . -1)
+                      ("Ask again" . nil))))
                (quit nil))))
         (customize-save-variable 'tapfa-init-cua newval)
-        (let ((ssaved "Configuration enregistrée.\n\n")
-              (sremov "Pas de configuration stockée.\n\n")
-              (swindo "Utilise : raccourcis Windows\n(C-c, C-x, C-v, et C-z)\n\n")
-              (semacs "Utilise : raccourcis Emacs/shell standards\n( M-w  pour copier, c.-à-d.  Alt+w,\n  C-w  pour couper, c.-à-d.  Ctrl+w,\n  C-y  pour coller, c.-à-d.  Ctrl+y,\n  C-_  pour annuler, c.-à-d.  Ctrl+_)\n\n")
-              (ssaved-end "Si jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET")
-              (sremov-end "Si jamais vous voulez rechanger, tapez M-x tapfa-init-cua RET\nou redémarrez Emacs."))
+        (let ((ssaved (tapfa-init-get-text "Configuration enregistrée. "
+                                           "Configuration stored. "))
+              (sremov (tapfa-init-get-text "Pas de configuration stockée.\n"
+                                           "No configuration stored.\n"))
+              (swindo (tapfa-init-get-text "\nUtilise : raccourcis Windows (C-c, C-x, C-v, et C-z)\n"
+                                           "\nUsing: Windows keybindings (C-c, C-x, C-v, and C-z)\n"))
+              (semacs (tapfa-init-get-text "Utilise : raccourcis Emacs/shell standards\n( M-w  pour copier, c.-à-d.  Alt+w,\n  C-w  pour couper, c.-à-d.  Ctrl+w,\n  C-y  pour coller, c.-à-d.  Ctrl+y,\n  C-_  pour annuler, c.-à-d.  Ctrl+_ )\n"
+                                           "Using: Emacs/shell standard keybindings\n( M-w to copy, i.e. Alt+w,\n  C-w to cut, i.e. Ctrl+w,\n  C-y to paste, i.e. Ctrl+y,\n  C-_ to undo, i.e. Ctrl+_ )\n"))
+              (ssaved-end (tapfa-init-get-text
+                           "Si jamais vous voulez rechanger, utilisez le menu (?)\n"
+                           "If ever you want to change, use the menu (?)\n"))
+              (sremov-end (tapfa-init-get-text
+                           "Si jamais vous voulez rechanger, utilisez le menu (?) or restart Emacs.\n"
+                           "If ever you want to change, use the menu (?) or restart Emacs.\n")))
           (cond ((eq newval 1)
                  (message-box (concat ssaved swindo ssaved-end)))
                 ((eq newval -1)
