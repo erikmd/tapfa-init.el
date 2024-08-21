@@ -44,6 +44,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(diff-switches "-u")
+ '(warning-suppress-types '((bytecomp) (comp)))
  '(package-selected-packages
    (quote (learn-ocaml company merlin tuareg auctex magit-gitflow magit yaml-mode markdown-mode helpful discover-my-major which-key dashboard page-break-lines centaur-tabs spaceline spacemacs-theme diminish use-package gnu-elpa-keyring-update))))
 
