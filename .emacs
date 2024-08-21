@@ -320,13 +320,13 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 C-g (= Ctrl+g) ; annuler la saisie en cours dans le minibuffer (≈ barre d'état)
 ESC ESC ESC    ; pour annuler plus violemment (commande plus puissante que C-g)
-
 C-x C-f …  ; pour ouvrir un fichier existant ou créer un nouveau fichier
 C-x C-s    ; sauver le fichier courant (ProTip : garder la touche Ctrl appuyée)
 C-x k RET  ; pour fermer le buffer courant
 C-x 2      ; pour découper la vue courante en 2 zones empilées verticalement
 C-x o      ; pour déplacer le curseur d'une zone à l'autre
 C-x 1      ; pour garder la zone courante et masquer les autres zones affichées
+F7  ; pour désactiver xterm-mouse-mode, permettant le copier-coller à la souris
 
 C-c …  ; préfixe spécifique au mode courant (dépend du langage, cf. ci-dessous)
 
@@ -365,13 +365,13 @@ M-x p-u-e-p RET  ; mettre à jour tous les modes Emacs (= Alt+x p-u-e-p Entrée)
 
 C-g (= Ctrl+g) ; abort the current editing in the minibuffer (≈ status bar)
 ESC ESC ESC    ; to abort more aggressively (command more powerful than C-g)
-
 C-x C-f …  ; to open an existing file or create a new file
 C-x C-s    ; to save the current file (ProTip: keep the Ctrl key down)
 C-x k RET  ; to kill (= close) the current buffer
 C-x 2      ; to split the current view in 2 zones, vertically stacked
 C-x o      ; to move the cursor from a zone to another one
 C-x 1      ; to keep the current zone and hide the other displayed ones
+F7  ; to disable xterm-mouse-mode and thus allow copy-and-paste with the mouse
 
 C-c …  ; prefix specific to the current mode (dep. on the language, see below)
 
