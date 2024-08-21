@@ -699,7 +699,7 @@ Advices to `magit-push-current-to-*' trigger this query."
   ;; (customize-customized)
   (customize-save-customized))
 
-(defcustom tapfa-always-install-opam-switch-mode nil
+(defcustom tapfa-init-always-install-opam-switch-mode nil
   "Should opam-switch-mode be installed even if opam is not detected?
 Option useful for .emacs.d batch prebuild.
 
@@ -710,13 +710,13 @@ nil do not enforce the installation
                  (const :tag "Always install opam-switch-mode" t))
   :group 'tapfa-init)
 
-(setq tapfa-opam-available
+(setq tapfa-init-opam-available
       (let* ((temp (get-buffer-create " *temp"))
              (status (shell-command "opam var bin" temp)))
         (kill-buffer temp)
         (eq status 0)))
 
-(when (or tapfa-opam-available tapfa-always-install-opam-switch-mode)
+(when (or tapfa-init-opam-available tapfa-init-always-install-opam-switch-mode)
   (use-package opam-switch-mode
     :ensure t
     :hook
