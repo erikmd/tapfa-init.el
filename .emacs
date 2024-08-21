@@ -602,6 +602,7 @@ Advices to `magit-push-current-to-*' trigger this query."
 (defun tapfa-reset-custom-variables-faces ()
   "Helper function to be run from CI/CD: .emacs.d batch prebuild."
   (interactive)
+  (message "Running tapfa-reset-custom-variables-faces...")
   (customize-save-variable 'diff-switches "-u")
   (customize-save-variable 'warning-suppress-types '((bytecomp) (comp)))
   (mapc (lambda (face-spec)
