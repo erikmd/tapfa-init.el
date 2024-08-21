@@ -599,6 +599,20 @@ Advices to `magit-push-current-to-*' trigger this query."
 
 ;; Config de Tuareg, Merlin et Company
 
+(defun tapfa-reset-custom-variables-faces ()
+  "Helper function to be run from CI/CD: .emacs.d batch prebuild."
+  (interactive)
+  (customize-save-variable 'diff-switches "-u")
+  (customize-save-variable 'warning-suppress-types '((bytecomp) (comp)))
+  (mapc (lambda (face-spec)
+          ;; https://www.emacswiki.org/emacs/CustomizingAndSaving#h5o-4
+          (put (car face-spec) 'customized-face (cadr face-spec))
+          (face-spec-set (car face-spec) (cadr face-spec)))
+        '((proof-locked-face ((t (:background "#add8e6"))))
+          (region ((t (:background "gold1" :distant-foreground "dim grey"))))))
+  ;; (customize-customized)
+  (customize-save-customized))
+
 (defcustom tapfa-always-install-opam-switch-mode nil
   "Should opam-switch-mode be installed even if opam is not detected?
 Option useful for .emacs.d batch prebuild.
