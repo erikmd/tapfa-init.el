@@ -68,7 +68,7 @@
  ;; If there is more than one, they won't work right.
  '(diff-switches "-u")
  '(package-selected-packages
-   (quote (learn-ocaml company merlin-iedit merlin-eldoc merlin tuareg auctex magit-gitflow magit yaml-mode markdown-mode helpful discover-my-major which-key dashboard page-break-lines centaur-tabs spaceline spacemacs-theme diminish use-package gnu-elpa-keyring-update)))))
+   (quote (learn-ocaml company merlin-iedit merlin-eldoc merlin tuareg auctex magit-gitflow magit yaml-mode markdown-mode helpful discover-my-major which-key dashboard page-break-lines centaur-tabs spaceline spacemacs-theme diminish use-package gnu-elpa-keyring-update))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
