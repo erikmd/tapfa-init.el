@@ -160,11 +160,46 @@ en  use English"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Custom spacemacs theme with nice tabs
-
 ;; (menu-bar-mode -1) Keep it!
-(tool-bar-mode -1)
 ;; M-x minor-mode-menu-from-indicator RET
+
+(defcustom tapfa-init-tool-bar nil
+  "Display Emacs' tool-bar.
+
+  The following values are meaningful:
+nil unset initially (seen as 1 on Darwin, -1 otherwise)
+-1  hide the tool-bar
+ 1  show the tool-bar"
+  :type '(choice (const :tag "Unset initially" nil)
+                 (const :tag "Hide the tool-bar" -1)
+                 (const :tag "Show the tool-bar" 1))
+  :set
+  (lambda (var value)
+      (set-default-toplevel-value var value)
+      (if value
+          (tool-bar-mode value)
+        (if (eq system-type 'darwin)
+            (tool-bar-mode 1)
+          (tool-bar-mode -1))))
+  :group 'tapfa-init)
+
+(unless tapfa-init-tool-bar
+  (customize-save-variable 'tapfa-init-tool-bar
+                           (if (eq system-type 'darwin) 1 -1)))
+
+(defun tapfa-init-tool-bar-toggle ()
+  "Toggle `tapfa-init-tool-bar'."
+  (interactive)
+  (cond ((eq tapfa-init-tool-bar 1)
+         (customize-save-variable 'tapfa-init-tool-bar -1))
+        ((eq tapfa-init-tool-bar -1)
+         (customize-save-variable 'tapfa-init-tool-bar 1))
+        (t
+         (if (eq system-type 'darwin)
+             (customize-save-variable 'tapfa-init-tool-bar -1)
+           (customize-save-variable 'tapfa-init-tool-bar 1)))))
+
+;; Custom spacemacs theme with nice tabs
 
 (use-package spacemacs-theme
   :ensure t
@@ -524,6 +559,11 @@ M-x p-u-e-p RET  ; to upgrade all the Emacs modes (= Alt+x p-u-e-p Return)
            dashboard-open
            :help "M-x dashboard-open RET"]
           "-------"
+          [,(tapfa-init-get-text
+            "Afficher / masquer la barre d'outils"
+            "Show / hide the tool-bar")
+           tapfa-init-tool-bar-toggle
+           :help "M-x tapfa-init-tool-bar-toggle RET"]
           [,(tapfa-init-get-text
             "Changer le thème spacemacs : light / dark"
             "Change the spacemacs theme: light / dark")
