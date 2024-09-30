@@ -515,15 +515,15 @@ M-x p-u-e-p RET  ; to upgrade all the Emacs modes (= Alt+x p-u-e-p Return)
            :help "M-x tapfa-init-set-lang"]
           "-------"
           [,(tapfa-init-get-text
-            "Sauver la position dans un signet"
-            "Store the position in a bookmark")
-           bookmark-set
-           :help "bookmark-set"]
-          [,(tapfa-init-get-text
             "Ouvrir un signet existant"
             "Jump to an existing bookmark")
            bookmark-jump
            :help "bookmark-jump"]
+          [,(tapfa-init-get-text
+            "Sauver la position dans un signet"
+            "Store the position in a bookmark")
+           bookmark-set
+           :help "bookmark-set"]
           [,(tapfa-init-get-text
             "Afficher la liste des signets"
             "Display the list of bookmarks")
