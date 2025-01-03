@@ -129,10 +129,12 @@ Pour installer automatiquement les modes
 
 <details><summary><b>Installation sous macOS</b></summary>
 
-1. Installer [Emacs avec Homebrew Cask](https://formulae.brew.sh/cask/emacs):
+1. Installer [Emacs Plus avec Homebrew](https://github.com/d12frosted/homebrew-emacs-plus):
    ```
-   brew install --cask emacs
+   brew tap d12frosted/emacs-plus
+   brew install emacs-plus
    ```
+   **Avant cela** (si vous aviez précédemment installé [Emacs Cask](https://formulae.brew.sh/cask/emacs)), désinstallez Emacs avec `brew uninstall emacs`. En effet, **Emacs Plus** est similaire à Emacs Cask mais comporte plusieurs patches spécifiques à MacOS, et est directement compilé à partir des sources, ce qui accroît les performances (en étant de-facto adapté à l'architecture de votre Mac, par exemple, Apple M1).
 
 1. Installer `opam` 2.x avec Homebrew :
    ```
