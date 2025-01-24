@@ -39,7 +39,7 @@ ces étapes.*)
 1. Configurer `opam` puis installer `merlin` :
    ```
    opam init --auto-setup --bare
-   opam switch create 4.12.1 ocaml-base-compiler.4.12.1
+   opam switch create 5.1.1 ocaml-base-compiler.5.1.1
    eval $(opam env)
    opam update
    opam install merlin
@@ -54,7 +54,7 @@ ces étapes.*)
 1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -y -k version coq 8.17.1
+   opam pin add -n -y -k version coq 8.20.1
    opam install -j 2 coq
    ```
 
@@ -144,7 +144,7 @@ Pour installer automatiquement les modes
 1. Configurer `opam` puis installer `merlin` :
    ```
    opam init --auto-setup --bare
-   opam switch create 4.12.1 ocaml-base-compiler.4.12.1
+   opam switch create 5.1.1 ocaml-base-compiler.5.1.1
    eval $(opam env)
    opam update
    opam install merlin
@@ -159,7 +159,7 @@ Pour installer automatiquement les modes
 1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -y -k version coq 8.17.1
+   opam pin add -n -y -k version coq 8.20.1
    opam install -j 2 coq
    ```
 
@@ -273,7 +273,7 @@ Pour installer automatiquement les modes
 
    ```
    opam init --disable-sandboxing --auto-setup --bare
-   opam switch create 4.12.1 ocaml-base-compiler.4.12.1
+   opam switch create 5.1.1 ocaml-base-compiler.5.1.1
    eval $(opam env)
    opam update
    opam install merlin
@@ -285,7 +285,7 @@ Pour installer automatiquement les modes
 1. **Optionnel** : installer `coq` :
    ```
    opam repo add --all-switches --set-default coq-released https://coq.inria.fr/opam/released
-   opam pin add -n -y -k version coq 8.17.1
+   opam pin add -n -y -k version coq 8.20.1
    opam install -j 2 coq
    ```
 
@@ -413,6 +413,6 @@ La configuration `.emacs` fournie incorpore un menu cliquable `(?)` permettant d
 
 En cas de problème avec cette configuration, ouvrez une [issue](https://github.com/erikmd/tapfa-init.el/issues) ou envoyez-moi un [e-mail](https://github.com/erikmd).
 
-Ce tutoriel d'installation propose d'installer `coq` version `8.17.1`,
+Ce tutoriel d'installation propose d'installer `coq` version `8.20.1`,
 mais vous pouvez aussi installer la dernière version stable de Coq, donnée au début du badge suivant :
 [![coq latest version](https://img.shields.io/docker/v/coqorg/coq/latest?sort=semver)](https://github.com/coq/coq/releases)
