@@ -161,8 +161,7 @@ nil unset initially (seen as 1 on Darwin, -1 otherwise)
   :group 'tapfa-init)
 
 (unless tapfa-init-tool-bar
-  (customize-save-variable 'tapfa-init-tool-bar
-                           (if (eq system-type 'darwin) 1 -1)))
+  (customize-save-variable 'tapfa-init-tool-bar 1))
 
 (defun tapfa-init-tool-bar-toggle ()
   "Toggle `tapfa-init-tool-bar'."
