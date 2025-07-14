@@ -616,7 +616,9 @@ M-x p-u-e-p RET  ; to upgrade all the Emacs modes (= Alt+x p-u-e-p Return)
 ;; Config de markdown-mode (to edit README.md files easily!) and yaml-mode
 
 (use-package markdown-mode
-  :ensure t)
+  :ensure t
+  :bind (("M-<up>" . markdown-move-up)
+         ("M-<down>" . markdown-move-down)))
 
 (use-package yaml-mode
   :ensure t)
